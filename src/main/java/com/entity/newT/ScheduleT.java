@@ -18,6 +18,9 @@ public class ScheduleT {
     private int subprojectId;
     private  int projectId;
 
+    public ScheduleT() {
+    }
+
     public ScheduleT(String taskContent, String taskReply, Character taskType, int scheduleId, String project, String subproject, Date taskTime) {
         this.taskContent = taskContent;
         this.taskReply = taskReply;

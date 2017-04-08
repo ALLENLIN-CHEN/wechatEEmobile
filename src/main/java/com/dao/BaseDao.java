@@ -74,6 +74,24 @@ public class  BaseDao<T> {
         }
         return true;
     }
+    public boolean updateBy(String hql, Map<String, Object> params, Query query)
+    {
+        try
+        {
+            if (query == null)
+                query = this.getCurrentSession().createQuery(hql);
+            if (params != null && params.size() > 0)
+                this.setParameters(query, params);
+            query.executeUpdate();
+            this.getCurrentSession().beginTransaction().commit();
+        } catch (Exception e)
+        {
+            this.getCurrentSession().close();
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 
     /**
      * 更新实体

@@ -17,6 +17,8 @@ public interface ProjectDaoI {
      */
     public Pager findByPage(String hql,Pager pagerModel,Map<String, Object> params);
 
+    public Project findById(int projectId);
+
     /**
      * 查询所有团队
      */
@@ -34,6 +36,8 @@ public interface ProjectDaoI {
      * 创建新项目
      */
     public boolean create_project(Project project);
+
+    public Project updateByHql(int projectId);
     /**
      * 根据人员职位查询人员
      */
@@ -79,4 +83,5 @@ public interface ProjectDaoI {
  * 更新某人对某一任务的最新回复
  */
 // public boolean updateReply(String task_reply,String scheduleId);
+public List findTeamProjectListByTeamId(Integer teamId);
 }

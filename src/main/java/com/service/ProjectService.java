@@ -3,12 +3,11 @@ package com.service;
 import com.dao.ProjectDaoI;
 import com.dao.impl.*;
 import com.entity.*;
-import com.entity.newT.ScheduleMemberT;
-import com.entity.vo.ScheduleVO;
+import com.entity.newT.UserT;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,68 +30,58 @@ public class ProjectService {
     @Autowired
     private ScheduleMemberDao scheduleMemberDao;
     @Autowired
+    private  ScheduleService scheduleService;
+    @Autowired
     private TeamUserDao teamUserDao;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
     /**
      * 分页显示项目列表 按子项目状态查询 已完成/未完成
-     *
-     * @param scope
+     *按项目阶段查询
+     * 按项目名字搜索
+     * @param
      * @param pagerModel
      * @return
      */
-    public Pager findByStatus(String scope, Pager pagerModel) {
-        String hql = "select new com.entity.newT.ProjectT( p.projectId,sub.subprojectId,sub.subproject, p.project, p.projectStage, m.user.openId, m.user.userName)"
-                + " from Subproject sub left join sub.project p left join sub.projectMembers m "
-                + "where m.roleType=:roleType ";
+    public Pager findByStatus(String  projectStatus,String projectStage,String project, Pager pagerModel) {
+
+        String hql = "select p.projectId,sub.subprojectId,sub.subproject, p.project, p.projectStage"
+                + " from Subproject sub left join sub.project p  where 1=1 ";
         Map<String, Object> params = new HashMap<String, Object>();
-        if (scope != null) {
-            char projectStatus;
-            if (scope.equals("active")) {
-                projectStatus = 'b';
-                params.put("projectStatus", projectStatus);
-            } else if (scope.equals("done")) {
-                projectStatus = 'a';
-                params.put("projectStatus", projectStatus);
-            }
-            hql += "and sub.projectStatus=:projectStatus";
+        if(projectStatus!=null) {
+            params.put("projectStatus", projectStatus.charAt(0));
+            hql+="and sub.projectStatus=:projectStatus";
         }
-        params.put("roleType", 'a');
+        if(projectStage!=null){
+            params.put("projectStage", projectStage.charAt(0));
+            hql+=" and p.projectStage=:projectStage";
+        }
+        if(project!=null){
+            params.put("project", "%" + project + "%");
+            hql+=" and p.project like :project ";
+        }
         return projectDao.findByPage(hql, pagerModel, params);
     }
-
+    public Project findById(int projectId){
+        return projectDao.findById(projectId);
+    }
     /**
-     * 根据项目所处阶段查询项目
+     * 查询项目负责人
      */
-    public Pager findByStage(Pager pagerModel, char projectStage) {
-        String hql = "select new com.entity.newT.ProjectT( p.projectId,sub.subprojectId,sub.subproject, p.project, p.projectStage, m.user.openId, m.user.userName)"
-                + " from Subproject sub left join sub.project p left join sub.projectMembers m "
-                + "where m.roleType=:roleType and p.projectStage=:projectStage ";
+    public List<UserT> findLeader(int subprojectId){
+        String hql="select new com.entity.newT.UserT(m.user.openId,m.user.userName) from ProjectMember m " +
+                " where m.subproject.subprojectId=:subprojectId and m.roleType=:roleType";
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("roleType", 'a');
-        params.put("projectStage", projectStage);
-        return projectDao.findByPage(hql, pagerModel, params);
+        params.put("subprojectId",subprojectId);
+        params.put("roleType",'a');
+        return projectDao.findById(params,hql);
     }
-
-    /**
-     * 根据项目名字查询
-     */
-    public Pager findByProjectName(Pager pagerModel, String project) {
-        String hql = "select new com.entity.newT.ProjectT( p.projectId,sub.subprojectId,sub.subproject, p.project, p.projectStage, m.user.openId, m.user.userName)"
-                + " from Subproject sub left join sub.project p left join sub.projectMembers m "
-                + "where m.roleType=:roleType and p.project like :project";
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("roleType", 'a');
-        params.put("project", "%" + project + "%");
-        return projectDao.findByPage(hql, pagerModel, params);
-    }
-
     /**
      * 查询所有团队
      */
     public List findAllTeam() {
-        String hql = "select t.teamId,t.teamName from Team t";
+        String hql = "select new com.entity.newT.TeamT(t.teamId,t.teamName) from Team t";
         return projectDao.findAllTeam(hql);
 
     }
@@ -120,6 +109,7 @@ public class ProjectService {
     /**
      * 创建新项目
      */
+    @Transactional
     public boolean createNewProject(Project project){
         return projectDao.create_project(project);
     }
@@ -135,55 +125,65 @@ public class ProjectService {
         params.put("position", "%" + position + "%");
         return projectDao.findByPosition(hql,params,null);
     }
+
+    public boolean updateProject(String project,String subproject,String openId,char projectStage,int projectId,int subporjectId) {
+        try {
+            Project p = projectDao.updateByHql(projectId);
+            p.setProjectStage(projectStage);
+            p.setProject(project);
+            Subproject sub = subprojectDao.get(Subproject.class, subporjectId);
+            sub.setSubproject(subproject);
+            String hql = " from User u where u.openId=:openId";
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("openId", openId);
+            List<User> users = projectDao.findById(params, hql);
+            User user = users.get(0);
+            params.clear();
+            String h = "select from ProjectMember p left join p.subproject sub " +
+                    "where sub.subprojectId=:subprojectId " ;
+            params.put("subprojectId",subporjectId);
+            List<ProjectMember> projectMembers = projectDao.findById(params, hql);
+            Set<ProjectMember> projectMember = new HashSet<ProjectMember>(0);
+           for(ProjectMember pm:projectMembers){
+               if(pm.getUser()==user){
+                   projectMember.add(pm);
+               }
+           }
+            sub.setProjectMembers(projectMember);
+            Set<Subproject> subprojects = new HashSet<Subproject>(0);
+            subprojects.add(sub);
+            p.setSubprojects(subprojects);
+            projectDao.create_project(p);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     /**
      * 显示项目下的任务列表
      */
-    public Pager findSchedules(int projectId,int subprojectId,Pager pagerModel){
+    public Pager findSchedules(int projectId,int subprojectId,String taskContent,Character taskType,Pager pagerModel){
         String hql="select new com.entity.newT.ScheduleT(task.taskContent, task.taskReply, task.taskType, task.scheduleId,p.projectId, p.project, sub.subprojectId, sub.subproject,task.taskTime)"
                 +"from Subproject sub left join sub.project p left join sub.schedules task "
                 +"where sub.subprojectId=:subprojectId and p.projectId=:projectId";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("projectId", projectId);
         params.put("subprojectId",subprojectId);
+        if(taskContent!=null){
+            hql+=" and task.taskContent like :taskContent ";
+            params.put("taskContent", "%" + taskContent + "%");
+        }
+        if(taskType!=null){
+            hql+=" and task.taskType=:taskType ";
+            params.put("taskType", taskType );
+        }
         return projectDao.findByPage(hql, pagerModel, params);
 
     }
 
-    public Pager findByTaskContent(int projectId,int subprojectId,String taskContent,Pager pagerModel){
-        String hql="select new com.entity.newT.ScheduleT(task.taskContent, task.taskReply, task.taskType, task.scheduleId,p.projectId, p.project, sub.subprojectId, sub.subproject,task.taskTime) "
-                +"from Subproject sub left join sub.project p left join sub.schedules task "
-                +"where sub.subprojectId=:subprojectId and p.projectId=:projectId and task.taskContent like :taskContent";
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("projectId", projectId);
-        params.put("subprojectId",subprojectId);
-        params.put("taskContent", "%" + taskContent + "%");
-        return projectDao.findByPage(hql, pagerModel, params);
-    }
-
-    /**
-     *根据任务类型查询任务列表
-     */
-      public Pager findByTask_type(String projectId,String subprojectId,Pager pager,String task_Type){
-
-
-          try {
-              String hql = "select new com.entity.newT.ScheduleT(s.taskContent,s.scheduleId,s.subproject.project.project,s.subproject.subproject,s.taskType,s.taskReply,s.taskTime) from Schedule s"
-                      +" where s.taskType="+" '"+task_Type+"' ";
-              if(projectId!=null&&!projectId.isEmpty())
-              {
-                  hql+= " and s.subproject.subjectId="+"projectId";
-              }
-              if(projectId!=null&&!subprojectId.isEmpty())
-              {
-                  hql+=" and s.subproject.project.projectId="+subprojectId;
-              }
-              pager = projectDao.findByPage(hql,pager,null);
-          } catch (Exception e) {
-              e.printStackTrace();
-          }
-          return  pager;
-
-      }
     /**
      * 修改任务完成的最后时间
      */
@@ -278,21 +278,14 @@ public class ProjectService {
      * 添加任务成员
      */
     @Transactional
-    public boolean addScheduleMember(String scheduleId,Set<Integer> TeamUserIds){
+    public boolean addScheduleMember(String scheduleId,Set<ScheduleMember> scheduleMemberSet){
           try {
-              Set<ScheduleMember>  setScheduleMenmber= new HashSet<ScheduleMember>();
-              Schedule schedule = scheduleDao.load(Schedule.class,Integer.parseInt(scheduleId));
-              //查找原来的
-//              String hql ="from ScheduleMember sm where sm.schedule.scheduleId="+scheduleId;
-//              setScheduleMenmber.addAll(projectDao.findAllTeam(hql));
-              //增加新的
-              for(Integer id :TeamUserIds) {
-                  TeamUser tu = teamUserDao.load(TeamUser.class,id);
-                  User user = tu.getUser();
-                  scheduleMemberDao.save(new ScheduleMember(schedule,user));
+             Schedule schedule=scheduleService.findById(Integer.parseInt(scheduleId));
+            //  Set<ScheduleMember> scheduleMembers=schedule.getScheduleMembers();
+              for(ScheduleMember member:scheduleMemberSet){
+                      member.setSchedule(schedule);
+                  scheduleMemberDao.save(member);
               }
-
-
           } catch (NumberFormatException e) {
               e.printStackTrace();
           }
@@ -303,12 +296,20 @@ public class ProjectService {
      * 删除任务成员
      */
     @Transactional
-    public  boolean deleteScheduleMember(String scheduleId,Set<Integer> teamUserIds){
-
-        for(Integer id:teamUserIds) {
-            String deleteScheduleMemerr ="select sm from ScheduleMember sm,TeamUser tu where sm.schedule.scheduleId="+scheduleId+" and sm.user = tu.user and tu.teamUserId="+id;
-            ScheduleMember scheduleMember = scheduleMemberDao.getCertain(deleteScheduleMemerr,null,null);
-            scheduleMemberDao.delete(scheduleMember);
+    public  boolean deleteScheduleMember(String scheduleId,String openId){
+        try {
+            String hql = "from ScheduleMember where scheduleId=:scheduleId ";
+            Map<String, Object> params = new HashedMap();
+            params.put("scheduleId", Integer.parseInt(scheduleId));
+            List<ScheduleMember> list = scheduleMemberDao.findByHql(hql, params, null);
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getUser().getOpenId().equals(openId)) {
+                    scheduleMemberDao.delete(list.get(i));
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
         }
         return true;
  }
@@ -316,21 +317,32 @@ public class ProjectService {
      * 创建新的任务
      */
     @Transactional
-    public boolean addNewSchedulepublic (String subprojectId, String userid, String taskContent,
-                                           Character taskType, Character taskStatus, String taskTime,
-                                           String taskStartTime, Set<String> scheduleMemberIds, String taskReply) {
-
+    public boolean addNewSchedulepublic (String subprojectId, String taskContent,
+                                           Character taskType, String taskTime,
+                                         Set<ScheduleMember> scheduleMemberSet, String taskReply,String openid) {
         try {
             Subproject subproject = subprojectDao.load(Subproject.class,Integer.parseInt(subprojectId));
-            User user = userDao.load(User.class,userid);
             Date taskTime1 = simpleDateFormat.parse(taskTime);
-            Date taskStartTime1 = simpleDateFormat.parse(taskStartTime);
-            Set<ScheduleMember> scheduleMembers = new HashSet<ScheduleMember>();
-            for(String id:scheduleMemberIds)
-            {
-                scheduleMembers.add(scheduleMemberDao.load(ScheduleMember.class, Integer.parseInt(id)));
+            Schedule schedule=new Schedule();
+            schedule.setSubproject(subproject);
+            schedule.setTaskContent(taskContent);
+            schedule.setTaskTime(taskTime1);
+            schedule.setTaskReply(taskReply);
+            schedule.setTaskType(taskType);
+            if(openid!=null) {
+                String hql = "from User where openId=:openId";
+                Map<String, Object> params = new HashedMap();
+                params.put("openId", openid);
+                List<User> users = userDao.findByHql(hql, params, null);
+                User user = users.get(0);
+                schedule.setUser(user);
             }
-            scheduleDao.save(new Schedule(subproject,user,taskContent,taskType,taskStatus,taskTime1,taskStartTime1,scheduleMembers,taskReply));
+            scheduleDao.save(schedule);
+            Set<ScheduleMember> scheduleMembers = new HashSet<ScheduleMember>();
+            for(ScheduleMember member:scheduleMemberSet) {
+                member.setSchedule(schedule);
+                scheduleMemberDao.save(member);
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -345,6 +357,9 @@ public class ProjectService {
          try {
              s = scheduleDao.load(Schedule.class,Integer.parseInt(scheduleId));
              String oldReply = s.getTaskReply();
+             if(oldReply==null){
+                 oldReply="";
+             }
              s.setTaskReply(oldReply+"</br>"+task_reply);
              scheduleDao.save(s);
          } catch (NumberFormatException e) {
@@ -353,5 +368,21 @@ public class ProjectService {
 
          return true;
      }
+    /**
+     * 根据teamId查找属于该团队的所有项目
+     */
+    public ArrayList findTeamProjectListByTeamId(Integer teamId){
+        ArrayList arrayList=new ArrayList();
+        List list=projectDao.findTeamProjectListByTeamId(teamId);
+        for(int i=0;i<list.size();i++){
+            Object [] row=(Object [])list.get(i);
+            Map <String,Object> projectMap=new HashedMap();
+            projectMap.put("projectId",row[0]);
+            projectMap.put("projectName",row[1]);
+            arrayList.add(projectMap);
+        }
+        return arrayList;
+    }
+
 
 }

@@ -20,10 +20,13 @@ public class ProjectDao extends BaseDao<Project> implements ProjectDaoI {
      */
     public Pager findByPage(String hql, Pager pagerModel, Map<String, Object> params){
         List dataList = this.listByPage(hql, pagerModel.getCurrentPageNumber(), pagerModel.getPageSize(), params, null);
-        int count = this.getAllTotal(hql, params, null);
+       int count = this.getAllTotal(hql, params, null);
         pagerModel.setTotalSize(count);
         pagerModel.setDataList(dataList);
         return pagerModel;
+    }
+    public Project findById(int projectId){
+        return this.get(Project.class,projectId);
     }
 
     /**
@@ -47,7 +50,7 @@ public class ProjectDao extends BaseDao<Project> implements ProjectDaoI {
     }
 
     /**
-     * 创建新项目
+     * 创建新项目/更新项目
      */
     public boolean create_project(Project project) {
         try {
@@ -57,6 +60,10 @@ public class ProjectDao extends BaseDao<Project> implements ProjectDaoI {
             e.printStackTrace();
         }
         return true;
+    }
+
+    public Project updateByHql(int projectId){
+        return this.get(Project.class,projectId);
     }
     /**
      * 根据人员职位查询人员
@@ -113,6 +120,10 @@ public class ProjectDao extends BaseDao<Project> implements ProjectDaoI {
      * 更新某人对某一任务的最新回复
      */
    // public boolean updateReply(String task_reply,String scheduleId);
+    public List findTeamProjectListByTeamId(Integer teamId){
+        String hql="select p.projectId, p.project from Project p where p.team.teamId="+teamId;
+        return this.findByHql(hql,null,null);
+    }
 
 }
 
