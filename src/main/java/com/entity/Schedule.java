@@ -38,6 +38,7 @@ public class Schedule implements java.io.Serializable {
     private Date taskTime;
     private Date taskStartTime;
     private Set<ScheduleMember> scheduleMembers = new HashSet<ScheduleMember>(0);
+    private Set<TransferEntity> transferEntities=new HashSet<>(0);
 
     public Schedule() {
     }
@@ -155,6 +156,15 @@ public class Schedule implements java.io.Serializable {
 
     public void setScheduleMembers(Set<ScheduleMember> scheduleMembers) {
         this.scheduleMembers = scheduleMembers;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "schedule")
+    public Set<TransferEntity> getTransferEntities() {
+        return transferEntities;
+    }
+
+    public void setTransferEntities(Set<TransferEntity> transferEntities) {
+        this.transferEntities = transferEntities;
     }
 
 }

@@ -1,5 +1,8 @@
 package com.entity.newT;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by zengqin on 2017/3/23.
  */
@@ -11,7 +14,11 @@ public class ProjectT {
     private char projectStage;
     private String openId;
     private String userName;
-    //Integer projectId, Integer subprjectId,
+    private List<UserT> userTs=new ArrayList<>(0);
+
+    public ProjectT() {
+    }
+
     public ProjectT(Integer projectId, Integer  subprjectId, String subproject, String project, char projectStage, String openId, String userName) {
         this.projectId = projectId;
         if(subproject==null){
@@ -29,6 +36,14 @@ public class ProjectT {
         this.projectStage = projectStage;
         this.openId = openId;
         this.userName = userName;
+    }
+
+    public List<UserT> getUserTs() {
+        return userTs;
+    }
+
+    public void setUserTs(List<UserT> userTs) {
+        this.userTs = userTs;
     }
 
     public Integer getProjectId() {

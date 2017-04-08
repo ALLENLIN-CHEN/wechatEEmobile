@@ -196,7 +196,7 @@ public class Project implements java.io.Serializable
 		this.projectTime = projectTime;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	@OneToMany(fetch = FetchType.LAZY)
 	public Set<Subproject> getSubprojects()
 	{
 		return this.subprojects;
