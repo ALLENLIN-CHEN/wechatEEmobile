@@ -6,6 +6,7 @@ import com.entity.TeamUser;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by  xionglian on 2017/3/26.
@@ -40,5 +41,9 @@ public class TeamUserDao extends BaseDao<TeamUser> {
         String hql="from TeamUser t where t.team.teamId="+teamId+" and t.user.openId='"+openId+"'";
         return this.findByHql(hql, null,null);
     }
+    public List findById(Map<String,Object> params, String hql){
+        return this.findByHql(hql,params,null);
+    }
+
 }
 

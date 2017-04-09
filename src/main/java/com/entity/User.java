@@ -30,7 +30,6 @@ public class User implements java.io.Serializable
 	private Set<ProjectMember> projectMembers = new HashSet<ProjectMember>(0);
 	private Set<ScheduleMember> scheduleMembers = new HashSet<ScheduleMember>(0);
 	private Set<TeamUser> teamUsers = new HashSet<TeamUser>(0);
-	private Set<RecordEntity> recordEntities=new HashSet<>(0);
 	private  Set<TransferEntity> transferEntities=new HashSet<>(0);
 	//private Set<TransferMemberEntity> transferMembers=new HashSet<>(0);
 	public User()
@@ -236,15 +235,6 @@ public class User implements java.io.Serializable
 		return this.teamUsers;
 	}
 	public void setTeamUsers(Set<TeamUser> teamUsers){this.teamUsers = teamUsers;}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<RecordEntity> getRecordEntities() {
-		return recordEntities;
-	}
-
-	public void setRecordEntities(Set<RecordEntity> recordEntities) {
-		this.recordEntities = recordEntities;
-	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 

@@ -35,11 +35,13 @@ public class ProjectController {
     @Autowired
     TransferMemberService transferMemberService;
     @Autowired
+    TeamUserService teamUserService;
+    @Autowired
     private Map<String, Object> dataMap = new HashMap<String, Object>();
     private Pager pagerModel = new Pager(1, 5);
 
     /**
-     * 分页显示项目列表 按子项目状态查询 已完成/未完成
+     * 分页显示项目列表 按子项目阶段查询
      * 按项目阶段查询
      * 按项目名字搜索
      */
@@ -50,34 +52,21 @@ public class ProjectController {
         try {
             int currentPageNumber = request.getParameter("currentPageNumber") != null ? Integer.parseInt(request.getParameter("currentPageNumber")) : 1;
             int pageSize = request.getParameter("pageSize") != null ? Integer.parseInt(request.getParameter("pageSize")) : 5;
-            String projectStatus = request.getParameter("projectStatus");
-            String projectStage = request.getParameter("projectStage");
+            String teamStatus = request.getParameter("teamStatus");
             String project = request.getParameter("project");
             String openId=request.getParameter("openId");
             Pager pagerModel = new Pager(currentPageNumber, pageSize);
-            if(projectStage!=null&&projectStatus!=null&&project!=null) {
-                pagerModel = projectService.findByStatus(projectStatus, projectStage, project, pagerModel);
+            if(teamStatus!=null&&project!=null) {
+                pagerModel = projectService.findByStatus(teamStatus, project, pagerModel,openId);
             }
-            if(projectStatus!=null&&projectStage!=null&&project==null){
-                pagerModel = projectService.findByStatus(projectStatus, projectStage, null, pagerModel);
+            if(teamStatus!=null&&project==null){
+                pagerModel = projectService.findByStatus(teamStatus,null, pagerModel,openId);
             }
-            if(projectStatus!=null&&projectStage==null&&project!=null){
-                pagerModel = projectService.findByStatus(projectStatus, null, project, pagerModel);
+            if(teamStatus==null&&project==null){
+                pagerModel = projectService.findByStatus(null,null, pagerModel,openId);
             }
-            if(projectStatus!=null&&projectStage==null&&project==null){
-                pagerModel = projectService.findByStatus(projectStatus, null, null, pagerModel);
-            }
-            if(projectStatus==null&&projectStage!=null&&project==null){
-                pagerModel = projectService.findByStatus(null, projectStage, null, pagerModel);
-            }
-            if(projectStatus==null&&projectStage!=null&&project!=null){
-                pagerModel = projectService.findByStatus(null, projectStage, project, pagerModel);
-            }
-            if(projectStatus==null&&projectStage==null&&project==null){
-                pagerModel = projectService.findByStatus(null, null, null, pagerModel);
-            }
-            if(projectStatus==null&&projectStage==null&&project!=null){
-                pagerModel = projectService.findByStatus(null, null, project, pagerModel);
+            if(teamStatus==null&&project!=null){
+                pagerModel = projectService.findByStatus(null,project, pagerModel,openId);
             }
             List projects = pagerModel.getDataList();
             List<ProjectT> projectTs=null;
@@ -101,7 +90,10 @@ public class ProjectController {
                         projectT.setProject(obj[3].toString());
                     }
                     if(obj[4]!=null){
-                        projectT.setProjectStage(obj[4].toString().charAt(0));
+                        projectT.setTeamStatus(obj[4].toString());
+                    }
+                    if(obj[5]!=null){
+                        projectT.setTeamId(Integer.parseInt(obj[5].toString()));
                     }
                     projectTs.add(projectT);
                 }
@@ -621,6 +613,30 @@ public class ProjectController {
 
         return  dataMap;
     }
+     @RequestMapping(value="canModify",method = RequestMethod.POST)
+    @ResponseBody
+    public  Map<String, Object> canModify( @RequestBody String request) {
+         dataMap.clear();
+         try {
+             Map<String, Object> json = JsonUtil.parseJSON2Map(request);
+             String openId=(String)json.get("openId");
+             int teamId=Integer.parseInt((String)json.get("teamId"));
+             int subprojectId=Integer.parseInt((String)json.get("subprojectId"));
+             int canModify;
+             boolean flag=teamUserService.canModify(openId,teamId,subprojectId);
+             if(flag==true){
+                 canModify=1;
+             }else{
+                 canModify=0;
+             }
+             dataMap.put("canModify",canModify);
+         } catch (Exception e) {
+             e.printStackTrace();
+             dataMap.put("result", "fail");
+             dataMap.put("resultTip", e.getMessage());
+         }
+         return dataMap;
+     }
 
 }
 

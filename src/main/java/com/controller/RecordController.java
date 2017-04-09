@@ -2,6 +2,7 @@ package com.controller;
 
 import com.entity.Pager;
 import com.entity.RecordEntity;
+import com.service.ProjectService;
 import com.service.RecordService;
 import com.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,13 @@ import java.util.Map;
 public class RecordController {
     @Autowired
     RecordService recordService;
+    @Autowired
+    ProjectService projectService;
 
     private Map<String,Object> dataMap=new HashMap<String,Object>();
 
     /**
-     * 查看随手记
+     * 查看随手记/随手记警告
     */
     @RequestMapping(value = "recordList")
     @ResponseBody
@@ -92,5 +95,47 @@ public class RecordController {
             dataMap.put("resultTip",e.getMessage());
         }
             return dataMap;
+    }
+    /**
+     * 获取单个随手记转入任务
+     */
+    @RequestMapping(value = "recordToSchedule")
+    @ResponseBody
+    public Map<String,Object> recordToSchedule(HttpServletRequest request){
+        dataMap.clear();
+        try{
+            int recordId=Integer.parseInt(request.getParameter("recordId"));
+            //RecordEntity record=projectService.findByRecordId(recordId);
+            RecordEntity record=recordService.findByRecordId(recordId);
+            dataMap.put("result","success");
+            dataMap.put("resultTip","");
+            dataMap.put("record",record);
+        }catch (Exception e){
+            e.getStackTrace();
+            dataMap.put("result","fial");
+            dataMap.put("resultTip",e.getMessage());
+        }
+
+        return dataMap;
+    }
+    /**
+     *随手记删除/删除随手记警告
+     */
+    @RequestMapping(value = "recordDelete")
+    @ResponseBody
+    public Map<String,Object> recordDelete(@RequestBody String request){
+        dataMap.clear();
+        try{
+            Map<String,Object> json=JsonUtil.parseJSON2Map(request);
+            int recordId=Integer.parseInt((String)json.get("recordId"));
+            recordService.recordDelete(recordId);
+            dataMap.put("result","success");
+            dataMap.put("resultTip","随手记删除成功");
+        }catch (Exception e){
+            e.getStackTrace();
+            dataMap.put("result","fial");
+            dataMap.put("resultTip",e.getMessage());
+        }
+        return dataMap;
     }
 }

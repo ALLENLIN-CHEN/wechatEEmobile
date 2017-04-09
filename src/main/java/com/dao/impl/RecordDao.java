@@ -35,5 +35,13 @@ public class RecordDao extends BaseDao<RecordEntity> {
         return pagerModel;
     }
 
+    /**
+     * 获取单个随手记
+     * @return
+     */
+    public List findById(Map<String,Object> params,String hql){
+        return this.findByHql(hql,params,null);
+    }
+
 }
 

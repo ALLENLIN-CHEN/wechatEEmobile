@@ -44,18 +44,15 @@ public class ProjectService {
      * @param pagerModel
      * @return
      */
-    public Pager findByStatus(String  projectStatus,String projectStage,String project, Pager pagerModel) {
+    public Pager findByStatus(String  teamStatus,String project, Pager pagerModel,String openId ) {
 
-        String hql = "select p.projectId,sub.subprojectId,sub.subproject, p.project, p.projectStage"
-                + " from Subproject sub left join sub.project p  where 1=1 ";
+        String hql = "select p.projectId,sub.subprojectId,sub.subproject, p.project, sub.teamStatus,p.team.teamId"
+                + " from Subproject sub left join sub.project p  where p.team.teamId in(select t.team.teamId from TeamUser t where t.user.openId=:openId and t.role!=0) ";
         Map<String, Object> params = new HashMap<String, Object>();
-        if(projectStatus!=null) {
-            params.put("projectStatus", projectStatus.charAt(0));
-            hql+="and sub.projectStatus=:projectStatus";
-        }
-        if(projectStage!=null){
-            params.put("projectStage", projectStage.charAt(0));
-            hql+=" and p.projectStage=:projectStage";
+        params.put("openId",openId);
+        if(teamStatus!=null) {
+            params.put("teamStatus", teamStatus);
+            hql+="and sub.teamStatus=:teamStatus";
         }
         if(project!=null){
             params.put("project", "%" + project + "%");
@@ -66,6 +63,7 @@ public class ProjectService {
     public Project findById(int projectId){
         return projectDao.findById(projectId);
     }
+
     /**
      * 查询项目负责人
      */
@@ -383,6 +381,11 @@ public class ProjectService {
         }
         return arrayList;
     }
-
-
+    public RecordEntity findByRecordId(int recordId) {
+        String hql = "from RecordEntity where recordId=:recordId";
+        Map<String, Object> params = new HashedMap();
+        params.put("recordId", recordId);
+        List<RecordEntity> list = projectDao.findById(params, hql);
+        return list.get(0);
+    }
 }

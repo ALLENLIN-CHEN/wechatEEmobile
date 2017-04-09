@@ -10,14 +10,14 @@ import javax.persistence.*;
 public class RecordEntity implements java.io.Serializable{
     private int recordId;
     private String content;
-    private User user;
+    private String openId;
 
     public RecordEntity() {
     }
 
-    public RecordEntity(String content, User user) {
+    public RecordEntity(String content, String openId) {
         this.content = content;
-        this.user = user;
+        this.openId = openId;
     }
 
     @Id
@@ -40,14 +40,11 @@ public class RecordEntity implements java.io.Serializable{
         this.content = content;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "openId")
-
-    public User getUser() {
-        return user;
+    public String getOpenId() {
+        return openId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 }

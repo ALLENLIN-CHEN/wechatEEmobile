@@ -11,15 +11,14 @@ public class ProjectT {
     private  Integer  subprjectId;
     private String subproject;
     private String project;
-    private char projectStage;
-    private String openId;
-    private String userName;
+    private String teamStatus;
+    private  int teamId;
     private List<UserT> userTs=new ArrayList<>(0);
 
     public ProjectT() {
     }
 
-    public ProjectT(Integer projectId, Integer  subprjectId, String subproject, String project, char projectStage, String openId, String userName) {
+    public ProjectT(Integer projectId, Integer  subprjectId, String subproject, String project, String teamStatus) {
         this.projectId = projectId;
         if(subproject==null){
             this.subproject =null;
@@ -30,12 +29,8 @@ public class ProjectT {
             this.project =null;
         }
         this.project = project;
-        if((Character)projectStage==null){
-            this.projectStage ='a';
-        }
-        this.projectStage = projectStage;
-        this.openId = openId;
-        this.userName = userName;
+
+        this.teamStatus = teamStatus;
     }
 
     public List<UserT> getUserTs() {
@@ -78,27 +73,20 @@ public class ProjectT {
         this.project = project;
     }
 
-    public char getProjectStage() {
-        return projectStage;
+    public String  getTeamStatus() {
+        return teamStatus;
     }
 
-    public void setProjectStage(char projectStage) {
-        this.projectStage = projectStage;
+    public void setTeamStatus(String teamStatus) {
+        this.teamStatus = teamStatus;
     }
 
-    public String getOpenId() {
-        return openId;
+    public int getTeamId() {
+        return teamId;
     }
 
-    public void setOpenId(String openId) {
-        this.openId = openId;
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

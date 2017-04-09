@@ -4,11 +4,12 @@ import com.dao.impl.RecordDao;
 import com.dao.impl.UserDao;
 import com.entity.Pager;
 import com.entity.RecordEntity;
-import com.entity.User;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,18 +23,13 @@ public class RecordService {
     @Autowired
     RecordDao recordDao;
 
-
     /**
      *新建随手记
      */
+    @Transactional
     public boolean createRecord(String content,String openId){
         try {
-            String hql = "from User where openId=:openId";
-            Map<String, Object> params = new HashedMap();
-            params.put("openId", openId);
-            List<User> list = userDao.findBy(hql, params);
-            User user = list.get(0);
-            RecordEntity record = new RecordEntity(content, user);
+            RecordEntity record = new RecordEntity(content, openId);
             recordDao.updateRecord(record);
         }catch (Exception e){
             e.getStackTrace();
@@ -44,7 +40,7 @@ public class RecordService {
      * 查看随手记
      */
     public Pager findRecord(String openId,Pager pagerModle){
-        String hql="from RecordEntity r left join r.user u where u.openId=:openId";
+        String hql="from RecordEntity where openId=:openId";
         Map<String, Object> params = new HashedMap();
         params.put("openId", openId);
         return pagerModle=recordDao.findByPage(hql,pagerModle,params);
@@ -52,6 +48,7 @@ public class RecordService {
     /**
      * 随手记-编辑
      */
+    @Transactional
     public boolean updateRecord(String content,int recordId){
         try {
             RecordEntity record=recordDao.get(RecordEntity.class,recordId);
@@ -62,5 +59,29 @@ public class RecordService {
         }
         return true;
 
+    }
+    /**
+     * 获取单个随手记转入任务
+     */
+    public RecordEntity findByRecordId(int recordId) {
+        String hql = "from RecordEntity where recordId=:recordId";
+        Map<String, Object> params = new HashedMap();
+        params.put("recordId", recordId);
+        List<RecordEntity> list = recordDao.findById(params, hql);
+        return list.get(0);
+    }
+    /**
+     * 删除随手记
+     */
+    @Transactional
+    public void recordDelete(int recordId){
+        try{
+            String hql="delete RecordEntity as R where R.recordId=:recordId ";
+            Map<String,Object> params=new HashMap<String,Object>();
+            params.put("recordId",recordId);
+            recordDao.deleteByHql(hql,params,null);
+        }catch (Exception e){
+            e.getStackTrace();
+        }
     }
 }
