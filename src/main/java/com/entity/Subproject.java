@@ -27,7 +27,7 @@ public class Subproject implements java.io.Serializable
 	private Project project;
 	private Character projectStatus;
 	private String subproject;
-	private String teamStatus;
+	private String teamStatus;//String 子项目标签
 	private String contractStatus;
 	private String paymentStatus;
 	private String allocationStatus;
