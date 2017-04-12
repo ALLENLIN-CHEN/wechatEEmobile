@@ -1,9 +1,10 @@
 package com.service;
 
-import com.dao.impl.ScheduleDao;
-import com.dao.impl.SubprojectDao;
+import com.dao.impl.*;
 import com.entity.Pager;
+import com.entity.ProjectMember;
 import com.entity.Subproject;
+import com.entity.User;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,20 @@ public class SubprojectService {
     SubprojectDao subprojectDao;
     @Autowired
     ScheduleDao scheduleDao;
+    @Autowired
+    ProjectDao projectDao;
+    @Autowired
+    UserDao userDao;
+    @Autowired
+    ProjectMemberDao projectMemberDao;
 
     @Transactional
     public boolean saveSubproject(Subproject subproject){
         return subprojectDao.saveSubproject(subproject);
+    }
+    @Transactional
+    public void update(Subproject subproject){
+         subprojectDao.update(subproject);
     }
     public Subproject findById(int subprojectId){
         return subprojectDao.findById(subprojectId);
@@ -70,5 +81,56 @@ public class SubprojectService {
             arrayList.add(mapForOneSubproject);
         }
         return arrayList;
+    }
+    /**
+     * 查询子项目现有人员
+     */
+    @Transactional
+    public List subprojectMembers(int subprojectId){
+        String hql="select p.user.openId,p.user.userName from ProjectMember p left join p.subproject sub where sub.subprojectId=:subprojectId ";
+        Map<String,Object>params=new HashMap<>();
+        params.put("subprojectId",subprojectId);
+        List list=subprojectDao.findByHql(hql,params,null);
+        return list;
+    }
+    /**
+     *查询项目现有人员
+     */
+    @Transactional
+    public List projectMembers(int projectId){
+        String hql="select p.user.openId,p.user.userName from ProjectMember p left join p.subproject sub where sub.project.projectId=:projectId";
+        Map<String,Object>params=new HashMap<>();
+        params.put("projectId",projectId);
+        List list=projectDao.findByHql(hql,params,null);
+        return  list;
+    }
+    /**
+     * 删除子项目现有人员
+     */
+    @Transactional
+    public void deleteSubprojectMember(int subprojectId,String openId){
+        String hql="delete ProjectMember as p where p.subproject.subprojectId=:subprojectId and p.user.openId=:openId";
+        Map<String,Object> params=new HashMap<String,Object>();
+        params.put("subprojectId",subprojectId);
+        params.put("openId",openId);
+        subprojectDao.deleteByHql(hql,params,null);
+    }
+    /**
+     * 添加子项目人员
+     */
+    @Transactional
+    public void addSubprojectMember(int subprojectId,String openId,char roleType){
+        String hql="from User where openId=:openId";
+        Map<String,Object> params=new HashMap<String,Object>();
+        params.put("openId",openId);
+        List<User> list=userDao.findByHql(hql,params,null);
+        User user=list.get(0);
+        Subproject subproject=subprojectDao.get(Subproject.class,subprojectId);
+        ProjectMember projectMember=new ProjectMember();
+        projectMember.setRoleType(roleType);
+        projectMember.setSubproject(subproject);
+        projectMember.setUser(user);
+        projectMemberDao.saveProjectMember(projectMember);
+
     }
 }

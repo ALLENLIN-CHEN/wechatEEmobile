@@ -72,6 +72,24 @@ public class ScheduleDao extends BaseDao<Schedule> {
         return pagerModel;
     }
 
+    /**
+     *@author rthtr 2017/4/10
+     * 0：任务Id  1：项目名称  2：子项目名称  3：任务名称  4：标签  5：留言
+     * 6：截止日期  7：任务状态  8：子项目id  9：项目id
+     */
+    public Pager findStatisticsForSubproject(Pager pagerModel, Integer teamId, String scheduleType, String startTime, String endTime){
+        String hql="select s.scheduleId, s.subproject.project.project, s.subproject.subproject, s.taskContent,"
+                    +"s.taskType, s.taskReply, s.taskTime, s.taskStatus, s.subproject.subprojectId,"
+                    +" s.subproject.project.projectId from Schedule s where (s.taskTime>='"+startTime
+                    +"' and s.taskTime<='"+endTime+"') "
+                    +" and s.subproject.project.team.teamId="+teamId+" and s.taskType='"+scheduleType+"'";
+        List dataList = this.listByPage(hql, pagerModel.getCurrentPageNumber(), pagerModel.getPageSize(), null, null);
+        //      List dataList=findByHql(hql, null,null);
+        int count = this.getAllTotal(hql, null, null);
+        pagerModel.setTotalSize(count);
+        pagerModel.setDataList(dataList);
+        return pagerModel;
+    }
 
 
 }

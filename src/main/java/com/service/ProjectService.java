@@ -1,6 +1,5 @@
 package com.service;
 
-import com.dao.ProjectDaoI;
 import com.dao.impl.*;
 import com.entity.*;
 import com.entity.newT.UserT;
@@ -19,7 +18,7 @@ import java.util.*;
 @Service
 public class ProjectService {
     @Autowired
-    private ProjectDaoI projectDao;
+    private ProjectDao projectDao;
     private TeamDao teamDao;
     @Autowired
     private ScheduleDao scheduleDao;
@@ -37,7 +36,7 @@ public class ProjectService {
 
 
     /**
-     * 分页显示项目列表 按子项目状态查询 已完成/未完成
+     * 分页显示项目列表
      *按项目阶段查询
      * 按项目名字搜索
      * @param
@@ -111,6 +110,7 @@ public class ProjectService {
     public boolean createNewProject(Project project){
         return projectDao.create_project(project);
     }
+
     /**
      * 根据人员职位查询人员
      */
@@ -123,43 +123,6 @@ public class ProjectService {
         params.put("position", "%" + position + "%");
         return projectDao.findByPosition(hql,params,null);
     }
-
-    public boolean updateProject(String project,String subproject,String openId,char projectStage,int projectId,int subporjectId) {
-        try {
-            Project p = projectDao.updateByHql(projectId);
-            p.setProjectStage(projectStage);
-            p.setProject(project);
-            Subproject sub = subprojectDao.get(Subproject.class, subporjectId);
-            sub.setSubproject(subproject);
-            String hql = " from User u where u.openId=:openId";
-            Map<String, Object> params = new HashMap<String, Object>();
-            params.put("openId", openId);
-            List<User> users = projectDao.findById(params, hql);
-            User user = users.get(0);
-            params.clear();
-            String h = "select from ProjectMember p left join p.subproject sub " +
-                    "where sub.subprojectId=:subprojectId " ;
-            params.put("subprojectId",subporjectId);
-            List<ProjectMember> projectMembers = projectDao.findById(params, hql);
-            Set<ProjectMember> projectMember = new HashSet<ProjectMember>(0);
-           for(ProjectMember pm:projectMembers){
-               if(pm.getUser()==user){
-                   projectMember.add(pm);
-               }
-           }
-            sub.setProjectMembers(projectMember);
-            Set<Subproject> subprojects = new HashSet<Subproject>(0);
-            subprojects.add(sub);
-            p.setSubprojects(subprojects);
-            projectDao.create_project(p);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
     /**
      * 显示项目下的任务列表
      */
@@ -388,4 +351,37 @@ public class ProjectService {
         List<RecordEntity> list = projectDao.findById(params, hql);
         return list.get(0);
     }
+
+    /**
+     * 删除任务(任务转移中使用)
+     */
+    @Transactional
+    public void deleteSchedule(int scheduleId){
+    String hql="delete Schedule as s where s.scheduleId="+scheduleId;
+        projectDao.deleteByHql(hql,null,null);
+    }
+
+    /**
+     * 根据openId查询与该人员相关的项目
+     */
+    public List findProject(String openId){
+        String hql="select p.projectId,p.project from Project p  where " +
+                " p.team.teamId in(select t.team.teamId from TeamUser t where t.user.openId=:openId)";
+        Map<String,Object>params=new HashMap<>();
+        params.put("openId",openId);
+        List list=projectDao.findByHql(hql,params,null);
+        return  list;
+    }
+    /**
+     * 根据项目Id查询其所有子项目
+     */
+    public List findSubproject(int projectId){
+        String hql="select sub.subprojectId,sub.subproject from Subproject sub left join sub.project p " +
+                " where p.projectId=:projectId ";
+        Map<String,Object>params=new HashMap<>();
+        params.put("projectId",projectId);
+        List list=projectDao.findByHql(hql,params,null);
+        return list;
+    }
+
 }

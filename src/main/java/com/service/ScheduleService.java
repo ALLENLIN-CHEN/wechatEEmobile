@@ -68,4 +68,27 @@ public class ScheduleService {
         return arrayList;
     }
 
+/*    public Pager findConferenceStatisticsForSubproject(){
+
+    }*/
+    public ArrayList findStatisticsForSubproject(Pager pager,Integer teamId, String scheduleType, String startTime, String endTime){
+        ArrayList <Map> arrayList=new ArrayList<Map>();
+        Pager scheduleList=scheduleDao.findStatisticsForSubproject(pager,teamId,scheduleType,startTime,endTime);
+        for(int i=0;i<scheduleList.getDataList().size();i++){
+            Object []row=(Object [])scheduleList.getDataList().get(i);
+            Map<String,Object> scheduleMap=new HashMap<String, Object>();
+            scheduleMap.put("scheduleId",row[0]);
+            scheduleMap.put("projectName",row[1]);
+            scheduleMap.put("projectId",row[9]);
+            scheduleMap.put("subprojectName",row[2]);
+            scheduleMap.put("subprojectId",row[8]);
+            scheduleMap.put("scheduleName",row[3]);
+            scheduleMap.put("scheduleType",row[4]);
+            scheduleMap.put("message",row[5]);
+            scheduleMap.put("endDate",row[6]);
+            scheduleMap.put("scheduleStatus",row[7]);
+            arrayList.add(scheduleMap);
+        }
+        return arrayList;
+    }
 }

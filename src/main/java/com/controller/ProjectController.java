@@ -1,5 +1,7 @@
 package com.controller;
 
+import com.dao.impl.SubprojectDao;
+import com.dao.impl.TeamUserDao;
 import com.entity.*;
 import com.entity.newT.ProjectT;
 import com.entity.newT.ScheduleT;
@@ -37,6 +39,10 @@ public class ProjectController {
     @Autowired
     TeamUserService teamUserService;
     @Autowired
+    TeamUserDao teamUserDao;
+    @Autowired
+    SubprojectDao subprojectDao;
+    @Autowired
     private Map<String, Object> dataMap = new HashMap<String, Object>();
     private Pager pagerModel = new Pager(1, 5);
 
@@ -55,6 +61,7 @@ public class ProjectController {
             String teamStatus = request.getParameter("teamStatus");
             String project = request.getParameter("project");
             String openId=request.getParameter("openId");
+            //int projectId=Integer.parseInt(request.getParameter("projectId"));
             Pager pagerModel = new Pager(currentPageNumber, pageSize);
             if(teamStatus!=null&&project!=null) {
                 pagerModel = projectService.findByStatus(teamStatus, project, pagerModel,openId);
@@ -92,7 +99,7 @@ public class ProjectController {
                     if(obj[4]!=null){
                         projectT.setTeamStatus(obj[4].toString());
                     }
-                    if(obj[5]!=null){
+                    if(obj[5]!=null) {
                         projectT.setTeamId(Integer.parseInt(obj[5].toString()));
                     }
                     projectTs.add(projectT);
@@ -194,27 +201,25 @@ public class ProjectController {
         try {
             Map<String, Object> json = JsonUtil.parseJSON2Map(request);
             String project = (String) json.get("project");
-            String projectStageS = (String) json.get("projectStage");
-            char projectStage=projectStageS.charAt(0);
             String teamIdS = (String) json.get("teamId");
             int teamId=Integer.parseInt(teamIdS);
             Team team= T.findTeam(teamId);
             Project projectT = new Project();
             projectT.setTeam(team);
             projectT.setProject(project);
-            projectT.setProjectStage(projectStage);
             projectService.createNewProject(projectT);
-            int projectId=projectT.getProjectId();
             ArrayList<Map<String, Object>> subprojectList = (ArrayList<Map<String, Object>>) json.get("subprojects");
             Set<ProjectMember> projectMembers = new HashSet<ProjectMember>();
             Set<Subproject> subprojects = new HashSet<Subproject>();
             for (Map<String, Object> map : subprojectList) {
                 String subproject = (String) map.get("subproject");
+                String teamStatus=(String)map.get("teamStatus");
                 Subproject subproject1=new Subproject();
                 subproject1.setSubproject(subproject);
+                subproject1.setTeamStatus(teamStatus);
                 subproject1.setProjectStatus('b');
                 subproject1.setProject(projectT);
-                //subprojectService.saveSubproject(subproject1);
+                subprojectService.saveSubproject(subproject1);
                 ArrayList<Map<String, Object>> projectMemberList = (ArrayList<Map<String, Object>>) map.get("projectMembers");
                 for (Map<String, Object> m : projectMemberList) {
                     String openId = (String) m.get("openId");
@@ -226,7 +231,7 @@ public class ProjectController {
                     projectMember.setRoleType(roleType);
                     projectMember.setUser(user);
                     projectMember.setSubproject(subproject1);
-                   // projectMemberService.saveProjectMember(projectMember);
+                    projectMemberService.saveProjectMember(projectMember);
                     projectMembers.add(projectMember);
                 }
                 Subproject subprojectT = new Subproject();
@@ -245,7 +250,123 @@ public class ProjectController {
         }
         return dataMap;
     }
+    /**
+     * 显示子项目现有人员
+     */
+    @RequestMapping(value = "subprojectMembers")
+    @ResponseBody
+    public Map<String,Object> subprojectMembers(HttpServletRequest request){
+        dataMap.clear();
+        try{
+            int subprojectId= Integer.parseInt(request.getParameter("subprojectId"));
+            List subprojectMembers=subprojectService.subprojectMembers(subprojectId);
+            ArrayList<Map<String,Object>>data=new ArrayList<>();
+            for(int i=0;i<subprojectMembers.size();i++){
+                Map<String,Object> map=new HashMap<>();
+                Object[] obj=(Object[])subprojectMembers.get(i);
+                map.put("openId",obj[0].toString());
+                map.put("userName",obj[1].toString());
+                data.add(map);
+            }
+            dataMap.put("result", "success");
+            dataMap.put("resultTip", "");
+            dataMap.put("subprojectMembers",data);
+        }catch (Exception e){
+            e.printStackTrace();
+            dataMap.put("result", "fail");
+            dataMap.put("resultTip", e.getMessage());
+        }
+        return  dataMap;
+    }
 
+    /**
+     * 显示项目现有人员
+     */
+    @RequestMapping(value = "projectMembers")
+    @ResponseBody
+    public Map<String,Object> projectMembers(HttpServletRequest request){
+        dataMap.clear();
+        try{
+            int projectId= Integer.parseInt(request.getParameter("projectId"));
+            List projectMembers=subprojectService.projectMembers(projectId);
+            ArrayList<Map<String,Object>>data=new ArrayList<>();
+            for(int i=0;i<projectMembers.size();i++){
+                Map<String,Object> map=new HashMap<>();
+                Object[] obj=(Object[])projectMembers.get(i);
+                map.put("openId",obj[0].toString());
+                map.put("userName",obj[1].toString());
+                data.add(map);
+            }
+            dataMap.put("result", "success");
+            dataMap.put("resultTip", "");
+            dataMap.put("projectMembers",data);
+        }catch (Exception e){
+            e.printStackTrace();
+            dataMap.put("result", "fail");
+            dataMap.put("resultTip", e.getMessage());
+        }
+        return  dataMap;
+    }
+
+    /**
+     * 删除子项目成员
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "deleteProjecMember")
+    @ResponseBody
+    public Map<String,Object> deleteProjectMember(@RequestBody String request){
+        dataMap.clear();
+        try {
+            Map<String, Object> json = JsonUtil.parseJSON2Map(request);
+            int subprojectId=Integer.parseInt((String)json.get("subprojectId"));
+            ArrayList<Map<String, Object>> removeList = (ArrayList<Map<String, Object>>) json.get("removeList");
+            for(Map<String,Object>map:removeList){
+                String openId=(String)map.get("openId");
+                subprojectService.deleteSubprojectMember(subprojectId,openId);
+            }
+            dataMap.put("result", "success");
+            dataMap.put("resultTip", "人员删除成功");
+        }catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            dataMap.put("result", "fail");
+            dataMap.put("resultTip", e.getMessage());
+        }
+
+         return dataMap;
+    }
+
+    /**
+     * 添加子项目成员
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "addProjecMember")
+    @ResponseBody
+    public Map<String,Object> addProjectMember(@RequestBody String request){
+        dataMap.clear();
+        try {
+            Map<String, Object> json = JsonUtil.parseJSON2Map(request);
+            int subprojectId=Integer.parseInt((String)json.get("subprojectId"));
+            ArrayList<Map<String, Object>> addList = (ArrayList<Map<String, Object>>) json.get("addList");
+            for(Map<String,Object>map:addList){
+                String openId=(String)map.get("openId");
+                String roleType1=(String)map.get("roleType");
+                char roleType=roleType1.charAt(0);
+                subprojectService.addSubprojectMember(subprojectId,openId,roleType);
+            }
+            dataMap.put("result", "success");
+            dataMap.put("resultTip", "人员添加成功");
+        }catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            dataMap.put("result", "fail");
+            dataMap.put("resultTip", e.getMessage());
+        }
+
+        return dataMap;
+    }
     /**
      * 更新项目
      */
@@ -255,18 +376,35 @@ public class ProjectController {
         dataMap.clear();
         try {
             Map<String, Object> json = JsonUtil.parseJSON2Map(request);
-            String project=(String)json.get("project");
             String subproject=(String)json.get("subproject");
-            String openId=(String)json.get("openId");
-            char projectStage=((String)json.get("projectStage")).charAt(0);
-            int projectId=Integer.parseInt((String)json.get("projectId"));
+            ArrayList<Map<String,Object>> addList=(ArrayList<Map<String,Object>>)json.get("addList");
+            ArrayList<Map<String,Object>>removeList=(ArrayList<Map<String,Object>>)json.get("removeList") ;
+            String teamStatus=(String)json.get("teamStatus");
             int subprojectId=Integer.parseInt((String)json.get("subprojectId"));
-            boolean flag=projectService.updateProject(project,subproject,openId,projectStage,projectId,subprojectId);
-            if(flag){
+            Subproject subproject1=subprojectService.findById(subprojectId);
+            if(subproject!=null){
+                subproject1.setSubproject(subproject);
+            }
+            if(teamStatus!=null){
+                subproject1.setTeamStatus(teamStatus);
+            }
+            if(addList.size()>0) {
+                for (Map<String, Object> map : addList){
+                    String openId=(String)map.get("openId");
+                    String roleType1=(String)map.get("roleType");
+                    char roleType=roleType1.charAt(0);
+                    subprojectService.addSubprojectMember(subprojectId,openId,roleType);
+                }
+            }
+            if(removeList.size()>0){
+                for(Map<String,Object>map1:removeList){
+                    String openId=(String)map1.get("openId");
+                    subprojectService.deleteSubprojectMember(subprojectId,openId);
+                }
+            }
+                subprojectService.update(subproject1);
                 dataMap.put("result", "success");
                 dataMap.put("resultTip", "项目修改成功");
-            }else
-                dataMap.put("result", "fail");
         }catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -366,6 +504,7 @@ public class ProjectController {
             String openId=(String)json.get("openId");
             ArrayList<Map<String,Object>> transferMembers=(ArrayList<Map<String,Object>>)json.get("transferMembers");
             transferService.saveTransfer(Integer.parseInt(scheduleId),openId,transferMembers);
+            projectService.deleteSchedule(Integer.parseInt(scheduleId));
             dataMap.put("result","success");
             dataMap.put("resultTip","转移成功");
         }catch (Exception e){
@@ -613,30 +752,20 @@ public class ProjectController {
 
         return  dataMap;
     }
-     @RequestMapping(value="canModify",method = RequestMethod.POST)
+    @RequestMapping(value = "deleteSchedule")
     @ResponseBody
-    public  Map<String, Object> canModify( @RequestBody String request) {
-         dataMap.clear();
-         try {
-             Map<String, Object> json = JsonUtil.parseJSON2Map(request);
-             String openId=(String)json.get("openId");
-             int teamId=Integer.parseInt((String)json.get("teamId"));
-             int subprojectId=Integer.parseInt((String)json.get("subprojectId"));
-             int canModify;
-             boolean flag=teamUserService.canModify(openId,teamId,subprojectId);
-             if(flag==true){
-                 canModify=1;
-             }else{
-                 canModify=0;
-             }
-             dataMap.put("canModify",canModify);
-         } catch (Exception e) {
-             e.printStackTrace();
-             dataMap.put("result", "fail");
-             dataMap.put("resultTip", e.getMessage());
-         }
-         return dataMap;
-     }
+    public Map<String, Object> delete(HttpServletRequest request){
+        try {
+            int scheduleId = Integer.parseInt(request.getParameter("scheduleId"));
+            projectService.deleteSchedule(scheduleId);
+            dataMap.clear();
+            dataMap.put("result", "success");
+            return dataMap;
+        }catch (Exception e){
+            dataMap.put("resultTip",e.getMessage());
+        }
+        return dataMap;
+    }
 
 }
 

@@ -1,6 +1,6 @@
 package com.service;
 
-import com.dao.ProjectDaoI;
+import com.dao.impl.ProjectDao;
 import com.entity.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProjectServiceTest {
     @Autowired
-    private ProjectDaoI projectDao;
+    private ProjectDao projectDao;
     public Pager findAllProject(String scope,Pager pagerModel){
         return pagerModel;
     }

@@ -33,35 +33,22 @@ public class TeamUserService {
         return teamUserDao.findTeamUsersByOpenId(openId,role);
     }
 
-    public TeamUser findTeamUsersByOpenIdAndTeamId(String openId, Integer teamId){
+    public List<TeamUser> findTeamUsersByOpenIdAndTeamId(String openId, Integer teamId){
         List <TeamUser> list = teamUserDao.findTeamUsersByOpenIdAndTeamId(openId,teamId);
-        return list.get(0);
+        return list;
     }
     /**
      * 查询用户对子项目的修改权限
      */
-    public boolean canModify(String openId,int teamId,int subprojectId){
-        String hql="from TeamUser";
-        //String hql=" from TeamUser t where t.user.openId=:openId and t.team.teamId=:teamId and t.role=1";
-        Map<String,Object> params=new HashMap<>();
-        params.put("openId",openId);
-        params.put("teamId",teamId);
-        List<TeamUser> list=teamUserDao.findTeamUsersByOpenIdAndTeamId(openId,teamId);
-        TeamUser teamUser=list.get(0);
-        if(teamUser.getRole()==1){
-            return true;
-        }
-        else{
-            String hq="from ProjectMember p where p.openId=:openId and p.subprojectId=:subprojectId";
-            params.clear();
-            params.put("openId",openId);
-            params.put("subproject",subprojectId);
-            List<ProjectMember> projectMemberList=teamUserDao.findById(params,hq);
-            ProjectMember projectMember=projectMemberList.get(0);
-            if(projectMember.getRoleType()!='d'){
-                return true;
-            }
-        }
-        return false;
-    }
+public ProjectMember findP(String openId,int subprojectId){
+     String hq="from ProjectMember p where p.user.openId=:openId and p.subproject.subprojectId=:subprojectId";
+     Map<String,Object> params=new HashMap<>();
+     params.put("openId",openId);
+     params.put("subprojectId",subprojectId);
+     List<ProjectMember> projectMemberList=teamUserDao.findBy(hq,params);
+     ProjectMember projectMember=projectMemberList.get(0);
+    return projectMember;
+     }
+
 }
+

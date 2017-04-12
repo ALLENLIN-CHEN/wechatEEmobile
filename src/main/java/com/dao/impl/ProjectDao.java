@@ -1,7 +1,6 @@
 package com.dao.impl;
 
 import com.dao.BaseDao;
-import com.dao.ProjectDaoI;
 import com.entity.Pager;
 import com.entity.Project;
 import org.hibernate.Query;
@@ -14,7 +13,7 @@ import java.util.Map;
  * Created by zengqin on 2017/3/21.
  */
 @Repository("ProjectDao")
-public class ProjectDao extends BaseDao<Project> implements ProjectDaoI {
+public class ProjectDao extends BaseDao<Project>  {
     /**
      * 分页查询
      */
