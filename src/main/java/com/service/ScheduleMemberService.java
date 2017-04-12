@@ -2,6 +2,7 @@ package com.service;
 
 import com.dao.impl.ScheduleDao;
 import com.dao.impl.ScheduleMemberDao;
+import com.dao.impl.SubprojectDao;
 import com.dao.impl.TeamUserDao;
 import com.entity.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class ScheduleMemberService {
     TeamUserDao teamUserDao;
     @Autowired
     ScheduleDao scheduleDao;
+    @Autowired
+    SubprojectDao subprojectDao;
+
     public ArrayList findTaskIntensityForPerson(Pager pager, Integer teamId, String memberName, String startTime, String endTime){
         ArrayList <Map> arrayList=new ArrayList<Map>();
         Pager teamUsers=teamUserDao.findTeamUsersByTeamId(pager,teamId,memberName);
@@ -63,5 +67,6 @@ public class ScheduleMemberService {
         }
         return arrayList;
     }
+
 
 }

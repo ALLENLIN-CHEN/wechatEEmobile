@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.dao.impl.TeamUserDao;
 import com.entity.*;
 import com.entity.newT.ProjectT;
 import com.entity.newT.ScheduleT;
@@ -37,6 +38,8 @@ public class ProjectController {
     @Autowired
     TeamUserService teamUserService;
     @Autowired
+    TeamUserDao teamUserDao;
+    @Autowired
     private Map<String, Object> dataMap = new HashMap<String, Object>();
     private Pager pagerModel = new Pager(1, 5);
 
@@ -55,6 +58,7 @@ public class ProjectController {
             String teamStatus = request.getParameter("teamStatus");
             String project = request.getParameter("project");
             String openId=request.getParameter("openId");
+            int projectId=Integer.parseInt(request.getParameter("projectId"));
             Pager pagerModel = new Pager(currentPageNumber, pageSize);
             if(teamStatus!=null&&project!=null) {
                 pagerModel = projectService.findByStatus(teamStatus, project, pagerModel,openId);
@@ -92,7 +96,7 @@ public class ProjectController {
                     if(obj[4]!=null){
                         projectT.setTeamStatus(obj[4].toString());
                     }
-                    if(obj[5]!=null){
+                    if(obj[5]!=null) {
                         projectT.setTeamId(Integer.parseInt(obj[5].toString()));
                     }
                     projectTs.add(projectT);
@@ -366,6 +370,7 @@ public class ProjectController {
             String openId=(String)json.get("openId");
             ArrayList<Map<String,Object>> transferMembers=(ArrayList<Map<String,Object>>)json.get("transferMembers");
             transferService.saveTransfer(Integer.parseInt(scheduleId),openId,transferMembers);
+            projectService.deleteSchedule(Integer.parseInt(scheduleId));
             dataMap.put("result","success");
             dataMap.put("resultTip","转移成功");
         }catch (Exception e){
@@ -613,30 +618,20 @@ public class ProjectController {
 
         return  dataMap;
     }
-     @RequestMapping(value="canModify",method = RequestMethod.POST)
+    @RequestMapping(value = "deleteSchedule")
     @ResponseBody
-    public  Map<String, Object> canModify( @RequestBody String request) {
-         dataMap.clear();
-         try {
-             Map<String, Object> json = JsonUtil.parseJSON2Map(request);
-             String openId=(String)json.get("openId");
-             int teamId=Integer.parseInt((String)json.get("teamId"));
-             int subprojectId=Integer.parseInt((String)json.get("subprojectId"));
-             int canModify;
-             boolean flag=teamUserService.canModify(openId,teamId,subprojectId);
-             if(flag==true){
-                 canModify=1;
-             }else{
-                 canModify=0;
-             }
-             dataMap.put("canModify",canModify);
-         } catch (Exception e) {
-             e.printStackTrace();
-             dataMap.put("result", "fail");
-             dataMap.put("resultTip", e.getMessage());
-         }
-         return dataMap;
-     }
+    public Map<String, Object> delete(HttpServletRequest request){
+        try {
+            int scheduleId = Integer.parseInt(request.getParameter("scheduleId"));
+            projectService.deleteSchedule(scheduleId);
+            dataMap.clear();
+            dataMap.put("result", "success");
+            return dataMap;
+        }catch (Exception e){
+            dataMap.put("resultTip",e.getMessage());
+        }
+        return dataMap;
+    }
 
 }
 

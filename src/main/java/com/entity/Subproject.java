@@ -2,6 +2,7 @@ package com.entity;
 
 // Generated 2016-4-16 15:43:05 by Hibernate Tools 3.4.0.CR1
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -20,14 +21,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "subproject", catalog = "projectdatabase")
-public class Subproject implements java.io.Serializable
+public class Subproject implements Serializable
 {
 
 	private Integer subprojectId;
 	private Project project;
 	private Character projectStatus;
 	private String subproject;
-	private String teamStatus;
+	private String teamStatus;//String 子项目标签(子项目当前阶段)
 	private String contractStatus;
 	private String paymentStatus;
 	private String allocationStatus;

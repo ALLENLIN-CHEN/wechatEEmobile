@@ -45,12 +45,12 @@ public class SubprojectDao extends BaseDao<Subproject> {
                     +subprojectName+"%' order by s.project.projectId asc";
         }else if(subprojectName==null||subprojectName.equals("")){
             hql="select s.subprojectId, s.subproject, s.project.projectId, s.project.project from"
-                    +" Subproject s where s.project.team.teamId="+teamId+" and s.projectStatus= '"
-                    +subprojectStatus+"' order by s.project.projectId asc";
+                    +" Subproject s where s.project.team.teamId="+teamId+" and s.teamStatus like '%"
+                    +subprojectStatus+"%' order by s.project.projectId asc";
         }else{
             hql="select s.subprojectId, s.subproject, s.project.projectId, s.project.project from"
-                    +" Subproject s where s.project.team.teamId="+teamId+" and s.projectStatus= '"
-                    +subprojectStatus+"' and s.subprojectName like '%"+subprojectName+"%' order by s.project.projectId asc";
+                    +" Subproject s where s.project.team.teamId="+teamId+" and s.teamStatus like '%"
+                    +subprojectStatus+"%' and s.subprojectName like '%"+subprojectName+"%' order by s.project.projectId asc";
         }
         List dataList = this.listByPage(hql, pagerModel.getCurrentPageNumber(), pagerModel.getPageSize(), null, null);
         //      List dataList=findByHql(hql, null,null);

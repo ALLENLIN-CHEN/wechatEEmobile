@@ -9,7 +9,9 @@
       <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
+      <introspection-schemas>*:projectdatabase</introspection-schemas>
       <resolve-scope>projectdatabase:</resolve-scope>
+      <unqualified-resolve-schemas>projectdatabase:</unqualified-resolve-schemas>
     </data-source>
   </component>
 </project>
