@@ -436,5 +436,9 @@ public class TeamController {
             dataMap.put("resultTip", e.getMessage());
         }
         return dataMap;
+<<<<<<< HEAD
+=======
+    }
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
 }
     }

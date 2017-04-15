@@ -50,4 +50,26 @@ public class ProjectMemberService {
         return arrayList;
     }
 
+    /**
+     * 备忘录模块中对与登录者相关的大事记子目录列表进行统计
+     */
+    public ArrayList findEventsForMemo(Pager pager,String openId,String searchString){
+        ArrayList <Map> arrayList=new ArrayList<Map>();
+        Pager subprojectList=projectMemberDao.findEventsForMemo(pager,openId,searchString);
+        for(int i=0;i<subprojectList.getDataList().size();i++){
+            Object [] row=(Object[])subprojectList.getDataList().get(i);
+            List principalList = projectMemberDao.getPrincipalListBySubprojectId(Integer.parseInt(row[0].toString()));
+
+            Map<String,Object> mapForOneSubproject=new HashMap<String, Object>();
+            mapForOneSubproject.put("principalList",principalList);//负责人
+            mapForOneSubproject.put("subprojectId",row[0]);
+            mapForOneSubproject.put("subprojectName",row[1]);
+            mapForOneSubproject.put("projectId",row[2]);
+            mapForOneSubproject.put("projectName",row[3]);
+            mapForOneSubproject.put("stage",row[4]);
+            arrayList.add(mapForOneSubproject);
+        }
+        return arrayList;
+}
+
 }

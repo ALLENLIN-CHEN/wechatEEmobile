@@ -1,6 +1,9 @@
 package com.controller;
 
+<<<<<<< HEAD
 import com.dao.impl.SubprojectDao;
+=======
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
 import com.dao.impl.TeamUserDao;
 import com.entity.*;
 import com.entity.newT.ProjectT;
@@ -41,8 +44,11 @@ public class ProjectController {
     @Autowired
     TeamUserDao teamUserDao;
     @Autowired
+<<<<<<< HEAD
     SubprojectDao subprojectDao;
     @Autowired
+=======
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
     private Map<String, Object> dataMap = new HashMap<String, Object>();
     private Pager pagerModel = new Pager(1, 5);
 
@@ -61,7 +67,11 @@ public class ProjectController {
             String teamStatus = request.getParameter("teamStatus");
             String project = request.getParameter("project");
             String openId=request.getParameter("openId");
+<<<<<<< HEAD
             //int projectId=Integer.parseInt(request.getParameter("projectId"));
+=======
+            int projectId=Integer.parseInt(request.getParameter("projectId"));
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
             Pager pagerModel = new Pager(currentPageNumber, pageSize);
             if(teamStatus!=null&&project!=null) {
                 pagerModel = projectService.findByStatus(teamStatus, project, pagerModel,openId);
