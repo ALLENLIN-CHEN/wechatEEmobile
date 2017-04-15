@@ -1,13 +1,9 @@
 package com.util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
+
+import java.util.*;
 /**
  * json解析工具
  * @author gzw
@@ -46,13 +42,26 @@ public class JsonUtil
         }
         return map;
     }
-    //test
-//    public static void main(String[] args) throws Exception {
-//        String url = "{project:\"12\",members:[{opanId:\"\",userName:\"\",},{opanId:\"\",userName:\"\",}]}";
-//        JSONObject u=new JSONObject(url);
-//        Map<String, Object> list = parseJSON2Map(url);
-//        System.out.println(u.getInt("project"));
-//        System.out.println(list.get("project"));
-//        System.out.println(((ArrayList<Object>)list.get("members")).get(0));
-//    }
+    public static boolean isLeapYear(int year){
+        boolean isLeapYear=false;
+        if((year%4==0&&year%100==0)||year%400==0){
+            isLeapYear=true;
+        }
+        return  isLeapYear;
+    }
+    public static  int leapYearfeDay(int month,int year){
+        int februaryDay=29;
+        boolean flag=isLeapYear(year);
+        if(!flag){
+            februaryDay=28;
+        }
+        return februaryDay;
+    }
+    public static  int maxDay(int month){
+        int maxDay=30;
+        if(month==1||month==3||month==5||month==7||month==8||month==10||month==12){
+            maxDay=31;
+        }
+        return  maxDay;
+    }
 }

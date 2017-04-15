@@ -1,26 +1,26 @@
 package com.entity.newT;
 
-import com.entity.Schedule;
-import com.entity.User;
-
 /**
  * Created by  xionglian on 2017/3/25.
  */
 public class ScheduleMemberT {
-    private Integer scheduleMemberId;
+    private String openId;
     private String userName;
 
-    public ScheduleMemberT(Integer scheduleMemberId, String userName) {
-        this.scheduleMemberId = scheduleMemberId;
+    public ScheduleMemberT() {
+    }
+
+    public ScheduleMemberT(String openId, String userName) {
+        this.openId = openId;
         this.userName = userName;
     }
 
-    public Integer getScheduleMemberId() {
-        return scheduleMemberId;
+    public String getOpenId() {
+        return openId;
     }
 
-    public void setScheduleMemberId(Integer scheduleMemberId) {
-        this.scheduleMemberId = scheduleMemberId;
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 
     public String getUserName() {

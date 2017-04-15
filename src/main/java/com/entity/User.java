@@ -3,6 +3,7 @@ package com.entity;
 // Generated 2016-4-16 15:43:05 by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "user", catalog = "projectdatabase")
-public class User implements java.io.Serializable
+public class User implements Serializable
 {
 
 	private String openId;

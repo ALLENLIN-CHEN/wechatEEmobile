@@ -407,6 +407,11 @@ public class TeamController {
         return dataMap;
     }
 
+    /**
+     * 对项目的修改权限判断
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "canModify")
     @ResponseBody
     public Map<String, Object> modify(@RequestBody String request){
@@ -436,5 +441,8 @@ public class TeamController {
             dataMap.put("resultTip", e.getMessage());
         }
         return dataMap;
-}
+
+
     }
+}
+

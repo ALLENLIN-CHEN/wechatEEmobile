@@ -7,6 +7,7 @@ import com.dao.impl.TeamUserDao;
 import com.entity.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,6 +68,11 @@ public class ScheduleMemberService {
         }
         return arrayList;
     }
-
+    @Transactional
+    public List findScheduleMembers(String scheduleId){
+        String hql = "select sm.user from ScheduleMember sm where sm.schedule.scheduleId="+scheduleId;
+        List list = scheduleMemberDao.findByHql(hql,null,null);
+        return list;
+    }
 
 }
