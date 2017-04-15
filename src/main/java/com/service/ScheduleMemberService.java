@@ -8,10 +8,8 @@ import com.entity.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by rthtr on 2017/4/3.
@@ -68,5 +66,64 @@ public class ScheduleMemberService {
         return arrayList;
     }
 
+    public Map findTaskIntensityAnalyzeForPerson(Integer teamId, String memberOpenId, String period){
+       SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        ArrayList unfinished=new ArrayList();
+        ArrayList finished=new ArrayList();
+        ArrayList overTime=new ArrayList();
+
+        String startTime="";
+        String endTime="";
+
+        if(period.equals("yearly")){
+            Calendar c = Calendar.getInstance();
+            c.setTime(new Date());
+            c.add(Calendar.MONTH, -6);
+            for(int i=0;i<6;i++){
+                startTime=simpleDateFormat.format(c.getTime());
+                c.add(Calendar.MONTH, 1);
+                endTime=simpleDateFormat.format(c.getTime());
+                List unfinishedForPerson=scheduleMemberDao.findUnfinishedForPersonByOpenId(teamId,memberOpenId,startTime,endTime);
+                unfinished.add(unfinishedForPerson.isEmpty() ? 0 : (Long) unfinishedForPerson.get(0));
+                List finishedForPerson=scheduleMemberDao.findFinishedForPersonByOpenId(teamId,memberOpenId,startTime,endTime);
+                finished.add(finishedForPerson.isEmpty() ? 0 : (Long) finishedForPerson.get(0));
+                List overTimeForPerson=scheduleMemberDao.findTaskOverTimeForPersonByOpenId(teamId,memberOpenId,startTime,endTime);
+                overTime.add(overTimeForPerson.isEmpty() ? 0 : (Long) overTimeForPerson.get(0));
+            }
+        }else{
+            String dateTime ="";
+            int days=0;
+            Calendar c = Calendar.getInstance();
+            c.setTime(new Date());
+            Date startDate=null;
+            Date endDate=new Date();
+            Date date=null;
+            if(period.equals("weekly")){
+                c.add(Calendar.DATE, -13);//默认时间：近两周
+                startDate=c.getTime();
+                days=(int)(endDate.getTime()-startDate.getTime())/(24*60*60*1000);
+            }else if(period.equals("monthly")){
+                c.add(Calendar.MONTH, -1);//默认时间：近一个月
+                days=c.getActualMaximum(Calendar.DATE);
+            }
+
+            for(int x=0;x<=days;x++){
+                date=c.getTime();
+                dateTime=simpleDateFormat.format(date);
+                c.add(Calendar.DATE,1);
+                List unfinishedForPerson=scheduleMemberDao.getCountUnfinishedForPerson(teamId,memberOpenId,dateTime);
+                unfinished.add(unfinishedForPerson.isEmpty() ? 0 : (Long) unfinishedForPerson.get(0));
+                List finishedForPerson=scheduleMemberDao.getCountFinishedForPerson(teamId,memberOpenId,dateTime);
+                finished.add(finishedForPerson.isEmpty() ? 0 : (Long) finishedForPerson.get(0));
+                List overTimeForPerson=scheduleMemberDao.getCountTaskOverTimeForPerson(teamId,memberOpenId,dateTime);
+                overTime.add(overTimeForPerson.isEmpty() ? 0 : (Long) overTimeForPerson.get(0));
+            }
+        }
+        Map<String,Object> map=new HashMap<String, Object>();
+        map.put("unfinished",unfinished);
+        map.put("finished",finished);
+        map.put("overTime",overTime);
+        return map;
+    }
 
 }

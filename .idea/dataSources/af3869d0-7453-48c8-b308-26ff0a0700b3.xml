@@ -1,581 +1,818 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="MySQL - projectdatabase@120.25.240.91">
-  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
-    <schema id="1" name="projectdatabase">
-      <visible>1</visible>
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.1">
+    <root id="1"/>
+    <schema id="2" parent="1" name="projectdatabase">
+      <Current>1</Current>
+      <Visible>1</Visible>
     </schema>
-    <schema id="2" name="information_schema"/>
-    <schema id="3" name="mysql"/>
-    <schema id="4" name="performance_schema"/>
-    <table id="5" parent="1" name="project">
-      <comment>项目表</comment>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <table id="6" parent="2" name="memoForPerson"/>
+    <table id="7" parent="2" name="memoForSubproject"/>
+    <table id="8" parent="2" name="project">
+      <Comment>项目表</Comment>
     </table>
-    <table id="6" parent="1" name="projectMember">
-      <comment>项目人员关系表</comment>
+    <table id="9" parent="2" name="projectMember">
+      <Comment>项目人员关系表</Comment>
     </table>
-    <table id="7" parent="1" name="project_subproject"/>
-    <table id="8" parent="1" name="schedule">
-      <comment>进度安排表</comment>
+    <table id="10" parent="2" name="project_subproject"/>
+    <table id="11" parent="2" name="record"/>
+    <table id="12" parent="2" name="schedule">
+      <Comment>进度安排表</Comment>
     </table>
-    <table id="9" parent="1" name="scheduleMember">
-      <comment>任务人员关系表</comment>
+    <table id="13" parent="2" name="scheduleMember">
+      <Comment>任务人员关系表</Comment>
     </table>
-    <table id="10" parent="1" name="scheduleMessage"/>
-    <table id="11" parent="1" name="subproject">
-      <comment>项目表</comment>
+    <table id="14" parent="2" name="scheduleMessage"/>
+    <table id="15" parent="2" name="subproject">
+      <Comment>项目表</Comment>
     </table>
-    <table id="12" parent="1" name="team"/>
-    <table id="13" parent="1" name="teamUser"/>
-    <table id="14" parent="1" name="user">
-      <comment>用户表</comment>
+    <table id="16" parent="2" name="team"/>
+    <table id="17" parent="2" name="teamUser"/>
+    <table id="18" parent="2" name="transfer"/>
+    <table id="19" parent="2" name="transferMember"/>
+    <table id="20" parent="2" name="user">
+      <Comment>用户表</Comment>
     </table>
-    <table id="15" parent="1" name="record"/>
-    <table id="16" parent="1" name="transfer"/>
-    <table id="17" parent="1" name="transferMember"/>
-    <column id="18" parent="5" name="projectId">
-      <comment>projectId</comment>
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
-      <sequence-identity>1</sequence-identity>
+    <column id="21" parent="6" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="19" parent="5" name="project">
-      <comment>项目</comment>
-      <data-type>varchar(200)|0</data-type>
+    <column id="22" parent="6" name="subprojectId">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
     </column>
-    <column id="20" parent="5" name="type">
-      <comment>项目类型：a:体育，b:校园，c:医疗，d:城市设计，e:其他</comment>
-      <data-type>char(1)|0</data-type>
+    <column id="23" parent="6" name="operatorOpenId">
+      <Position>3</Position>
+      <Comment>消息操作人</Comment>
+      <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="21" parent="5" name="area">
-      <comment>地区：a:省内，b:省外，c:国外</comment>
-      <data-type>char(1)|0</data-type>
+    <column id="24" parent="6" name="content">
+      <Position>4</Position>
+      <DataType>varchar(200)|0</DataType>
     </column>
-    <column id="22" parent="5" name="contract_stage">
-      <comment>合同委托阶段：a:投标；b:中标；c:委托</comment>
-      <data-type>char(1)|0</data-type>
+    <column id="25" parent="6" name="operTime">
+      <Position>5</Position>
+      <DataType>date|0</DataType>
     </column>
-    <column id="23" parent="5" name="project_stage">
-      <comment>项目所处阶段：a:咨询；b:方案；c:初设；d:施工图</comment>
-      <data-type>char(1)|0</data-type>
+    <column id="26" parent="6" name="hasRead">
+      <Position>6</Position>
+      <Comment>标记是否已读，未读：0，已读：1</Comment>
+      <DataType>int(1)|0</DataType>
     </column>
-    <column id="24" parent="5" name="contract_amount">
-      <comment>合同额</comment>
-      <data-type>double|0</data-type>
+    <column id="27" parent="6" name="openId">
+      <Position>7</Position>
+      <Comment>消息接收人</Comment>
+      <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="25" parent="5" name="completed_amount">
-      <comment>已完成合同额</comment>
-      <data-type>double|0</data-type>
-    </column>
-    <column id="26" parent="5" name="received_amount">
-      <comment>已收设计费</comment>
-      <data-type>double|0</data-type>
-    </column>
-    <column id="27" parent="5" name="contract_balance">
-      <comment>合同余额</comment>
-      <data-type>double|0</data-type>
-    </column>
-    <column id="28" parent="5" name="project_time">
-      <comment>项目时间</comment>
-      <data-type>date|0</data-type>
-    </column>
-    <column id="29" parent="5" name="team">
-      <data-type>int(11)|0</data-type>
-    </column>
-    <index id="30" parent="5" name="FK_d8kon32nl4hr1bbfq398px0d2">
-      <columns>team</columns>
-      <desc-columns></desc-columns>
+    <index id="28" parent="6" name="openId">
+      <ColNames>openId</ColNames>
     </index>
-    <key id="31" parent="5" name="PRIMARY">
-      <columns>projectId</columns>
-      <primary>1</primary>
+    <index id="29" parent="6" name="operatorOpenId">
+      <ColNames>operatorOpenId</ColNames>
+    </index>
+    <index id="30" parent="6" name="subprojectId">
+      <ColNames>subprojectId</ColNames>
+    </index>
+    <key id="31" parent="6" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
     </key>
-    <foreign-key id="32" parent="5" name="FK_d8kon32nl4hr1bbfq398px0d2">
-      <columns>team</columns>
-      <ref-key>~.team.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
+    <foreign-key id="32" parent="6" name="memoForPerson_ibfk_1">
+      <ColNames>subprojectId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>subproject</RefTableName>
+      <RefColNames>subprojectId</RefColNames>
     </foreign-key>
-    <column id="33" parent="6" name="projectMemberId">
-      <comment>projectMemberId</comment>
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
-      <sequence-identity>1</sequence-identity>
+    <foreign-key id="33" parent="6" name="memoForPerson_ibfk_2">
+      <ColNames>operatorOpenId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>openId</RefColNames>
+    </foreign-key>
+    <foreign-key id="34" parent="6" name="memoForPerson_ibfk_3">
+      <ColNames>openId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>openId</RefColNames>
+    </foreign-key>
+    <column id="35" parent="7" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="34" parent="6" name="openId">
-      <comment>微信Id</comment>
-      <data-type>varchar(50)|0</data-type>
+    <column id="36" parent="7" name="subprojectId">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
     </column>
-    <column id="35" parent="6" name="subprojectId">
-      <comment>subprojectId</comment>
-      <data-type>int(11)|0</data-type>
+    <column id="37" parent="7" name="operatorOpenId">
+      <Position>3</Position>
+      <Comment>操作人</Comment>
+      <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="36" parent="6" name="role_type">
-      <comment>项目角色类型（a.项目负责人，b.秘书，c.设计人员，d.管理员）</comment>
-      <data-type>char(1)|0</data-type>
+    <column id="38" parent="7" name="content">
+      <Position>4</Position>
+      <DataType>varchar(200)|0</DataType>
     </column>
-    <column id="37" parent="6" name="can_modify">
-      <data-type>char(1)|0</data-type>
+    <column id="39" parent="7" name="operTime">
+      <Position>5</Position>
+      <DataType>date|0</DataType>
     </column>
-    <index id="38" parent="6" name="FK_Reference_2">
-      <columns>subprojectId</columns>
-      <desc-columns></desc-columns>
+    <column id="40" parent="7" name="hasRead">
+      <Position>6</Position>
+      <Comment>标记是否已读，未读：0，已读：1</Comment>
+      <DataType>int(1)|0</DataType>
+    </column>
+    <index id="41" parent="7" name="operatorOpenId">
+      <ColNames>operatorOpenId</ColNames>
     </index>
-    <index id="39" parent="6" name="FK_Reference_51">
-      <columns>openId</columns>
-      <desc-columns></desc-columns>
+    <index id="42" parent="7" name="subprojectId">
+      <ColNames>subprojectId</ColNames>
     </index>
-    <key id="40" parent="6" name="PRIMARY">
-      <columns>projectMemberId</columns>
-      <primary>1</primary>
+    <key id="43" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
     </key>
-    <foreign-key id="41" parent="6" name="FK_Reference_51">
-      <columns>openId</columns>
-      <ref-key>~.user.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
+    <foreign-key id="44" parent="7" name="memoForSubproject_ibfk_2">
+      <ColNames>subprojectId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>subproject</RefTableName>
+      <RefColNames>subprojectId</RefColNames>
     </foreign-key>
-    <foreign-key id="42" parent="6" name="FK_Reference_2">
-      <columns>subprojectId</columns>
-      <ref-key>~.subproject.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
+    <foreign-key id="45" parent="7" name="memoForSubproject_ibfk_1">
+      <ColNames>operatorOpenId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>openId</RefColNames>
     </foreign-key>
-    <column id="43" parent="7" name="project_projectId">
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
+    <column id="46" parent="8" name="projectId">
+      <Position>1</Position>
+      <Comment>projectId</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="44" parent="7" name="subprojects_subprojectId">
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
+    <column id="47" parent="8" name="project">
+      <Position>2</Position>
+      <Comment>项目</Comment>
+      <DataType>varchar(200)|0</DataType>
     </column>
-    <index id="45" parent="7" name="UK_rrtlbkecj3tyrgyixkubgqpec">
-      <columns>subprojects_subprojectId</columns>
-      <desc-columns></desc-columns>
-      <unique>1</unique>
+    <column id="48" parent="8" name="type">
+      <Position>3</Position>
+      <Comment>项目类型：a:体育，b:校园，c:医疗，d:城市设计，e:其他</Comment>
+      <DataType>char(1)|0</DataType>
+    </column>
+    <column id="49" parent="8" name="area">
+      <Position>4</Position>
+      <Comment>地区：a:省内，b:省外，c:国外</Comment>
+      <DataType>char(1)|0</DataType>
+    </column>
+    <column id="50" parent="8" name="contract_stage">
+      <Position>5</Position>
+      <Comment>合同委托阶段：a:投标；b:中标；c:委托</Comment>
+      <DataType>char(1)|0</DataType>
+    </column>
+    <column id="51" parent="8" name="project_stage">
+      <Position>6</Position>
+      <Comment>项目所处阶段：a:咨询；b:方案；c:初设；d:施工图</Comment>
+      <DataType>char(1)|0</DataType>
+    </column>
+    <column id="52" parent="8" name="contract_amount">
+      <Position>7</Position>
+      <Comment>合同额</Comment>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="53" parent="8" name="completed_amount">
+      <Position>8</Position>
+      <Comment>已完成合同额</Comment>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="54" parent="8" name="received_amount">
+      <Position>9</Position>
+      <Comment>已收设计费</Comment>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="55" parent="8" name="contract_balance">
+      <Position>10</Position>
+      <Comment>合同余额</Comment>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="56" parent="8" name="project_time">
+      <Position>11</Position>
+      <Comment>项目时间</Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="57" parent="8" name="team">
+      <Position>12</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="58" parent="8" name="FK_d8kon32nl4hr1bbfq398px0d2">
+      <ColNames>team</ColNames>
     </index>
-    <key id="46" parent="7" name="PRIMARY">
-      <columns>project_projectId
-subprojects_subprojectId</columns>
-      <primary>1</primary>
+    <key id="59" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>projectId</ColNames>
+      <Primary>1</Primary>
     </key>
-    <key id="47" parent="7" name="UK_rrtlbkecj3tyrgyixkubgqpec">
-      <columns>subprojects_subprojectId</columns>
-      <underlying-index>UK_rrtlbkecj3tyrgyixkubgqpec</underlying-index>
+    <foreign-key id="60" parent="8" name="FK_d8kon32nl4hr1bbfq398px0d2">
+      <ColNames>team</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>team</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>teamId</RefColNames>
+    </foreign-key>
+    <column id="61" parent="9" name="projectMemberId">
+      <Position>1</Position>
+      <Comment>projectMemberId</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="62" parent="9" name="openId">
+      <Position>2</Position>
+      <Comment>微信Id</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="63" parent="9" name="subprojectId">
+      <Position>3</Position>
+      <Comment>subprojectId</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="64" parent="9" name="role_type">
+      <Position>4</Position>
+      <Comment>项目角色类型（a.项目负责人，b.秘书，c.设计人员，d.管理员）</Comment>
+      <DataType>char(1)|0</DataType>
+    </column>
+    <column id="65" parent="9" name="can_modify">
+      <Position>5</Position>
+      <DataType>char(1)|0</DataType>
+    </column>
+    <index id="66" parent="9" name="FK_Reference_2">
+      <ColNames>subprojectId</ColNames>
+    </index>
+    <index id="67" parent="9" name="FK_Reference_51">
+      <ColNames>openId</ColNames>
+    </index>
+    <key id="68" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>projectMemberId</ColNames>
+      <Primary>1</Primary>
     </key>
-    <foreign-key id="48" parent="7" name="FK_k4q8skyxcgtwcawq5otcxgdj0">
-      <columns>project_projectId</columns>
-      <ref-key>~.project.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
+    <foreign-key id="69" parent="9" name="FK_Reference_51">
+      <ColNames>openId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>openId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="49" parent="7" name="FK_rrtlbkecj3tyrgyixkubgqpec">
-      <columns>subprojects_subprojectId</columns>
-      <ref-key>~.subproject.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
+    <foreign-key id="70" parent="9" name="FK_Reference_2">
+      <ColNames>subprojectId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>subproject</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>subprojectId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="50" parent="8" name="scheduleId">
-      <comment>scheduleId</comment>
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
-      <sequence-identity>1</sequence-identity>
+    <column id="71" parent="10" name="project_projectId">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <column id="51" parent="8" name="subprojectId">
-      <comment>subprojectId</comment>
-      <data-type>int(11)|0</data-type>
+    <column id="72" parent="10" name="subprojects_subprojectId">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <column id="52" parent="8" name="openId">
-      <comment>微信Id</comment>
-      <data-type>varchar(50)|0</data-type>
-    </column>
-    <column id="53" parent="8" name="task_content">
-      <comment>任务内容</comment>
-      <data-type>varchar(200)|0</data-type>
-    </column>
-    <column id="54" parent="8" name="task_type">
-      <comment>任务类型(a.合同备案进度、b.付款进度、c.分配进度、d.计划进度、e.近期出图回文、f.近期会议组织、g.外部设计条件、h.内部落实、i.总结交流 )</comment>
-      <data-type>char(1)|0</data-type>
-    </column>
-    <column id="55" parent="8" name="task_status">
-      <comment>任务状态(a.未开始，b.进行中，c.已完成，d.超期，e.无效，f.延期，其中未完成为a b f，超期为d)</comment>
-      <data-type>char(1)|0</data-type>
-    </column>
-    <column id="56" parent="8" name="task_time">
-      <comment>任务时间（年月日）</comment>
-      <data-type>date|0</data-type>
-    </column>
-    <column id="57" parent="8" name="task_start_time">
-      <comment>任务开始时间（年月日）</comment>
-      <data-type>date|0</data-type>
-    </column>
-    <column id="58" parent="8" name="task_reply">
-      <data-type>varchar(500)|0</data-type>
-    </column>
-    <index id="59" parent="8" name="FK_Reference_3">
-      <columns>subprojectId</columns>
-      <desc-columns></desc-columns>
+    <index id="73" parent="10" name="UK_rrtlbkecj3tyrgyixkubgqpec">
+      <ColNames>subprojects_subprojectId</ColNames>
+      <Unique>1</Unique>
     </index>
-    <index id="60" parent="8" name="FK_Reference_4">
-      <columns>openId</columns>
-      <desc-columns></desc-columns>
-    </index>
-    <key id="61" parent="8" name="PRIMARY">
-      <columns>scheduleId</columns>
-      <primary>1</primary>
+    <key id="74" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>project_projectId
+subprojects_subprojectId</ColNames>
+      <Primary>1</Primary>
     </key>
-    <foreign-key id="62" parent="8" name="FK_Reference_3">
-      <columns>subprojectId</columns>
-      <ref-key>~.subproject.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
-    </foreign-key>
-    <foreign-key id="63" parent="8" name="FK_Reference_4">
-      <columns>openId</columns>
-      <ref-key>~.user.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
-    </foreign-key>
-    <column id="64" parent="9" name="scheduleMemberId">
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
-      <sequence-identity>1</sequence-identity>
-    </column>
-    <column id="65" parent="9" name="openId">
-      <comment>微信Id</comment>
-      <data-type>varchar(50)|0</data-type>
-    </column>
-    <column id="66" parent="9" name="scheduleId">
-      <comment>scheduleId</comment>
-      <data-type>int(11)|0</data-type>
-    </column>
-    <index id="67" parent="9" name="FK_Reference_8">
-      <columns>openId</columns>
-      <desc-columns></desc-columns>
-    </index>
-    <index id="68" parent="9" name="FK_Reference_9">
-      <columns>scheduleId</columns>
-      <desc-columns></desc-columns>
-    </index>
-    <key id="69" parent="9" name="PRIMARY">
-      <columns>scheduleMemberId</columns>
-      <primary>1</primary>
+    <key id="75" parent="10" name="UK_rrtlbkecj3tyrgyixkubgqpec">
+      <ColNames>subprojects_subprojectId</ColNames>
+      <UnderlyingIndexName>UK_rrtlbkecj3tyrgyixkubgqpec</UnderlyingIndexName>
     </key>
-    <foreign-key id="70" parent="9" name="FK_Reference_8">
-      <columns>openId</columns>
-      <ref-key>~.user.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
+    <foreign-key id="76" parent="10" name="FK_k4q8skyxcgtwcawq5otcxgdj0">
+      <ColNames>project_projectId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>project</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>projectId</RefColNames>
     </foreign-key>
-    <foreign-key id="71" parent="9" name="FK_Reference_9">
-      <columns>scheduleId</columns>
-      <ref-key>~.schedule.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
+    <foreign-key id="77" parent="10" name="FK_rrtlbkecj3tyrgyixkubgqpec">
+      <ColNames>subprojects_subprojectId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>subproject</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>subprojectId</RefColNames>
     </foreign-key>
-    <column id="72" parent="10" name="id">
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
+    <column id="78" parent="11" name="recordId">
+      <Position>1</Position>
+      <Comment>recordId</Comment>
+      <DataType>int(15)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="73" parent="10" name="scheduleId">
-      <data-type>int(11)|0</data-type>
+    <column id="79" parent="11" name="openId">
+      <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="74" parent="10" name="openId">
-      <data-type>varchar(50)|0</data-type>
+    <column id="80" parent="11" name="content">
+      <Position>3</Position>
+      <DataType>varchar(200)|0</DataType>
     </column>
-    <column id="75" parent="10" name="createTime">
-      <data-type>date|0</data-type>
-    </column>
-    <column id="76" parent="10" name="content">
-      <data-type>varchar(200)|0</data-type>
-    </column>
-    <index id="77" parent="10" name="openId">
-      <columns>openId</columns>
-      <desc-columns></desc-columns>
+    <index id="81" parent="11" name="openId">
+      <ColNames>openId</ColNames>
     </index>
-    <index id="78" parent="10" name="scheduleId">
-      <columns>scheduleId</columns>
-      <desc-columns></desc-columns>
-    </index>
-    <key id="79" parent="10" name="PRIMARY">
-      <columns>id</columns>
-      <primary>1</primary>
+    <key id="82" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>recordId</ColNames>
+      <Primary>1</Primary>
     </key>
-    <foreign-key id="80" parent="10" name="scheduleMessage_ibfk_2">
-      <columns>scheduleId</columns>
-      <ref-key>~.schedule.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
-    </foreign-key>
-    <foreign-key id="81" parent="10" name="scheduleMessage_ibfk_3">
-      <columns>openId</columns>
-      <ref-key>~.user.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
-    </foreign-key>
-    <column id="82" parent="11" name="subprojectId">
-      <comment>projectId</comment>
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
-      <sequence-identity>1</sequence-identity>
+    <column id="83" parent="12" name="scheduleId">
+      <Position>1</Position>
+      <Comment>scheduleId</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="83" parent="11" name="projectId">
-      <comment>项目ID</comment>
-      <data-type>int(11)|0</data-type>
+    <column id="84" parent="12" name="subprojectId">
+      <Position>2</Position>
+      <Comment>subprojectId</Comment>
+      <DataType>int(11)|0</DataType>
     </column>
-    <column id="84" parent="11" name="project_status">
-      <comment>子项目状态（a前期工作，b.方案设计，c.初步设计，d.施工图设计，e.施工配合，e.暂缓，f.完成）</comment>
-      <data-type>char(1)|0</data-type>
+    <column id="85" parent="12" name="openId">
+      <Position>3</Position>
+      <Comment>微信Id</Comment>
+      <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="85" parent="11" name="subproject">
-      <comment>子项目</comment>
-      <data-type>varchar(200)|0</data-type>
+    <column id="86" parent="12" name="task_content">
+      <Position>4</Position>
+      <Comment>任务内容</Comment>
+      <DataType>varchar(200)|0</DataType>
     </column>
-    <column id="86" parent="11" name="team_status">
-      <comment>团队工作状态</comment>
-      <data-type>varchar(200)|0</data-type>
+    <column id="87" parent="12" name="task_type">
+      <Position>5</Position>
+      <Comment>任务类型(a.合同备案进度、b.付款进度、c.分配进度、d.计划进度、e.近期出图回文、f.近期会议组织、g.外部设计条件、h.内部落实、i.总结交流 )</Comment>
+      <DataType>char(1)|0</DataType>
     </column>
-    <column id="87" parent="11" name="contract_status">
-      <comment>合同、备案进度</comment>
-      <data-type>varchar(200)|0</data-type>
+    <column id="88" parent="12" name="task_status">
+      <Position>6</Position>
+      <Comment>任务状态(a.未开始，b.进行中，c.已完成，d.超期，e.无效，f.延期，其中未完成为a b f，超期为d)</Comment>
+      <DataType>char(1)|0</DataType>
     </column>
-    <column id="88" parent="11" name="payment_status">
-      <comment>付款进度</comment>
-      <data-type>varchar(200)|0</data-type>
+    <column id="89" parent="12" name="task_time">
+      <Position>7</Position>
+      <Comment>任务时间（年月日）</Comment>
+      <DataType>date|0</DataType>
     </column>
-    <column id="89" parent="11" name="allocation_status">
-      <comment>分配进度</comment>
-      <data-type>varchar(200)|0</data-type>
+    <column id="90" parent="12" name="task_start_time">
+      <Position>8</Position>
+      <Comment>任务开始时间（年月日）</Comment>
+      <DataType>date|0</DataType>
     </column>
-    <index id="90" parent="11" name="projectId_idx">
-      <columns>projectId</columns>
-      <desc-columns></desc-columns>
+    <column id="91" parent="12" name="task_reply">
+      <Position>9</Position>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <index id="92" parent="12" name="FK_Reference_3">
+      <ColNames>subprojectId</ColNames>
     </index>
-    <key id="91" parent="11" name="PRIMARY">
-      <columns>subprojectId</columns>
-      <primary>1</primary>
+    <index id="93" parent="12" name="FK_Reference_4">
+      <ColNames>openId</ColNames>
+    </index>
+    <key id="94" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>scheduleId</ColNames>
+      <Primary>1</Primary>
     </key>
-    <foreign-key id="92" parent="11" name="projectId">
-      <columns>projectId</columns>
-      <ref-key>~.project.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
+    <foreign-key id="95" parent="12" name="FK_Reference_3">
+      <ColNames>subprojectId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>subproject</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>subprojectId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="93" parent="12" name="teamId">
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
-      <sequence-identity>1</sequence-identity>
+    <foreign-key id="96" parent="12" name="FK_Reference_4">
+      <ColNames>openId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>openId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="97" parent="13" name="scheduleMemberId">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="94" parent="12" name="relatedTitle">
-      <data-type>varchar(255)|0</data-type>
+    <column id="98" parent="13" name="openId">
+      <Position>2</Position>
+      <Comment>微信Id</Comment>
+      <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="95" parent="12" name="teamName">
-      <data-type>varchar(45)|0</data-type>
+    <column id="99" parent="13" name="scheduleId">
+      <Position>3</Position>
+      <Comment>scheduleId</Comment>
+      <DataType>int(11)|0</DataType>
     </column>
-    <key id="96" parent="12" name="PRIMARY">
-      <columns>teamId</columns>
-      <primary>1</primary>
+    <index id="100" parent="13" name="FK_Reference_8">
+      <ColNames>openId</ColNames>
+    </index>
+    <index id="101" parent="13" name="FK_Reference_9">
+      <ColNames>scheduleId</ColNames>
+    </index>
+    <key id="102" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>scheduleMemberId</ColNames>
+      <Primary>1</Primary>
     </key>
-    <column id="97" parent="13" name="teamUserId">
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
-      <sequence-identity>1</sequence-identity>
+    <foreign-key id="103" parent="13" name="FK_Reference_8">
+      <ColNames>openId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>openId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="104" parent="13" name="FK_Reference_9">
+      <ColNames>scheduleId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>schedule</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>scheduleId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="105" parent="14" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="98" parent="13" name="role">
-      <comment>0.顶级管理员、1.超级管理员、2.项目负责人、3.秘书、4.设计人员、5.其他</comment>
-      <data-type>int(11)|0</data-type>
+    <column id="106" parent="14" name="scheduleId">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
     </column>
-    <column id="99" parent="13" name="teamId">
-      <data-type>int(11)|0</data-type>
+    <column id="107" parent="14" name="openId">
+      <Position>4</Position>
+      <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="100" parent="13" name="openId">
-      <data-type>varchar(50)|0</data-type>
+    <column id="108" parent="14" name="createTime">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
     </column>
-    <index id="101" parent="13" name="FK_h0wjugxc3wylkw4hixeqahete">
-      <columns>teamId</columns>
-      <desc-columns></desc-columns>
+    <column id="109" parent="14" name="content">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <index id="110" parent="14" name="FK_9fdq63cx561an42sjfdgl89ax">
+      <ColNames>scheduleId</ColNames>
     </index>
-    <index id="102" parent="13" name="FK_p02s6y69arxjge7vqhs0je9on">
-      <columns>openId</columns>
-      <desc-columns></desc-columns>
+    <index id="111" parent="14" name="FK_ix8bq8vqoy5n3hs6bsgpab61p">
+      <ColNames>openId</ColNames>
     </index>
-    <index id="103" parent="13" name="UK_6632er0pm20j1jxrb2o9b8rk8">
-      <columns>role
+    <index id="112" parent="14" name="UK_qxnae5voqndtjfekeak99qr8t">
+      <ColNames>createTime
+content
 openId
-teamId</columns>
-      <desc-columns></desc-columns>
-      <unique>1</unique>
+scheduleId</ColNames>
+      <Unique>1</Unique>
     </index>
-    <key id="104" parent="13" name="PRIMARY">
-      <columns>teamUserId</columns>
-      <primary>1</primary>
+    <key id="113" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
     </key>
-    <key id="105" parent="13" name="UK_6632er0pm20j1jxrb2o9b8rk8">
-      <columns>role
+    <key id="114" parent="14" name="UK_qxnae5voqndtjfekeak99qr8t">
+      <ColNames>createTime
+content
 openId
-teamId</columns>
-      <underlying-index>UK_6632er0pm20j1jxrb2o9b8rk8</underlying-index>
+scheduleId</ColNames>
+      <UnderlyingIndexName>UK_qxnae5voqndtjfekeak99qr8t</UnderlyingIndexName>
     </key>
-    <foreign-key id="106" parent="13" name="teamUser_ibfk_1">
-      <columns>teamId</columns>
-      <ref-key>~.team.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
+    <foreign-key id="115" parent="14" name="FK_ix8bq8vqoy5n3hs6bsgpab61p">
+      <ColNames>openId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>openId</RefColNames>
     </foreign-key>
-    <foreign-key id="107" parent="13" name="teamUser_ibfk_2">
-      <columns>openId</columns>
-      <ref-key>~.user.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
+    <foreign-key id="116" parent="14" name="FK_9fdq63cx561an42sjfdgl89ax">
+      <ColNames>scheduleId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>schedule</RefTableName>
+      <RefColNames>scheduleId</RefColNames>
     </foreign-key>
-    <column id="108" parent="14" name="openId">
-      <comment>微信Id</comment>
-      <mandatory>1</mandatory>
-      <data-type>varchar(50)|0</data-type>
+    <column id="117" parent="15" name="subprojectId">
+      <Position>1</Position>
+      <Comment>projectId</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="109" parent="14" name="userName">
-      <comment>姓名</comment>
-      <data-type>varchar(20)|0</data-type>
+    <column id="118" parent="15" name="projectId">
+      <Position>2</Position>
+      <Comment>项目ID</Comment>
+      <DataType>int(11)|0</DataType>
     </column>
-    <column id="110" parent="14" name="phoneNum">
-      <comment>手机号</comment>
-      <data-type>varchar(11)|0</data-type>
+    <column id="119" parent="15" name="project_status">
+      <Position>3</Position>
+      <Comment>子项目状态（a.进行中，b.已完成，c.无效）</Comment>
+      <DataType>char(1)|0</DataType>
     </column>
-    <column id="111" parent="14" name="email">
-      <comment>邮箱</comment>
-      <data-type>varchar(50)|0</data-type>
+    <column id="120" parent="15" name="subproject">
+      <Position>4</Position>
+      <Comment>子项目</Comment>
+      <DataType>varchar(200)|0</DataType>
     </column>
-    <column id="112" parent="14" name="sex">
-      <comment>性别</comment>
-      <data-type>char(2)|0</data-type>
+    <column id="121" parent="15" name="team_status">
+      <Position>5</Position>
+      <Comment>团队工作状态（前期工作，方案设计，初步设计，施工图设计，施工配合，暂缓，完成）</Comment>
+      <DataType>varchar(200)|0</DataType>
     </column>
-    <column id="113" parent="14" name="telephone">
-      <comment>固定电话</comment>
-      <data-type>varchar(20)|0</data-type>
+    <column id="122" parent="15" name="contract_status">
+      <Position>6</Position>
+      <Comment>合同、备案进度</Comment>
+      <DataType>varchar(200)|0</DataType>
     </column>
-    <column id="114" parent="14" name="position">
-      <comment>单位职务</comment>
-      <data-type>varchar(100)|0</data-type>
+    <column id="123" parent="15" name="payment_status">
+      <Position>7</Position>
+      <Comment>付款进度</Comment>
+      <DataType>varchar(200)|0</DataType>
     </column>
-    <column id="115" parent="14" name="qqNum">
-      <comment>qq号</comment>
-      <data-type>varchar(20)|0</data-type>
+    <column id="124" parent="15" name="allocation_status">
+      <Position>8</Position>
+      <Comment>分配进度</Comment>
+      <DataType>varchar(200)|0</DataType>
     </column>
-    <column id="116" parent="14" name="wechatNum">
-      <comment>微信号</comment>
-      <data-type>varchar(20)|0</data-type>
-    </column>
-    <column id="117" parent="14" name="address">
-      <comment>地址</comment>
-      <data-type>varchar(100)|0</data-type>
-    </column>
-    <column id="118" parent="14" name="isfocus">
-      <comment>是否关注微信</comment>
-      <data-type>tinyint(1)|0</data-type>
-    </column>
-    <column id="119" parent="14" name="password">
-      <data-type>varchar(40)|0</data-type>
-    </column>
-    <key id="120" parent="14" name="PRIMARY">
-      <columns>openId</columns>
-      <primary>1</primary>
+    <index id="125" parent="15" name="projectId_idx">
+      <ColNames>projectId</ColNames>
+    </index>
+    <key id="126" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>subprojectId</ColNames>
+      <Primary>1</Primary>
     </key>
-    <column id="121" parent="15" name="recordId">
-      <comment>recordId</comment>
-      <mandatory>1</mandatory>
-      <data-type>int(15)|0</data-type>
-      <sequence-identity>1</sequence-identity>
+    <foreign-key id="127" parent="15" name="projectId">
+      <ColNames>projectId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>project</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>projectId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="128" parent="16" name="teamId">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="122" parent="15" name="openId">
-      <data-type>varchar(50)|0</data-type>
+    <column id="129" parent="16" name="relatedTitle">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="123" parent="15" name="content">
-      <data-type>varchar(200)|0</data-type>
+    <column id="130" parent="16" name="teamName">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
     </column>
-    <index id="124" parent="15" name="openId">
-      <columns>openId</columns>
-      <desc-columns></desc-columns>
-    </index>
-    <key id="125" parent="15" name="PRIMARY">
-      <columns>recordId</columns>
-      <primary>1</primary>
+    <key id="131" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>teamId</ColNames>
+      <Primary>1</Primary>
     </key>
-    <foreign-key id="126" parent="15" name="openId">
-      <columns>openId</columns>
-      <ref-key>~.user.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
-    </foreign-key>
-    <column id="127" parent="16" name="transferId">
-      <mandatory>1</mandatory>
-      <data-type>int(15)|0</data-type>
-      <sequence-identity>1</sequence-identity>
+    <column id="132" parent="17" name="teamUserId">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="128" parent="16" name="scheduleId">
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
+    <column id="133" parent="17" name="role">
+      <Position>2</Position>
+      <Comment>0.顶级管理员、1.超级管理员、2.项目负责人、3.秘书（项目助理）、4.设计人员、5.其他</Comment>
+      <DataType>int(11)|0</DataType>
     </column>
-    <column id="129" parent="16" name="openId">
-      <mandatory>1</mandatory>
-      <data-type>varchar(50)|0</data-type>
+    <column id="134" parent="17" name="teamId">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
     </column>
-    <index id="130" parent="16" name="openId">
-      <columns>openId</columns>
-      <desc-columns></desc-columns>
+    <column id="135" parent="17" name="openId">
+      <Position>4</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <index id="136" parent="17" name="FK_h0wjugxc3wylkw4hixeqahete">
+      <ColNames>teamId</ColNames>
     </index>
-    <index id="131" parent="16" name="scheduleId">
-      <columns>scheduleId</columns>
-      <desc-columns></desc-columns>
+    <index id="137" parent="17" name="FK_p02s6y69arxjge7vqhs0je9on">
+      <ColNames>openId</ColNames>
     </index>
-    <key id="132" parent="16" name="PRIMARY">
-      <columns>transferId</columns>
-      <primary>1</primary>
+    <index id="138" parent="17" name="UK_6632er0pm20j1jxrb2o9b8rk8">
+      <ColNames>role
+openId
+teamId</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="139" parent="17" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>teamUserId</ColNames>
+      <Primary>1</Primary>
     </key>
-    <foreign-key id="133" parent="16" name="scheduleId">
-      <columns>scheduleId</columns>
-      <ref-key>~.schedule.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
-    </foreign-key>
-    <foreign-key id="134" parent="16" name="open">
-      <columns>openId</columns>
-      <ref-key>~.user.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
-    </foreign-key>
-    <column id="135" parent="17" name="transferMemberId">
-      <mandatory>1</mandatory>
-      <data-type>int(11)|0</data-type>
-      <sequence-identity>1</sequence-identity>
-    </column>
-    <column id="136" parent="17" name="transferId">
-      <data-type>int(15)|0</data-type>
-    </column>
-    <column id="137" parent="17" name="openId">
-      <data-type>varchar(50)|0</data-type>
-    </column>
-    <index id="138" parent="17" name="openIdx">
-      <columns>openId</columns>
-      <desc-columns></desc-columns>
-    </index>
-    <index id="139" parent="17" name="transferId">
-      <columns>transferId</columns>
-      <desc-columns></desc-columns>
-    </index>
-    <key id="140" parent="17" name="PRIMARY">
-      <columns>transferMemberId</columns>
-      <primary>1</primary>
+    <key id="140" parent="17" name="UK_6632er0pm20j1jxrb2o9b8rk8">
+      <ColNames>role
+openId
+teamId</ColNames>
+      <UnderlyingIndexName>UK_6632er0pm20j1jxrb2o9b8rk8</UnderlyingIndexName>
     </key>
-    <foreign-key id="141" parent="17" name="transferId">
-      <columns>transferId</columns>
-      <ref-key>~.transfer.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
+    <foreign-key id="141" parent="17" name="teamUser_ibfk_1">
+      <ColNames>teamId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>team</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>teamId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="142" parent="17" name="openIdx">
-      <columns>openId</columns>
-      <ref-key>~.user.PRIMARY</ref-key>
-      <cascade-update-rule>restrict</cascade-update-rule>
-      <cascade-delete-rule>restrict</cascade-delete-rule>
+    <foreign-key id="142" parent="17" name="teamUser_ibfk_2">
+      <ColNames>openId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>openId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
+    <column id="143" parent="18" name="transferId">
+      <Position>1</Position>
+      <DataType>int(15)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="144" parent="18" name="scheduleId">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="145" parent="18" name="openId">
+      <Position>3</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="146" parent="18" name="openId">
+      <ColNames>openId</ColNames>
+    </index>
+    <index id="147" parent="18" name="scheduleId">
+      <ColNames>scheduleId</ColNames>
+    </index>
+    <key id="148" parent="18" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>transferId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="149" parent="18" name="scheduleId">
+      <ColNames>scheduleId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>schedule</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>scheduleId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="150" parent="18" name="open">
+      <ColNames>openId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>openId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="151" parent="19" name="transferMemberId">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="152" parent="19" name="transferId">
+      <Position>2</Position>
+      <DataType>int(15)|0</DataType>
+    </column>
+    <column id="153" parent="19" name="openId">
+      <Position>3</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <index id="154" parent="19" name="openIdx">
+      <ColNames>openId</ColNames>
+    </index>
+    <index id="155" parent="19" name="transferId">
+      <ColNames>transferId</ColNames>
+    </index>
+    <key id="156" parent="19" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>transferMemberId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="157" parent="19" name="transferId">
+      <ColNames>transferId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>transfer</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>transferId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="158" parent="19" name="openIdx">
+      <ColNames>openId</ColNames>
+      <RefSchemaName>projectdatabase</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>openId</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="159" parent="20" name="openId">
+      <Position>1</Position>
+      <Comment>微信Id</Comment>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="160" parent="20" name="userName">
+      <Position>2</Position>
+      <Comment>姓名</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="161" parent="20" name="phoneNum">
+      <Position>3</Position>
+      <Comment>手机号</Comment>
+      <DataType>varchar(11)|0</DataType>
+    </column>
+    <column id="162" parent="20" name="email">
+      <Position>4</Position>
+      <Comment>邮箱</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="163" parent="20" name="sex">
+      <Position>5</Position>
+      <Comment>性别</Comment>
+      <DataType>char(2)|0</DataType>
+    </column>
+    <column id="164" parent="20" name="telephone">
+      <Position>6</Position>
+      <Comment>固定电话</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="165" parent="20" name="position">
+      <Position>7</Position>
+      <Comment>单位职务</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="166" parent="20" name="qqNum">
+      <Position>8</Position>
+      <Comment>qq号</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="167" parent="20" name="wechatNum">
+      <Position>9</Position>
+      <Comment>微信号</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="168" parent="20" name="address">
+      <Position>10</Position>
+      <Comment>地址</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="169" parent="20" name="isfocus">
+      <Position>11</Position>
+      <Comment>是否关注微信</Comment>
+      <DataType>tinyint(1)|0</DataType>
+    </column>
+    <column id="170" parent="20" name="password">
+      <Position>12</Position>
+      <DataType>varchar(40)|0</DataType>
+    </column>
+    <key id="171" parent="20" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>openId</ColNames>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>

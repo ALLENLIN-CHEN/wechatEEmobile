@@ -23,14 +23,7 @@ public class TeamUserService {
     public List findTeamUsersByOpenId(String openId){
         int role=10;//非超级管理员
         List list =teamUserDao.findTeamUsersByOpenId(openId,role);
-        for(int i=0;i<list.size();i++){
-            Object [] row=(Object[]) list.get(i);
-            if (Integer.parseInt(row[2].toString())==0){
-                role=0;
-                break;
-            }
-        }
-        return teamUserDao.findTeamUsersByOpenId(openId,role);
+        return list;
     }
 
     public List<TeamUser> findTeamUsersByOpenIdAndTeamId(String openId, Integer teamId){
@@ -40,15 +33,15 @@ public class TeamUserService {
     /**
      * 查询用户对子项目的修改权限
      */
-public ProjectMember findP(String openId,int subprojectId){
-     String hq="from ProjectMember p where p.user.openId=:openId and p.subproject.subprojectId=:subprojectId";
-     Map<String,Object> params=new HashMap<>();
-     params.put("openId",openId);
-     params.put("subprojectId",subprojectId);
-     List<ProjectMember> projectMemberList=teamUserDao.findBy(hq,params);
-     ProjectMember projectMember=projectMemberList.get(0);
-    return projectMember;
-     }
+    public ProjectMember findP(String openId,int subprojectId){
+         String hq="from ProjectMember p where p.user.openId=:openId and p.subproject.subprojectId=:subprojectId";
+         Map<String,Object> params=new HashMap<>();
+         params.put("openId",openId);
+         params.put("subprojectId",subprojectId);
+         List<ProjectMember> projectMemberList=teamUserDao.findBy(hq,params);
+         ProjectMember projectMember=projectMemberList.get(0);
+        return projectMember;
+         }
 
 }
 

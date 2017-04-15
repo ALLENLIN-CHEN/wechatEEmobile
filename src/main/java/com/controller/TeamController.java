@@ -7,6 +7,7 @@ import com.service.*;
 import com.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,6 +37,8 @@ public class TeamController {
     @Autowired
     ProjectMemberService projectMemberService;
     @Autowired
+    MemoForPersonService memoForPersonService;
+
     private Map<String, Object> dataMap = new HashMap<String, Object>();
     private Pager pagerModel = new Pager(1, 5);
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -88,25 +91,25 @@ public class TeamController {
     }
 
     /**
-     *团队模块中对人员的任务强度统计(团队id已知)
+     *2.1 团队-人员
+     * 团队模块中对人员的任务强度统计(团队id已知)
      * 按团队人员名称、时间范围查询人员已超期、未完成的任务的个数
      */
     @RequestMapping(value = "findTaskIntensityForPerson")
     @ResponseBody
-    public Map<String, Object> findTaskIntensityForPerson(@RequestBody String request) {
+    public Map<String, Object> findTaskIntensityForPerson(HttpServletRequest request) {
         dataMap.clear();
         try {
-            Map<String, Object> json = JsonUtil.parseJSON2Map(request);
-            int currentPage = json.get("currentPageNumber")!=null?Integer.parseInt(json.get("currentPageNumber").toString()):1;
-            int pageSize = json.get("pageSize")!=null?Integer.parseInt(json.get("pageSize").toString()):5;
+            int currentPage = request.getParameter("currentPageNumber")!=null?Integer.parseInt(request.getParameter("currentPageNumber").toString()):1;
+            int pageSize = request.getParameter("pageSize")!=null?Integer.parseInt(request.getParameter("pageSize").toString()):5;
             pagerModel.setCurrentPageNumber(currentPage);
             pagerModel.setPageSize(pageSize);
-            String openId = (String) json.get("openId");
+            String openId = (String) request.getParameter("openId");
             Integer teamIdTemp=initTeamId(openId);
-            Integer teamId = json.get("teamId")!=null?Integer.parseInt(json.get("teamId").toString()):teamIdTemp;
-            String memberName = (String) json.get("memberName");
-            String startTime=(String) json.get("startTime");
-            String endTime=(String) json.get("endTime");
+            Integer teamId = request.getParameter("teamId")!=null?Integer.parseInt(request.getParameter("teamId").toString()):teamIdTemp;
+            String memberName = (String) request.getParameter("memberName");
+            String startTime=(String) request.getParameter("startTime");
+            String endTime=(String) request.getParameter("endTime");
             if(startTime==null||endTime==null||startTime.equals("")||endTime.equals("")){
                 Calendar c = Calendar.getInstance();
                 c.setTime(new Date());
@@ -132,26 +135,26 @@ public class TeamController {
     }
 
     /**
-     *团队模块中对人员的任务强度中的任务进行详细统计(列表)
+     *2.1.5 团队-人员-统计
+     * 团队模块中对人员的任务强度中的任务进行详细统计(列表)
      * 根据团队中成员微信号（memberOpenId）获取该成员的超期和未完成任务列表
      * 需要给出登录者的角色，以便确认是否有新建任务的权限
      */
     @RequestMapping(value = "taskIntensityStatisticsForPerson")
     @ResponseBody
-    public Map<String, Object> taskIntensityStatisticsForPerson(@RequestBody String request) {
+    public Map<String, Object> taskIntensityStatisticsForPerson(HttpServletRequest request) {
         dataMap.clear();
         try {
-            Map<String, Object> json = JsonUtil.parseJSON2Map(request);
-            int currentPage = json.get("currentPageNumber")!=null?Integer.parseInt(json.get("currentPageNumber").toString()):1;
-            int pageSize = json.get("pageSize")!=null?Integer.parseInt(json.get("pageSize").toString()):5;
+            int currentPage = request.getParameter("currentPageNumber")!=null?Integer.parseInt(request.getParameter("currentPageNumber").toString()):1;
+            int pageSize = request.getParameter("pageSize")!=null?Integer.parseInt(request.getParameter("pageSize").toString()):5;
             pagerModel.setCurrentPageNumber(currentPage);
             pagerModel.setPageSize(pageSize);
-            String openId=(String) json.get("openId");//登录者微信号
-            String memberOpenId=(String) json.get("memberOpenId");//被查看团队成员微信号
-            Integer teamId = json.get("teamId")!=null?Integer.parseInt(json.get("teamId").toString()):0;
+            String openId=(String) request.getParameter("openId");//登录者微信号
+            String memberOpenId=(String) request.getParameter("memberOpenId");//被查看团队成员微信号
+            Integer teamId = request.getParameter("teamId")!=null?Integer.parseInt(request.getParameter("teamId").toString()):0;
 //            Integer teamId = Integer.parseInt(json.get("teamId").toString());
-            String startTime=(String) json.get("startTime");
-            String endTime=(String) json.get("endTime");
+            String startTime=(String) request.getParameter("startTime");
+            String endTime=(String) request.getParameter("endTime");
             if(startTime==null||endTime==null||startTime.equals("")||endTime.equals("")){
                 Calendar c = Calendar.getInstance();
                 c.setTime(new Date());
@@ -180,6 +183,98 @@ public class TeamController {
     }
 
     /**
+     * 2.1.6 一键询问
+     * openId：询问人（登录者），memberOpenId：被询问人，subprojectId：任务Id
+     */
+    @RequestMapping(value = "inquiry")
+    @ResponseBody
+    public  Map<String,Object> inquiry(HttpServletRequest request){
+        dataMap.clear();
+        try {
+            String openId=(String) request.getParameter("openId");//登录者微信号
+            String memberOpenId=(String) request.getParameter("memberOpenId");//被查看团队成员微信号
+            Integer scheduleId = request.getParameter("scheduleId")!=null?Integer.parseInt(request.getParameter("scheduleId").toString()):0;
+            memoForPersonService.inquiry(openId,memberOpenId,scheduleId);
+            dataMap.put("result", "success");
+            dataMap.put("resultTip", "");
+        }catch (Exception e){
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            dataMap.put("result", "fail");
+            dataMap.put("resultTip", e.getMessage());
+        }
+        System.out.println(dataMap);
+        return dataMap;
+    }
+
+    /**
+     *2.1.7 团队-人员-分析
+     * 团队模块中对人员的任务强度中的任务进行分析（折线图）
+     * 根据团队中成员微信号（memberOpenId）获取该成员超期、未完成、已完成任务的三条折线
+     * 三个时间范围：近两周（weekly） 近一个月（monthly） 近半年（yearly）
+     */
+    @RequestMapping(value = "taskIntensityAnalyzeForPerson")
+    @ResponseBody
+    public Map<String, Object> taskIntensityAnalyzeForPerson(HttpServletRequest request) {
+        dataMap.clear();
+        try {
+            String openId=(String) request.getParameter("openId");//登录者微信号
+            String memberOpenId=(String) request.getParameter("memberOpenId");//被查看团队成员微信号
+            Integer teamId = request.getParameter("teamId")!=null?Integer.parseInt(request.getParameter("teamId").toString()):0;
+            String period=request.getParameter("period")!=null?request.getParameter("period").toString():"weekly";//时间范围
+
+            TeamUser teamUserForOpen=teamUserService.findTeamUsersByOpenIdAndTeamId(openId, teamId).get(0);
+            Map data=scheduleMemberService.findTaskIntensityAnalyzeForPerson(teamId,memberOpenId,period);
+            dataMap.put("result", "success");
+            dataMap.put("resultTip", "");
+            dataMap.put("role",teamUserForOpen.getRole());
+            dataMap.put("data",data);
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            dataMap.put("result", "fail");
+            dataMap.put("resultTip", e.getMessage());
+        }
+        System.out.println(dataMap);
+        return dataMap;
+    }
+
+    /**
+     *2.1.9 团队-项目-分析
+     * 团队模块中对子项目的任务强度中的任务进行分析（折线图）
+     * 根据团队中子项目Id（subprojectId）获取该子项目超期、未完成、已完成任务三条折线
+     * 三个时间范围：近两周（weekly） 近一个月（monthly） 近半年（yearly）
+     */
+    @RequestMapping(value = "taskIntensityAnalyzeForSubproject")
+    @ResponseBody
+    public Map<String, Object> taskIntensityAnalyzeForSubproject(HttpServletRequest request) {
+        dataMap.clear();
+        try {
+            String openId=(String) request.getParameter("openId");//登录者微信号
+            Integer subprojectId= Integer.parseInt(request.getParameter("subprojectId").toString());//被查看子项目id
+            Integer teamId = request.getParameter("teamId")!=null?Integer.parseInt(request.getParameter("teamId").toString()):0;
+            String period=request.getParameter("period")!=null?request.getParameter("period").toString():"weekly";//时间范围
+
+            TeamUser teamUserForOpen=teamUserService.findTeamUsersByOpenIdAndTeamId(openId, teamId).get(0);
+            Map data=scheduleService.findTaskIntensityAnalyzeForSubproject(teamId,subprojectId,period);
+            dataMap.put("result", "success");
+            dataMap.put("resultTip", "");
+            dataMap.put("role",teamUserForOpen.getRole());
+            dataMap.put("data",data);
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            dataMap.put("result", "fail");
+            dataMap.put("resultTip", e.getMessage());
+        }
+        System.out.println(dataMap);
+        return dataMap;
+    }
+
+    /**
+     * 2.1.8 团队-项目-新建任务选择项目（根据teamId返回在该团队下的所有项目）
      *团队模块中创建新任务时的下拉框提供项目列表
      *根据teamId查找属于该团队的所有项目
      */
@@ -205,6 +300,7 @@ public class TeamController {
     }
 
     /**
+     * 2.1.8 团队-项目-新建任务选择子任务
      *创建新任务时的下拉框提供子项目列表（需在选定项目后才能提供子项目列表）
      *根据projectId查找属于项目（project）的所有子项目（subProject）
      */
@@ -230,27 +326,27 @@ public class TeamController {
     }
 
     /**
+     * 2.1.1 & 2.1.2 团队-项目
      *团队模块中对子项目的任务强度统计(团队id已知)[子项目列表]
      * 按团队子项目名称、子项目状态标签、时间范围、查询项目中已超期、未完成的任务的个数
      */
     @RequestMapping(value = "findTaskIntensityForProject")
     @ResponseBody
-    public Map<String, Object> findTaskIntensityForProject(@RequestBody String request) {
+    public Map<String, Object> findTaskIntensityForProject(HttpServletRequest request) {
         dataMap.clear();
         try {
-            Map<String, Object> json = JsonUtil.parseJSON2Map(request);
-            int currentPage = json.get("currentPageNumber")!=null?Integer.parseInt(json.get("currentPageNumber").toString()):1;
-            int pageSize = json.get("pageSize")!=null?Integer.parseInt(json.get("pageSize").toString()):5;
+            int currentPage = request.getParameter("currentPageNumber")!=null?Integer.parseInt(request.getParameter("currentPageNumber").toString()):1;
+            int pageSize = request.getParameter("pageSize")!=null?Integer.parseInt(request.getParameter("pageSize").toString()):5;
             pagerModel.setCurrentPageNumber(currentPage);
             pagerModel.setPageSize(pageSize);
 //            Integer teamId = Integer.parseInt(json.get("teamId").toString());
-            String openId = (String) json.get("openId");
+            String openId = (String) request.getParameter("openId");
             Integer teamIdTemp=initTeamId(openId);
-            Integer teamId = json.get("teamId")!=null?Integer.parseInt(json.get("teamId").toString()):teamIdTemp;
-            String subprojectName = (String) json.get("subprojectNames");
-            String subprojectStatus=(String) json.get("subprojectStatus");//子项目状态
-            String startTime=(String) json.get("startTime");
-            String endTime=(String) json.get("endTime");
+            Integer teamId = request.getParameter("teamId")!=null?Integer.parseInt(request.getParameter("teamId").toString()):teamIdTemp;
+            String subprojectName = (String) request.getParameter("subprojectNames");
+            String subprojectStatus=(String) request.getParameter("subprojectStatus");//子项目状态
+            String startTime=(String) request.getParameter("startTime");
+            String endTime=(String) request.getParameter("endTime");
             if(startTime==null||endTime==null||startTime.equals("")||endTime.equals("")){
                 Calendar c = Calendar.getInstance();
                 c.setTime(new Date());
@@ -276,27 +372,27 @@ public class TeamController {
     }
 
     /**
+     * 2.1.3 & 2.1.4 团队-项目-统计
      *团队模块中对项目的任务强度中的任务进行详细统计(任务列表)
      * 根据团队中成员微信号（subproject）获取该子项目的超期和未完成任务列表
      * 需要给出登录者的角色，以便确认是否有新建任务的权限
      */
     @RequestMapping(value = "taskIntensityStatisticsForSubproject")
     @ResponseBody
-    public Map<String, Object> taskIntensityStatisticsForSubproject(@RequestBody String request) {
+    public Map<String, Object> taskIntensityStatisticsForSubproject(HttpServletRequest request) {
         dataMap.clear();
         try {
-            Map<String, Object> json = JsonUtil.parseJSON2Map(request);
-            int currentPage = json.get("currentPageNumber")!=null?Integer.parseInt(json.get("currentPageNumber").toString()):1;
-            int pageSize = json.get("pageSize")!=null?Integer.parseInt(json.get("pageSize").toString()):5;
+            int currentPage = request.getParameter("currentPageNumber")!=null?Integer.parseInt(request.getParameter("currentPageNumber").toString()):1;
+            int pageSize = request.getParameter("pageSize")!=null?Integer.parseInt(request.getParameter("pageSize").toString()):5;
             pagerModel.setCurrentPageNumber(currentPage);
             pagerModel.setPageSize(pageSize);
-            String openId=(String) json.get("openId");//登录者微信号
+            String openId=(String) request.getParameter("openId");//登录者微信号
 //            Integer teamId = Integer.parseInt(json.get("teamId").toString());// 登录者
-            Integer teamId = json.get("teamId")!=null?Integer.parseInt(json.get("teamId").toString()):0;
-            Integer subprojectId = Integer.parseInt(json.get("subprojectId").toString());// 被查看的子项目id
-            String scheduleType=(String) json.get("scheduleType");
-            String startTime=(String) json.get("startTime");
-            String endTime=(String) json.get("endTime");
+            Integer teamId = request.getParameter("teamId")!=null?Integer.parseInt(request.getParameter("teamId").toString()):0;
+            Integer subprojectId = Integer.parseInt(request.getParameter("subprojectId").toString());// 被查看的子项目id
+            String scheduleType=(String) request.getParameter("scheduleType");
+            String startTime=(String) request.getParameter("startTime");
+            String endTime=(String) request.getParameter("endTime");
             if(startTime==null||endTime==null||startTime.equals("")||endTime.equals("")){
                 Calendar c = Calendar.getInstance();
                 c.setTime(new Date());
@@ -304,14 +400,24 @@ public class TeamController {
                 startTime=simpleDateFormat.format(c.getTime());
                 endTime=simpleDateFormat.format(new Date());
             }
-
-            TeamUser teamUserForOpen=teamUserService.findTeamUsersByOpenIdAndTeamId(openId, teamId).get(0);
+//            TeamUser teamUserForOpen=teamUserService.findTeamUsersByOpenIdAndTeamId(openId, teamId).get(0);
+            List<TeamUser> list=teamUserService.findTeamUsersByOpenIdAndTeamId(openId, teamId);
+            int canModify=0;
+            for(TeamUser teamUser:list){
+                if(teamUser.getRole()==1){
+                    canModify=1;
+                }
+            }
+            ProjectMember projectMember=teamUserService.findP(openId,subprojectId);
+            if(projectMember.getRoleType()!='d'){
+                canModify=1;
+            }
             ArrayList data=scheduleService.findTaskIntensityStatisticsForSubproject(pagerModel,subprojectId, scheduleType,startTime,endTime);
             int totalSize = pagerModel.getTotalSize();
             dataMap.put("result", "success");
             dataMap.put("resultTip", "");
             dataMap.put("totalSize",totalSize);
-            dataMap.put("role",teamUserForOpen.getRole());
+            dataMap.put("canModify",canModify);
             dataMap.put("data",data);
 
         } catch (Exception e) {
@@ -330,17 +436,16 @@ public class TeamController {
      */
     @RequestMapping(value = "manpowerDistributionForTeam")
     @ResponseBody
-    public Map<String, Object> manpowerDistributionForTeam(@RequestBody String request) {
+    public Map<String, Object> manpowerDistributionForTeam(HttpServletRequest request) {
         dataMap.clear();
         try {
-            Map<String, Object> json = JsonUtil.parseJSON2Map(request);
-            int currentPage = json.get("currentPageNumber")!=null?Integer.parseInt(json.get("currentPageNumber").toString()):1;
-            int pageSize = json.get("pageSize")!=null?Integer.parseInt(json.get("pageSize").toString()):5;
+            int currentPage = request.getParameter("currentPageNumber")!=null?Integer.parseInt(request.getParameter("currentPageNumber").toString()):1;
+            int pageSize = request.getParameter("pageSize")!=null?Integer.parseInt(request.getParameter("pageSize").toString()):5;
             pagerModel.setCurrentPageNumber(currentPage);
             pagerModel.setPageSize(pageSize);
-            Integer teamId = json.get("teamId")!=null?Integer.parseInt(json.get("teamId").toString()):0;
-            String subprojectName = (String) json.get("subprojectNames");
-            String subprojectStatus=(String) json.get("subprojectStatus");//子项目状态
+            Integer teamId = request.getParameter("teamId")!=null?Integer.parseInt(request.getParameter("teamId").toString()):0;
+            String subprojectName = (String) request.getParameter("subprojectNames");
+            String subprojectStatus=(String) request.getParameter("subprojectStatus");//子项目状态
 
             ArrayList data=projectMemberService.findManpowerDistributionForTeam(pagerModel,teamId,subprojectName,subprojectStatus);
             int totalSize = pagerModel.getTotalSize();
@@ -366,19 +471,18 @@ public class TeamController {
      */
     @RequestMapping(value = "scheduleStatisticsForSubproject")
     @ResponseBody
-    public Map<String, Object> scheduleStatisticsForSubproject(@RequestBody String request) {
+    public Map<String, Object> scheduleStatisticsForSubproject(HttpServletRequest request) {
         dataMap.clear();
         try {
-            Map<String, Object> json = JsonUtil.parseJSON2Map(request);
-            int currentPage = json.get("currentPageNumber")!=null?Integer.parseInt(json.get("currentPageNumber").toString()):1;
-            int pageSize = json.get("pageSize")!=null?Integer.parseInt(json.get("pageSize").toString()):5;
+            int currentPage = request.getParameter("currentPageNumber")!=null?Integer.parseInt(request.getParameter("currentPageNumber").toString()):1;
+            int pageSize = request.getParameter("pageSize")!=null?Integer.parseInt(request.getParameter("pageSize").toString()):5;
             pagerModel.setCurrentPageNumber(currentPage);
             pagerModel.setPageSize(pageSize);
-            String openId=(String) json.get("openId");//登录者微信号
+            String openId=(String) request.getParameter("openId");//登录者微信号
             Integer teamIdTemp=initTeamId(openId);
-            Integer teamId = json.get("teamId")!=null?Integer.parseInt(json.get("teamId").toString()):teamIdTemp;
-            String startTime=(String) json.get("startTime");
-            String endTime=(String) json.get("endTime");
+            Integer teamId = request.getParameter("teamId")!=null?Integer.parseInt(request.getParameter("teamId").toString()):teamIdTemp;
+            String startTime=(String) request.getParameter("startTime");
+            String endTime=(String) request.getParameter("endTime");
             if(startTime==null||endTime==null||startTime.equals("")||endTime.equals("")){
                 Calendar c = Calendar.getInstance();
                 c.setTime(new Date());
@@ -386,7 +490,7 @@ public class TeamController {
                 startTime=simpleDateFormat.format(c.getTime());
                 endTime=simpleDateFormat.format(new Date());
             }
-            String scheduleType=(String) json.get("scheduleType");//登录者微信号
+            String scheduleType=(String) request.getParameter("scheduleType");//登录者微信号
 
             TeamUser teamUserForOpen=teamUserService.findTeamUsersByOpenIdAndTeamId(openId, teamId).get(0);
             ArrayList data=scheduleService.findStatisticsForSubproject(pagerModel,teamId, scheduleType,startTime,endTime);
@@ -412,12 +516,12 @@ public class TeamController {
     public Map<String, Object> modify(@RequestBody String request){
         dataMap.clear();
         try {
-            int canModify=0;
             Map<String, Object> json = JsonUtil.parseJSON2Map(request);
             String openId=(String)json.get("openId");
             int teamId=Integer.parseInt((String)json.get("teamId"));
             int subprojectId=Integer.parseInt((String)json.get("subprojectId"));
             List<TeamUser> list=teamUserService.findTeamUsersByOpenIdAndTeamId(openId, teamId);
+            int canModify=0;
             for(TeamUser teamUser:list){
                 if(teamUser.getRole()==1){
                     canModify=1;
@@ -436,5 +540,9 @@ public class TeamController {
             dataMap.put("resultTip", e.getMessage());
         }
         return dataMap;
-}
     }
+
+
+
+
+}

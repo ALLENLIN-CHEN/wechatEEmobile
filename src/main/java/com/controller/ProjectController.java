@@ -31,7 +31,6 @@ public class ProjectController {
     ProjectMemberService projectMemberService;
     @Autowired
     SubprojectService subprojectService;
-
     @Autowired
     TransferService transferService;
     @Autowired
@@ -42,7 +41,7 @@ public class ProjectController {
     TeamUserDao teamUserDao;
     @Autowired
     SubprojectDao subprojectDao;
-    @Autowired
+
     private Map<String, Object> dataMap = new HashMap<String, Object>();
     private Pager pagerModel = new Pager(1, 5);
 
@@ -62,6 +61,7 @@ public class ProjectController {
             String project = request.getParameter("project");
             String openId=request.getParameter("openId");
             //int projectId=Integer.parseInt(request.getParameter("projectId"));
+//            int projectId=Integer.parseInt(request.getParameter("projectId"));
             Pager pagerModel = new Pager(currentPageNumber, pageSize);
             if(teamStatus!=null&&project!=null) {
                 pagerModel = projectService.findByStatus(teamStatus, project, pagerModel,openId);
