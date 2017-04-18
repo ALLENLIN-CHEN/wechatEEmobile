@@ -1,10 +1,9 @@
 package com.controller;
-
 import com.dao.impl.SubprojectDao;
 import com.dao.impl.TeamUserDao;
 import com.entity.*;
-import com.entity.newT.*;
 import com.entity.newT.ProjectT;
+import com.entity.newT.*;
 import com.service.*;
 import com.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +39,6 @@ public class ProjectController {
     @Autowired
     TeamUserDao teamUserDao;
     @Autowired
-    SubprojectDao subprojectDao;
-    @Autowired
     UserService userService;
     @Autowired
     MemoForPersonService memoForPersonService;
@@ -51,6 +48,8 @@ public class ProjectController {
     ScheduleMemberService scheduleMemberService;
     @Autowired
     MemoForSubprojectService memoForSubprojectService;
+    @Autowired
+    SubprojectDao subprojectDao;
     @Autowired
     private Map<String, Object> dataMap = new HashMap<String, Object>();
     private Pager pagerModel = new Pager(1, 5);
@@ -71,6 +70,8 @@ public class ProjectController {
             String teamStatus = request.getParameter("teamStatus");
             String project = request.getParameter("project");
             String openId=request.getParameter("openId");
+            //int projectId=Integer.parseInt(request.getParameter("projectId"));
+            int projectId=Integer.parseInt(request.getParameter("projectId"));
             Pager pagerModel = new Pager(currentPageNumber, pageSize);
             if(teamStatus!=null&&project!=null) {
                 pagerModel = projectService.findByStatus(teamStatus, project, pagerModel,openId);
