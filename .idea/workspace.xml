@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="e73cc461-bb40-4476-8a64-864cc697e630" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/controller/ProjectController.class" afterPath="$PROJECT_DIR$/target/classes/com/controller/ProjectController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/controller/TeamController.class" afterPath="$PROJECT_DIR$/target/classes/com/controller/TeamController.class" />
@@ -18,6 +19,27 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/wechatEE/WEB-INF/classes/com/service/ProjectService.class" afterPath="$PROJECT_DIR$/target/wechatEE/WEB-INF/classes/com/service/ProjectService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/wechatEE/WEB-INF/classes/com/service/ScheduleMemberService.class" afterPath="$PROJECT_DIR$/target/wechatEE/WEB-INF/classes/com/service/ScheduleMemberService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/wechatEE/WEB-INF/classes/com/service/UserService.class" afterPath="$PROJECT_DIR$/target/wechatEE/WEB-INF/classes/com/service/UserService.class" />
+=======
+<<<<<<< HEAD
+    <list default="true" id="2aff4fff-fccc-4c76-acc2-4238c9b8ef75" name="Default" comment="" />
+=======
+    <list default="true" id="2aff4fff-fccc-4c76-acc2-4238c9b8ef75" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/controller/MemoController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/dao/impl/MemoForPersonDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/dao/impl/MemoForSubprojectDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/entity/MemoForPerson.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/entity/MemoForSubproject.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/service/MemoForPersonService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/service/MemoForSubprojectService.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/wechatEE.war" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/dao/impl/ProjectMemberDao.class" afterPath="$PROJECT_DIR$/target/classes/com/dao/impl/ProjectMemberDao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/service/ProjectMemberService.class" afterPath="$PROJECT_DIR$/target/classes/com/service/ProjectMemberService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/wechatEE/WEB-INF/classes/com/dao/impl/ProjectMemberDao.class" afterPath="$PROJECT_DIR$/target/wechatEE/WEB-INF/classes/com/dao/impl/ProjectMemberDao.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/wechatEE/WEB-INF/classes/com/service/ProjectMemberService.class" afterPath="$PROJECT_DIR$/target/wechatEE/WEB-INF/classes/com/service/ProjectMemberService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/af3869d0-7453-48c8-b308-26ff0a0700b3.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/af3869d0-7453-48c8-b308-26ff0a0700b3.xml" />
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/controller/MyController.java" afterPath="$PROJECT_DIR$/src/main/java/com/controller/MyController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java" afterPath="$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java" />
@@ -33,6 +55,13 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/service/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/service/UserService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/util/JsonUtil.java" afterPath="$PROJECT_DIR$/src/main/java/com/util/JsonUtil.java" />
     </list>
+<<<<<<< HEAD
+=======
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+    <ignored path="wechatEE.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/target/" />
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,24 +74,267 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MySQL - projectdatabase@120.25.240.91" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MySQL - projectdatabase@120.25.240.91" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="projectdatabase" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+  </component>
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="wechatEE" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< HEAD
       <file leaf-file-name="ProjectController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="27">
               <caret line="387" column="54" selection-start-line="387" selection-start-column="54" selection-end-line="387" selection-end-column="54" />
               <folding />
+=======
+<<<<<<< HEAD
+      <file leaf-file-name="ProjectController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="170" column="17" selection-start-line="170" selection-start-column="17" selection-end-line="170" selection-end-column="17" />
+=======
+      <file leaf-file-name="MemoForPerson.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/MemoForPerson.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="13" column="25" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="219">
+              <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="25" />
+              <folding>
+                <element signature="e#677#687#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MemoController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/MemoController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="122" column="57" lean-forward="true" selection-start-line="122" selection-start-column="57" selection-end-line="122" selection-end-column="57" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#7937#7952#0" expanded="true" />
+                <element signature="e#8009#8021#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="SubprojectDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/SubprojectDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="84">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding>
+                <element signature="e#677#678#0" expanded="true" />
+=======
+      <file leaf-file-name="MemoForPersonService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/service/MemoForPersonService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="23" column="58" lean-forward="true" selection-start-line="23" selection-start-column="58" selection-end-line="23" selection-end-column="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#915#931#0" expanded="true" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="MethodProxy.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.0.3.RELEASE/spring-core-4.0.3.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+=======
+      <file leaf-file-name="MemoForPersonDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/MemoForPersonDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="22" column="15" lean-forward="true" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="SubprojectService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/service/SubprojectService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="106">
+              <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#871#872#0" expanded="true" />
+                <element signature="e#934#935#0" expanded="true" />
+                <element signature="e#1000#1001#0" expanded="true" />
+                <element signature="e#1049#1050#0" expanded="true" />
+                <element signature="e#1099#1100#0" expanded="true" />
+                <element signature="e#1158#1159#0" expanded="true" />
+                <element signature="e#4446#4461#0" expanded="true" />
+                <element signature="e#4840#4855#0" expanded="true" />
+=======
+      <file leaf-file-name="MemoForSubprojectDao.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/MemoForSubprojectDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="33" column="35" lean-forward="false" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MemoForSubproject.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/MemoForSubproject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="13" column="25" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Subproject.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/Subproject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="26" column="33" lean-forward="true" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MemoForSubprojectService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/service/MemoForSubprojectService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="26" column="62" lean-forward="false" selection-start-line="26" selection-start-column="62" selection-end-line="26" selection-end-column="62" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1009#1025#0" expanded="true" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="Subproject.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/Subproject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="960">
+              <caret line="43" column="70" selection-start-line="43" selection-start-column="70" selection-end-line="43" selection-end-column="70" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProjectService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/service/ProjectService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="188">
+              <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+=======
+      <file leaf-file-name="BaseDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/BaseDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="178" column="19" lean-forward="false" selection-start-line="178" selection-start-column="19" selection-end-line="178" selection-end-column="19" />
+              <folding />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Se</find>
+      <find>S</find>
+      <find>Sch</find>
+      <find>Sche</find>
+      <find>Schedu</find>
+      <find>Schedule</find>
+    </findStrings>
+    <dirStrings>
+      <dir>F:\outsourcingBusiness\Project\wechatEE\.idea</dir>
+    </dirStrings>
+  </component>
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -75,6 +347,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/main/java/com/entity/MemoForSubproject.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/controller/TeamController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/service/MemoForSubprojectService.java" />
@@ -88,6 +361,40 @@
         <option value="$PROJECT_DIR$/src/main/java/com/util/JsonUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/controller/MyController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java" />
+=======
+        <option value="$PROJECT_DIR$/src/main/java/com/dao/impl/TeamUserDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/TeamUserService.java" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/src/main/java/com/controller/TeamController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dao/impl/ProjectDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/ProjectServiceTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/ProjectMemberService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/MyService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/controller/MyController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/ProjectService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/SubprojectService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java" />
+=======
+        <option value="$PROJECT_DIR$/src/main/java/com/dao/impl/ProjectDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/ProjectServiceTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/ProjectService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/MyService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/controller/MyController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/controller/TeamController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dao/impl/ProjectMemberDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/entity/Subproject.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/hibernate.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/ProjectMemberService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/entity/MemoForPerson.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/entity/MemoForSubproject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/MemoForPersonService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/service/MemoForSubprojectService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/controller/MemoController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dao/impl/MemoForPersonDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dao/impl/MemoForSubprojectDao.java" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       </list>
     </option>
   </component>
@@ -104,6 +411,10 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -111,6 +422,11 @@
       </MavenGeneralSettings>
     </option>
   </component>
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
   <component name="ProjectFrameBounds">
     <option name="width" value="1366" />
     <option name="height" value="728" />
@@ -140,9 +456,16 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="Scope" />
+=======
+<<<<<<< HEAD
+      <pane id="Scratches" />
+=======
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -150,6 +473,15 @@
               <option name="myItemId" value="wechatEE" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wechatEE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -260,6 +592,10 @@
               <option name="myItemId" value="service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+<<<<<<< HEAD
+=======
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -270,6 +606,11 @@
               <option name="myItemId" value="wechatPM" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
@@ -380,15 +721,55 @@
               <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+<<<<<<< HEAD
           </PATH>
         </subPane>
       </pane>
+=======
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+<<<<<<< HEAD
+=======
+      <pane id="Scratches" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+      <pane id="Scope" />
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../wechatEE1" />
+=======
+    <property name="JPA.DatabaseSchemaImportDialog" value="af3869d0-7453-48c8-b308-26ff0a0700b3" />
+    <property name="settings.editor.selected.configurable" value="project.propDebugger" />
+  </component>
+  <component name="RecentsManager">
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="com.entity" />
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
   </component>
   <component name="RunManager" selected="Tomcat Server.tomcat">
     <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
@@ -426,6 +807,14 @@
       <option name="PREFERRED_AVD" value="" />
       <Java />
       <Profilers>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+        <option name="ENABLE_ADVANCED_PROFILING" value="false" />
+        <option name="GAPID_ENABLED" value="false" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
         <option name="GAPID_DISABLE_PCS" value="false" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
@@ -451,6 +840,14 @@
       <option name="PREFERRED_AVD" value="" />
       <Java />
       <Profilers>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+        <option name="ENABLE_ADVANCED_PROFILING" value="false" />
+        <option name="GAPID_ENABLED" value="false" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
         <option name="GAPID_DISABLE_PCS" value="false" />
       </Profilers>
       <method />
@@ -724,6 +1121,15 @@
       <envs />
       <method />
     </configuration>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -816,10 +1222,43 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
+<<<<<<< HEAD
     <configuration default="false" name="tomcat" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.0.M132" ALTERNATIVE_JRE_ENABLED="false">
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
       <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+=======
+<<<<<<< HEAD
+    <configuration default="false" name="tomcat" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.0.M132" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+=======
+    <configuration default="true" type="uTestRunConfiguration" factoryName="utest">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
+      <setting name="useSbt" value="false" />
+      <setting name="useUiWithSbt" value="false" />
+      <classRegexps />
+      <testRegexps />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="tomcat" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.0.M132" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="D:\Program Files\Java\jdk1.8.0_112\jre">
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="HOT_SWAP_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+      <option name="UPDATING_POLICY" value="restart-server" />
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <deployment>
         <artifact name="wechatEE:war exploded">
           <settings>
@@ -903,6 +1342,7 @@
       <created>1492250002145</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD
       <updated>1492250002145</updated>
       <workItem from="1492250005150" duration="2305000" />
       <workItem from="1492252471567" duration="91000" />
@@ -911,20 +1351,63 @@
       <workItem from="1492330261876" duration="10876000" />
       <workItem from="1492437697003" duration="3261000" />
       <workItem from="1492500394002" duration="14560000" />
+=======
+      <updated>1492044246946</updated>
+      <workItem from="1492044257917" duration="20157000" />
+<<<<<<< HEAD
+      <workItem from="1492217733425" duration="18222000" />
+=======
+      <workItem from="1492086104750" duration="25673000" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="40390000" />
+=======
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="47126000" />
+=======
+    <option name="totallyTimeSpent" value="54577000" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="728" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32879046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+=======
+<<<<<<< HEAD
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34494194" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36797273" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hibernate Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18905473" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26783004" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32829046" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962063" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6886326" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34494194" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26853377" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -934,6 +1417,10 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -943,7 +1430,18 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37989777" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3560477" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21331316" sideWeight="0.5151515" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16792738" sideWeight="0.4848485" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.66886324" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -968,8 +1466,130 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
+<<<<<<< HEAD
           <url>file://$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java</url>
           <line>232</line>
+=======
+          <url>file://$PROJECT_DIR$/src/main/java/com/dao/BaseDao.java</url>
+          <line>92</line>
+          <properties />
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/ProjectService.java</url>
+<<<<<<< HEAD
+          <line>247</line>
+=======
+          <line>283</line>
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <properties />
+          <option name="timeStamp" value="118" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java</url>
+<<<<<<< HEAD
+          <line>214</line>
+=======
+          <line>215</line>
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <properties />
+          <option name="timeStamp" value="188" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+<<<<<<< HEAD
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/ProjectService.java</url>
+          <line>243</line>
+=======
+          <url>file://$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java</url>
+          <line>228</line>
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <properties />
+          <option name="timeStamp" value="208" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+<<<<<<< HEAD
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/ProjectService.java</url>
+          <line>264</line>
+=======
+          <url>file://$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java</url>
+          <line>232</line>
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <properties />
+          <option name="timeStamp" value="211" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+<<<<<<< HEAD
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/ProjectService.java</url>
+          <line>261</line>
+=======
+          <url>file://$PROJECT_DIR$/src/main/java/com/dao/impl/SubprojectDao.java</url>
+          <line>24</line>
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <properties />
+          <option name="timeStamp" value="213" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+<<<<<<< HEAD
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/TransferService.java</url>
+          <line>37</line>
+=======
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/ProjectService.java</url>
+          <line>279</line>
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <properties />
+          <option name="timeStamp" value="226" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+<<<<<<< HEAD
+          <url>file://$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java</url>
+          <line>58</line>
+=======
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/ProjectService.java</url>
+          <line>300</line>
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <properties />
+          <option name="timeStamp" value="302" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+<<<<<<< HEAD
+          <url>file://$PROJECT_DIR$/src/main/java/com/controller/TeamController.java</url>
+          <line>425</line>
+          <properties />
+          <option name="timeStamp" value="321" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/TeamUserService.java</url>
+          <line>36</line>
+=======
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/ProjectService.java</url>
+          <line>297</line>
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <properties />
+          <option name="timeStamp" value="322" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/TeamUserService.java</url>
+          <line>43</line>
+          <properties />
+          <option name="timeStamp" value="323" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/controller/TeamController.java</url>
+          <line>426</line>
+          <properties />
+          <option name="timeStamp" value="325" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+<<<<<<< HEAD
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/ProjectService.java</url>
+          <line>378</line>
+          <properties />
+          <option name="timeStamp" value="327" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/controller/MyController.java</url>
+          <line>65</line>
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
           <properties />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1033,7 +1653,44 @@
           <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
+<<<<<<< HEAD
       <option name="time" value="53" />
+=======
+      <option name="time" value="364" />
+=======
+          <url>file://$PROJECT_DIR$/src/main/java/com/dao/BaseDao.java</url>
+          <line>199</line>
+          <properties />
+          <option name="timeStamp" value="301" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java</url>
+          <line>55</line>
+          <properties />
+          <option name="timeStamp" value="302" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/TeamUserService.java</url>
+          <line>43</line>
+          <properties />
+          <option name="timeStamp" value="323" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/service/ProjectService.java</url>
+          <line>414</line>
+          <properties />
+          <option name="timeStamp" value="327" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/controller/MyController.java</url>
+          <line>65</line>
+          <properties />
+          <option name="timeStamp" value="334" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="343" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1042,15 +1699,31 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/ScheduleDao.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/ProjectService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4671">
+          <caret line="184" column="18" lean-forward="false" selection-start-line="184" selection-start-column="18" selection-end-line="184" selection-end-column="18" />
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/MemoForPerson.java">
+=======
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.0.3.RELEASE/spring-web-4.0.3.RELEASE-sources.jar!/org/springframework/web/method/support/InvocableHandlerMethod.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/MyService.java">
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
@@ -1087,7 +1760,62 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/service/ProjectService.java">
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/ScheduleService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1101">
+          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/ScheduleMemberService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="27" column="41" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/TransferMemberEntity.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/MyController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="191" column="0" lean-forward="false" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="343" column="32" lean-forward="false" selection-start-line="343" selection-start-column="32" selection-end-line="343" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/4.0.3.RELEASE/spring-webmvc-4.0.3.RELEASE.jar!/org/springframework/web/servlet/FrameworkServlet.class">
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="410" column="0" lean-forward="false" selection-start-line="410" selection-start-column="0" selection-end-line="410" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/4.0.3.RELEASE/spring-webmvc-4.0.3.RELEASE.jar!/org/springframework/web/servlet/DispatcherServlet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="399" column="0" lean-forward="false" selection-start-line="399" selection-start-column="0" selection-end-line="399" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/TransferEntity.java">
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6600">
           <caret line="220" column="17" selection-start-line="220" selection-start-column="17" selection-end-line="220" selection-end-column="17" />
@@ -1129,18 +1857,64 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/service/TransferService.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="930">
           <caret line="44" column="42" selection-start-line="44" selection-start-column="42" selection-end-line="44" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
+=======
+        <state relative-caret-position="148">
+          <caret line="43" column="29" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/TransferDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="9" column="24" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+=======
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/4.0.3.RELEASE/spring-webmvc-4.0.3.RELEASE.jar!/org/springframework/web/servlet/mvc/method/AbstractHandlerMethodAdapter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/TeamController.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="12300">
           <caret line="410" column="17" selection-start-line="410" selection-start-column="17" selection-end-line="410" selection-end-column="17" />
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="199">
+          <caret line="143" column="0" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/RecordEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="17" column="56" selection-start-line="17" selection-start-column="56" selection-end-line="17" selection-end-column="56" />
+          <folding>
+            <element signature="e#906#907#0" expanded="false" />
+            <element signature="e#935#936#0" expanded="false" />
+            <element signature="e#979#980#0" expanded="false" />
+            <element signature="e#1015#1016#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/Project.java">
+=======
+        <state relative-caret-position="88">
+          <caret line="418" column="0" lean-forward="false" selection-start-line="418" selection-start-column="0" selection-end-line="418" selection-end-column="0" />
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
           <folding />
         </state>
       </provider>
@@ -1182,6 +1956,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/MyController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2640">
@@ -1193,16 +1968,63 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/service/MemoForSubprojectService.java">
+=======
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-tx/4.0.3.RELEASE/spring-tx-4.0.3.RELEASE.jar!/org/springframework/transaction/interceptor/TransactionAspectSupport.class">
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.0.3.RELEASE/spring-aop-4.0.3.RELEASE.jar!/org/springframework/aop/interceptor/ExposeInvocationInterceptor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/RecordDao.java">
+=======
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.0.3.RELEASE/spring-aop-4.0.3.RELEASE.jar!/org/springframework/aop/framework/ReflectiveMethodInvocation.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-tx/4.0.3.RELEASE/spring-tx-4.0.3.RELEASE.jar!/org/springframework/transaction/interceptor/TransactionInterceptor.class">
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1320">
           <caret line="55" column="7" selection-start-line="55" selection-start-column="7" selection-end-line="55" selection-end-column="7" />
           <folding>
+<<<<<<< HEAD
             <element signature="imports" expanded="true" />
+=======
+<<<<<<< HEAD
+            <element signature="e#1088#1089#0" expanded="false" />
+            <element signature="e#1142#1143#0" expanded="false" />
+=======
+            <element signature="e#1503#1667#0" expanded="true" />
+            <element signature="e#1666#1667#0" expanded="true" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/service/TransferService.java">
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/RecordService.java">
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="780">
           <caret line="39" column="41" selection-start-line="39" selection-start-column="41" selection-end-line="39" selection-end-column="41" />
@@ -1228,6 +2050,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/TeamController.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="13290">
           <caret line="443" column="0" selection-start-line="443" selection-start-column="0" selection-end-line="443" selection-end-column="0" />
           <folding />
@@ -1238,11 +2061,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1830">
           <caret line="61" column="57" selection-start-line="61" selection-start-column="57" selection-end-line="61" selection-end-column="57" />
+=======
+        <state relative-caret-position="150">
+          <caret line="72" column="48" selection-start-line="72" selection-start-column="48" selection-end-line="72" selection-end-column="48" />
+=======
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.0.3.RELEASE/spring-aop-4.0.3.RELEASE.jar!/org/springframework/aop/framework/CglibAopProxy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="408" column="0" lean-forward="false" selection-start-line="408" selection-start-column="0" selection-end-line="408" selection-end-column="0" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/MemoController.java">
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1250,6 +2088,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/TeamController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12900">
@@ -1270,10 +2109,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-tx/4.0.3.RELEASE/spring-tx-4.0.3.RELEASE-sources.jar!/org/springframework/transaction/interceptor/TransactionInterceptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1425">
+          <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+          <folding>
+            <element signature="e#3771#3912#0" expanded="false" />
+            <element signature="e#3911#3912#0" expanded="false" />
+          </folding>
+=======
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.0.3.RELEASE/spring-core-4.0.3.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="104" column="0" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1303,6 +2158,47 @@
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.0.3.RELEASE/spring-core-4.0.3.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
+=======
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_112/src.zip!/java/net/DualStackPlainSocketImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="282" column="22" lean-forward="false" selection-start-line="282" selection-start-column="22" selection-end-line="282" selection-end-column="22" />
+          <folding />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/SubprojectService.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="75">
+          <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+=======
+        <state relative-caret-position="1107">
+          <caret line="57" column="59" lean-forward="true" selection-start-line="57" selection-start-column="59" selection-end-line="57" selection-end-column="59" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.0.3.RELEASE/spring-aop-4.0.3.RELEASE-sources.jar!/org/springframework/aop/framework/ReflectiveMethodInvocation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="178" column="0" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/TeamController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="162" column="107" lean-forward="true" selection-start-line="162" selection-start-column="11" selection-end-line="162" selection-end-column="107" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.0.3.RELEASE/spring-aop-4.0.3.RELEASE-sources.jar!/org/springframework/aop/framework/CglibAopProxy.java">
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
           <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
@@ -1334,14 +2230,155 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/service/SubprojectService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="124" column="36" selection-start-line="124" selection-start-column="36" selection-end-line="124" selection-end-column="36" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/ProjectDaoI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/ProjectServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/RecordController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-60">
+          <caret line="99" column="18" selection-start-line="99" selection-start-column="18" selection-end-line="99" selection-end-column="18" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/ProjectMember.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="26" column="33" lean-forward="false" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/ScheduleDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1471">
+          <caret line="27" column="16" lean-forward="false" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/ScheduleMemberDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-942">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/MyDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/ProjectDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="15" column="49" lean-forward="false" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/TeamUserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="15" column="66" lean-forward="false" selection-start-line="15" selection-start-column="66" selection-end-line="15" selection-end-column="66" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/TransferMemberDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/TeamUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/SubprojectDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1188">
+          <caret line="51" column="32" lean-forward="true" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-tx/4.0.3.RELEASE/spring-tx-4.0.3.RELEASE-sources.jar!/org/springframework/transaction/interceptor/TransactionAspectSupport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="263" column="0" selection-start-line="263" selection-start-column="0" selection-end-line="263" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/MemoForSubject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="13" column="28" lean-forward="false" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/newT/ProjectT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/persistence-mysql.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/newT/ScheduleT.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="1">
+          <caret line="33" column="143" selection-start-line="33" selection-start-column="126" selection-end-line="33" selection-end-column="143" />
+=======
+        <state relative-caret-position="270">
+          <caret line="10" column="69" lean-forward="false" selection-start-line="10" selection-start-column="69" selection-end-line="10" selection-end-column="69" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/newT/ScheduleMemberT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -1359,10 +2396,46 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="410" column="17" selection-start-line="410" selection-start-column="17" selection-end-line="410" selection-end-column="17" />
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/Schedule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="39" column="47" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/ScheduleMember.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="36" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/TransferDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/TeamController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9930">
+          <caret line="344" column="65" selection-start-line="344" selection-start-column="65" selection-end-line="344" selection-end-column="65" />
+=======
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_112/src.zip!/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1407">
+          <caret line="120" column="8" lean-forward="false" selection-start-line="120" selection-start-column="8" selection-end-line="120" selection-end-column="8" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/newT/TeamUserT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
@@ -1397,11 +2470,33 @@
             <element signature="e#1826#1827#0" expanded="false" />
             <element signature="e#1874#1875#0" expanded="false" />
             <element signature="e#1905#1906#0" expanded="false" />
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/MyService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1140">
+          <caret line="47" column="47" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="false" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/TeamUserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="25" column="28" lean-forward="true" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/MemoForPerson.java">
+=======
+<<<<<<< HEAD
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.0.3.RELEASE/spring-web-4.0.3.RELEASE-sources.jar!/org/springframework/web/method/support/InvocableHandlerMethod.java">
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
@@ -1440,6 +2535,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/User.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="85">
           <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
         </state>
@@ -1449,10 +2545,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="74" column="20" selection-start-line="74" selection-start-column="20" selection-end-line="74" selection-end-column="20" />
+=======
+        <state relative-caret-position="2490">
+          <caret line="86" column="35" selection-start-line="86" selection-start-column="21" selection-end-line="86" selection-end-column="35" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/Project.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="26" lean-forward="false" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="26" />
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/service/TransferMemberService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
@@ -1461,6 +2567,34 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/service/TransferService.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/ProjectMemberService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="56" column="8" lean-forward="false" selection-start-line="56" selection-start-column="8" selection-end-line="71" selection-end-column="25" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/Subproject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="43" column="70" selection-start-line="43" selection-start-column="70" selection-end-line="43" selection-end-column="70" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/ProjectMemberDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="31" column="7" lean-forward="true" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/ProjectDao.java">
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="930">
           <caret line="44" column="42" selection-start-line="44" selection-start-column="42" selection-end-line="44" selection-end-column="42" />
@@ -1470,14 +2604,36 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/ScheduleMember.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
           <caret line="23" column="30" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/ProjectMemberService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/Schedule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/Subproject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="26" column="33" lean-forward="true" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/ScheduleDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
@@ -1501,6 +2657,25 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/service/ProjectService.java">
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/ProjectMember.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="26" column="33" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="33" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/BaseDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="178" column="19" lean-forward="false" selection-start-line="178" selection-start-column="19" selection-end-line="178" selection-end-column="19" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/TeamService.java">
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10230">
           <caret line="355" column="48" selection-start-line="355" selection-start-column="41" selection-end-line="355" selection-end-column="48" />
@@ -1532,14 +2707,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/MyController.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="218">
           <caret line="129" column="0" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
+=======
+        <state relative-caret-position="188">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="25" />
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#677#687#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/MemoForSubproject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -1552,11 +2738,72 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/MemoForSubprojectService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="26" column="62" lean-forward="false" selection-start-line="26" selection-start-column="62" selection-end-line="26" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1009#1025#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/MemoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="122" column="57" lean-forward="true" selection-start-line="122" selection-start-column="57" selection-end-line="122" selection-end-column="57" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/SubprojectService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#871#872#0" expanded="true" />
+            <element signature="e#934#935#0" expanded="true" />
+            <element signature="e#1000#1001#0" expanded="true" />
+            <element signature="e#1049#1050#0" expanded="true" />
+            <element signature="e#1099#1100#0" expanded="true" />
+            <element signature="e#1158#1159#0" expanded="true" />
+            <element signature="e#4446#4461#0" expanded="true" />
+            <element signature="e#4840#4855#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/MemoForSubproject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="13" column="25" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="25" />
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/service/MemoForSubprojectService.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/service/MemoForPersonService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="23" column="58" lean-forward="true" selection-start-line="23" selection-start-column="58" selection-end-line="23" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#915#931#0" expanded="true" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/SubprojectDao.java">
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="31" column="64" selection-start-line="31" selection-start-column="64" selection-end-line="31" selection-end-column="64" />
@@ -1568,17 +2815,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/MemoController.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="30">
           <caret line="87" column="62" selection-start-line="87" selection-start-column="62" selection-end-line="87" selection-end-column="62" />
+=======
+        <state relative-caret-position="141">
+          <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/entity/MemoForPerson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="13" column="25" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="25" />
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="27">
           <caret line="387" column="54" selection-start-line="387" selection-start-column="54" selection-end-line="387" selection-end-column="54" />
           <folding />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/MemoForPersonDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="22" column="15" lean-forward="true" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/controller/ProjectController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="170" column="17" selection-start-line="170" selection-start-column="17" selection-end-line="170" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7937#7952#0" expanded="true" />
+            <element signature="e#8009#8021#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dao/impl/MemoForSubprojectDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="33" column="35" lean-forward="false" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+>>>>>>> 326d14cb47d0abcd2531e19c634ef12dc2a5675a
+          </folding>
+>>>>>>> 651c8c1ebc60b7b3959becb56442572a030e28f8
         </state>
       </provider>
     </entry>
