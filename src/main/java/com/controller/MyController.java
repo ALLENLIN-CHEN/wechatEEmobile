@@ -4,6 +4,7 @@ import com.entity.Pager;
 import com.entity.newT.ScheduleT;
 import com.service.MyService;
 import com.service.ProjectService;
+import com.util.JsonUtil;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -107,10 +108,48 @@ public class MyController {
                 Date d=df.parse(list.get(i).toString());
                 if(d.equals(date)){
                     map.put("taskTime",list.get(i));
+                    map.put("isTask","true");
                     dataList.add(map);
                 }
             }
-            dataMap.put("taskTimes",dataList);
+            Calendar calendar=Calendar.getInstance();
+            calendar.setTime(date);
+            int year=calendar.get(Calendar.YEAR);
+            int month=calendar.get(Calendar.MONTH)+1;
+            //int day=calendar.get(Calendar.DAY_OF_MONTH);
+            int days=28;
+            if(month==2) {
+                if (JsonUtil.isLeapYear(year)) {
+                    days = 29;
+                }
+            }else{
+                    days = JsonUtil.maxDay(month);
+                }
+            List<Map<String, Object>> dataList1 = new ArrayList<>();
+               Calendar calendar1=Calendar.getInstance();
+            for(int i=1;i<days+1;i++){
+                int flag=0;
+                Map<String,Object> data=new HashMap<>();
+                String s=year+"-"+month+"-"+i;
+               for(Map<String,Object>map:dataList) {
+                   Date date1 = (Date) map.get("taskTime");
+                   calendar.setTime(date1);
+                   int day = calendar.get(Calendar.DAY_OF_MONTH);
+                   if(day==i){
+                     data.put("taskTime",date1);
+                       data.put("isTask","true");
+                       dataList1.add(data);
+                       flag=1;
+                       break;
+                   }
+               }
+               if(flag==0) {
+                   data.put("taskTime", s);
+                   data.put("isTask", "false");
+                   dataList1.add(data);
+               }
+            }
+            dataMap.put("taskTimes",dataList1);
         } catch (Exception e) {
             e.printStackTrace();
             dataMap.put("result", "fail");

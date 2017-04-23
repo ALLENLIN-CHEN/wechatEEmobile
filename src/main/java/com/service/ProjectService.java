@@ -206,34 +206,22 @@ public class ProjectService {
         return true;
     }
     /**
-     * 获取任务现有人员并可根据人员姓名搜索
+     * 获取任务现有人员
      */
     @Transactional
-    public Pager findScheduleMember(String scheduleId,Pager pager){
-
-         try {
-                String hql = "select new com.entity.newT.ScheduleMemberT(sm.scheduleMemberId,sm.user.userName) from ScheduleMember sm where sm.schedule.scheduleId="+scheduleId;
-                pager =   projectDao.findByPage(hql,pager,null);
-
-         } catch (NumberFormatException e) {
-             e.printStackTrace();
-         }
-         return   pager;
+    public List findScheduleMember(String scheduleId){
+                String hql = "select new com.entity.newT.ScheduleMemberT(sm.user.openId,sm.user.userName) from ScheduleMember sm where sm.schedule.scheduleId="+scheduleId;
+                List list = projectDao.findByHql(hql,null,null);
+                 return list;
      }
     /**
-     * 查询团队中不在项目内的成员并可根据人员姓名搜索
+     * 查询团队中不在项目内的成员
      */
     @Transactional
-    public  Pager findOtherMember(String teamId,String projectId,Pager pager){
-         List list = null;
-         try {
-
-             String hql ="select new com.entity.newT.TeamUserT(tu.teamUserId,tu.user.userName) from TeamUser tu where tu.team.teamId="+teamId+" and tu.user.openId not in(select sm.user.openId from ScheduleMember sm where sm.schedule.subproject.project.projectId="+projectId+")";
-             pager =   projectDao.findByPage(hql,pager,null);
-         } catch (NumberFormatException e) {
-             e.printStackTrace();
-         }
-         return pager;
+    public  List findOtherMember(String teamId,String projectId){
+             String hql ="select new com.entity.newT.TeamUserT(tu.user.openId,tu.user.userName) from TeamUser tu where tu.team.teamId="+teamId+" and tu.user.openId not in(select p.user.openId from ProjectMember p where p.subproject.project.projectId="+projectId+")";
+             List list=   projectDao.findByHql(hql,null,null);
+             return list;
      }
     /**
      * 添加任务成员

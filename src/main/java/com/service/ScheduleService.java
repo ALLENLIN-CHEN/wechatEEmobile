@@ -62,6 +62,11 @@ public class ScheduleService {
             scheduleMap.put("message",row[5]);
             scheduleMap.put("endDate",row[6]);
             scheduleMap.put("scheduleStatus",row[7]);
+            if("d".equals(row[7].toString())){
+                scheduleMap.put("isOverTime",1);
+            }else{
+                scheduleMap.put("isOverTime",0);
+            }
             arrayList.add(scheduleMap);
         }
         return arrayList;
@@ -86,6 +91,11 @@ public class ScheduleService {
             scheduleMap.put("message",row[5]);
             scheduleMap.put("endDate",row[6]);
             scheduleMap.put("scheduleStatus",row[7]);
+            if("d".equals(row[7].toString())){
+                scheduleMap.put("isOverTime",1);
+            }else{
+                scheduleMap.put("isOverTime",0);
+            }
             arrayList.add(scheduleMap);
         }
         return arrayList;

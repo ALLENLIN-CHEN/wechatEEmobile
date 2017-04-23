@@ -6,7 +6,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
 
 import com.msg.response.TextRespMsg;
-import com.qq.weixin.mp.aes.WXBizMsgCrypt;
+/*import com.qq.weixin.mp.aes.WXBizMsgCrypt;*/
 
 
 
@@ -31,7 +31,7 @@ public class ResponseUtil {
 //		}
 //
 //	}
-	public static void sendTextResponse(HttpServletResponse response,String content ,String toUserName, WXBizMsgCrypt wxcpt ,String timeStamp, String nonce)
+	/*public static void sendTextResponse(HttpServletResponse response,String content ,String toUserName, WXBizMsgCrypt wxcpt ,String timeStamp, String nonce)
 	{
 		TextRespMsg msg = new TextRespMsg();
 		msg.setFromUserName("wxa50ffd87271d6e9e");
@@ -54,7 +54,7 @@ public class ResponseUtil {
 			e.printStackTrace();
 		}
 		
-	}
+	}*/
 
 	
 	public static String getInputTips()

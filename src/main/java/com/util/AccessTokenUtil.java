@@ -16,16 +16,70 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClients;
 import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
-
+import net.sf.json.JSONObject;
+import org.springframework.stereotype.Component;
 
 
 /**
  * @author phan at 2016年2月15日
  *
  */
+@Component
 public class AccessTokenUtil {
-	// 获取访问权限码URL
+
+	private HttpSender httpSender;
+
+	private String appId = "wxa50ffd87271d6e9e";
+	private String appSecret = "PP6oO5miSKsQsRTDrZaaHLxvZx2hQT9PnWXtESRPP6anCMxaIgfITTIo-riM1Pnu";
+	private AccessToken accessToken;
+	private long currentTime = 0;
+	private long freshTime = 1000 * 60 * 60;
+
+	public AccessToken getAccessToken()
+	{
+		/*
+		 * 增加java锁，在accesstoken过期后，
+		 * 假如同时收到好几个请求，这时可以保证请求的正常执行顺序
+		 */
+		synchronized(this)
+		{
+			if((System.currentTimeMillis() - currentTime) > freshTime)
+			{
+				accessToken = getAccessToken(appId, appSecret);
+				if(!accessToken.getToken().equals(null) && !accessToken.getToken().equals(""))
+				{//如果accessToken获取成功
+					System.out.println("accessToken获取成功：" + accessToken.getToken());
+					currentTime = System.currentTimeMillis();
+				}
+			}
+
+			return accessToken;
+		}
+	}
+
+	public AccessToken getAccessToken(String appId, String appSecret)
+	{
+		AccessToken accessToken = new AccessToken();
+		//访问微信服务器端
+		String url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken";
+		//获取token
+		httpSender = new HttpSender();
+		String accessTokenString = httpSender.sendGet(url, "corpid=" + appId + "&corpsecret=" + appSecret, 3);
+		System.out.println("构造url后，accessToken：" + accessTokenString);
+		JSONObject json = JSONObject.fromObject(accessTokenString);
+
+		if (json.containsKey("NULL"))
+		{
+			return null;
+		}
+
+		accessToken.setToken(json.optString("access_token"));
+		accessToken.setExpiresIn(new Integer(json.optInt("expires_in")));
+
+		return accessToken;
+	}
+
+	/*// 获取访问权限码URL
     private final static String ACCESS_TOKEN_URL = "https://qyapi.weixin.qq.com/cgi-bin/gettoken";
     
 	public static String getAccessToken(HttpServletRequest request){
@@ -87,7 +141,7 @@ public class AccessTokenUtil {
 		System.out.println("accesstoken:"+result);
 		return result;
 		
-	}
+	}*/
 	
 	
 }
