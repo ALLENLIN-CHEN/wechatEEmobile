@@ -45,7 +45,7 @@ public class ProjectService {
      */
     public Pager findByStatus(String  teamStatus,String project, Pager pagerModel,String openId ) {
 
-        String hql = "select p.projectId,sub.subprojectId,sub.subproject, p.project, sub.teamStatus,p.team.teamId"
+        String hql = "select p.projectId,sub.subprojectId,sub.subproject, p.project, sub.teamStatus,p.team.teamId,p.team.teamName"
                 + " from Subproject sub left join sub.project p  where p.team.teamId in(select t.team.teamId from TeamUser t where t.user.openId=:openId and t.role!=0) ";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("openId",openId);
@@ -110,7 +110,10 @@ public class ProjectService {
     public boolean createNewProject(Project project){
         return projectDao.create_project(project);
     }
-
+    @Transactional
+    public  void updateMainProject(Project project){
+        projectDao.update(project);
+    }
     /**
      * 根据人员职位查询人员
      */

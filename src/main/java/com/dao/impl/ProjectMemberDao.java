@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by zengqin on 2017/4/6.
  */
-@Repository
+@Repository("ProjectMemberDao")
 public class ProjectMemberDao extends BaseDao<ProjectMember> {
     public boolean saveProjectMember(ProjectMember projectMember) {
         try {
@@ -57,6 +57,16 @@ public class ProjectMemberDao extends BaseDao<ProjectMember> {
         List dataList=findByHql(hql, null,null);
 
         return dataList;
+    }
+
+    /**
+     * 根据subprojectId和openId获取实例
+     */
+    public ProjectMember findByOpenIdAndSubprojectId(String openId, Integer subprojectId){
+        String hql="from ProjectMember p where p.subproject.subprojectId="+subprojectId
+                +" and p.user.openId='"+openId+"'";
+        List <ProjectMember>list=findByHql(hql, null,null);
+        return list.get(0);
     }
 
 

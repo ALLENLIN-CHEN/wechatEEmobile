@@ -13,6 +13,7 @@ public class ProjectT {
     private String project;
     private String teamStatus;
     private  int teamId;
+    private  String teamName;
     private List<UserT> userTs=new ArrayList<>(0);
 
     public ProjectT() {
@@ -31,6 +32,14 @@ public class ProjectT {
         this.project = project;
 
         this.teamStatus = teamStatus;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     public List<UserT> getUserTs() {

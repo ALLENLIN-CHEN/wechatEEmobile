@@ -1,4 +1,5 @@
 package com.controller;
+
 import com.dao.impl.SubprojectDao;
 import com.dao.impl.TeamUserDao;
 import com.entity.*;
@@ -29,7 +30,6 @@ public class ProjectController {
     ProjectMemberService projectMemberService;
     @Autowired
     SubprojectService subprojectService;
-
     @Autowired
     TransferService transferService;
     @Autowired
@@ -50,7 +50,6 @@ public class ProjectController {
     MemoForSubprojectService memoForSubprojectService;
     @Autowired
     SubprojectDao subprojectDao;
-    @Autowired
     private Map<String, Object> dataMap = new HashMap<String, Object>();
     private Pager pagerModel = new Pager(1, 5);
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -70,8 +69,6 @@ public class ProjectController {
             String teamStatus = request.getParameter("teamStatus");
             String project = request.getParameter("project");
             String openId=request.getParameter("openId");
-            //int projectId=Integer.parseInt(request.getParameter("projectId"));
-            int projectId=Integer.parseInt(request.getParameter("projectId"));
             Pager pagerModel = new Pager(currentPageNumber, pageSize);
             if(teamStatus!=null&&project!=null) {
                 pagerModel = projectService.findByStatus(teamStatus, project, pagerModel,openId);
@@ -111,6 +108,9 @@ public class ProjectController {
                     }
                     if(obj[5]!=null) {
                         projectT.setTeamId(Integer.parseInt(obj[5].toString()));
+                    }
+                    if(obj[6]!=null){
+                        projectT.setTeamName(obj[6].toString());
                     }
                     projectTs.add(projectT);
                 }
@@ -274,6 +274,126 @@ public class ProjectController {
         }
         return dataMap;
     }
+
+    /**
+     * 更新主项目
+     */
+    @RequestMapping(value = "updateMainProject")
+    @ResponseBody
+    public Map<String,Object> updateMainProject(@RequestBody String request){
+        dataMap.clear();
+        try {
+            Map<String, Object> json = JsonUtil.parseJSON2Map(request);
+            String projectId = (String) json.get("projectId");
+            String project = (String) json.get("project");
+            String teamId = (String) json.get("teamId");
+            String opneId=(String)json.get("openId");
+            User users=userService.findUser(opneId);
+            Project project1=projectService.findById(Integer.parseInt(projectId));
+            Team team=T.findTeam(Integer.parseInt(teamId));
+            project1.setProject(project);
+            project1.setTeam(team);
+            projectService.updateMainProject(project1);
+            ArrayList<Map<String, Object>> subprojectList = (ArrayList<Map<String, Object>>) json.get("subprojects");
+            Set<ProjectMember> projectMembers = new HashSet<ProjectMember>();
+            Set<Subproject> subprojects = new HashSet<Subproject>();
+            for (Map<String, Object> map : subprojectList) {
+                String subprojectId = (String) map.get("subprojectId");
+                String subproject = (String) map.get("subproject");
+                String teamStatus = (String) map.get("teamStatus");
+                if (subprojectId != null) {
+                    ArrayList<Map<String,Object>> addList1=(ArrayList<Map<String,Object>>)map.get("projectMembers");
+                    ArrayList<Map<String,Object>>removeList1=(ArrayList<Map<String,Object>>)map.get("removeList") ;
+                    Subproject subproject2=subprojectService.findById(Integer.parseInt(subprojectId));
+                    MemoForSubproject memoForSubproject1=new MemoForSubproject();
+                    memoForSubproject1.setOperatorOpenId(users);
+                    memoForSubproject1.setSubprojectId(subproject2);
+                    memoForSubproject1.setOperTime(new Date());
+                    memoForSubproject1.setHasRead(0);
+                    String content=users.getUserName();
+                    if(subproject!=subproject2.getSubproject()){
+                        content+=" 将项目 "+subproject2.getSubproject()+" 项目名改为 "+subproject+"</br>";
+                        subproject2.setSubproject(subproject);
+                    }
+                    if(teamStatus!=subproject2.getTeamStatus()){
+                        content+="项目 "+subproject2.getSubproject()+" 进入 "+teamStatus+" 阶段 </br>";
+                        subproject2.setTeamStatus(teamStatus);
+                    }
+                    if(addList1.size()>0) {
+                        content+=" 将：";
+                        for (Map<String, Object> map1 : addList1){
+                            String openId=(String)map1.get("openId");
+                            String roleType1=(String)map1.get("roleType");
+                            char roleType=roleType1.charAt(0);
+                            User user=userService.findUser(openId);
+                            content+=user.getUserName()+" ";
+                            subprojectService.addSubprojectMember(Integer.parseInt(subprojectId),openId,roleType);
+                        }
+                        content+="加入项目"+subproject2.getSubproject()+" </br>";
+                    }
+                    if(removeList1.size()>0){
+                        content+=" 将：";
+                        for(Map<String,Object>map2:removeList1){
+                            String openId=(String)map2.get("openId");
+                            User user=userService.findUser(openId);
+                            content+=user.getUserName()+"、";
+                            subprojectService.deleteSubprojectMember(Integer.parseInt(subprojectId),openId);
+                        }
+                        content+="移除项目"+subproject2.getSubproject();
+                    }
+                    subprojectService.update(subproject2);
+                    memoForSubproject1.setContent(content);
+                    memoForSubprojectService.saveEvents(memoForSubproject1);
+                } else {
+                    Subproject subproject1 = new Subproject();
+                    subproject1.setSubproject(subproject);
+                    subproject1.setTeamStatus(teamStatus);
+                    subproject1.setProjectStatus('b');
+                    subproject1.setProject(project1);
+                    subprojectService.saveSubproject(subproject1);
+                    MemoForSubproject memoForSubproject=new MemoForSubproject();
+                    memoForSubproject.setSubprojectId(subproject1);
+                    memoForSubproject.setOperatorOpenId(users);
+                    String content=users.getUserName()+"--"+"创建项目"+"  "+subproject1.getSubproject()+"</br>";
+                    memoForSubproject.setOperTime(new Date());
+                    memoForSubproject.setHasRead(0);
+                    ArrayList<Map<String, Object>> projectMemberList = (ArrayList<Map<String, Object>>) map.get("projectMembers");
+                    if(projectMemberList.size()>0){
+                        content+="项目人员包括 : </br>";
+                    }
+                    for (Map<String, Object> m : projectMemberList) {
+                        String openId = (String) m.get("openId");
+                        String roleTypeS = (String) m.get("roleType");
+                        char roleType=roleTypeS.charAt(0);
+                        User user=userService.findUser(openId);
+                        ProjectMember projectMember = new ProjectMember();
+                        projectMember.setRoleType(roleType);
+                        projectMember.setUser(user);
+                        projectMember.setSubproject(subproject1);
+                        projectMemberService.saveProjectMember(projectMember);
+                        content+=user.getUserName()+" ";
+                        projectMembers.add(projectMember);
+                    }
+                    memoForSubproject.setContent(content);
+                    memoForSubprojectService.saveEvents(memoForSubproject);
+                    Subproject subprojectT = new Subproject();
+                    subprojectT.setSubproject(subproject);
+                    subprojectT.setProjectMembers(projectMembers);
+                    subprojects.add(subprojectT);
+                }
+            }
+            dataMap.put("result", "success");
+            dataMap.put("resultTip", "项目修改成功");
+        }catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            dataMap.put("result", "fail");
+            dataMap.put("resultTip", e.getMessage());
+        }
+        return dataMap;
+    }
+
+
     /**
      * 显示子项目现有人员
      */
@@ -943,7 +1063,46 @@ public class ProjectController {
         }
         return dataMap;
     }
+    @RequestMapping(value = "member")
+    @ResponseBody
+    public  Map<String,Object> member(HttpServletRequest request){
+        dataMap.clear();
+        try{
+            String projectId=request.getParameter("projectId");
+            String subprojectId=request.getParameter("subprojectId");
+            if(subprojectId==null){
+                List projectMembers=subprojectService.projectMembers(Integer.parseInt(projectId));
+                ArrayList<Map<String,Object>>data1=new ArrayList<>();
+                for(int i=0;i<projectMembers.size();i++){
+                    Map<String,Object> map=new HashMap<>();
+                    Object[] obj=(Object[])projectMembers.get(i);
+                    map.put("openId",obj[0].toString());
+                    map.put("userName",obj[1].toString());
+                    data1.add(map);
+                }
+                dataMap.put("result","success");
+                dataMap.put("resultTip","");
+                dataMap.put("members",data1);
+            }else {
+                List subprojectMember=subprojectService.members(Integer.parseInt(projectId),Integer.parseInt(subprojectId));
+                ArrayList<Map<String,Object>>data=new ArrayList<>();
+                for(int i=0;i<subprojectMember.size();i++){
+                    Map<String,Object> map=new HashMap<>();
+                    Object[] obj=(Object[])subprojectMember.get(i);
+                    map.put("openId",obj[0].toString());
+                    map.put("userName",obj[1].toString());
+                    data.add(map);
+                }
+                dataMap.put("result","success");
+                dataMap.put("resultTip","");
+                dataMap.put("members",data);
 
+            }
+        }catch (Exception e){
+            dataMap.put("resultTip",e.getMessage());
+        }
+        return dataMap;
+    }
 }
 
 

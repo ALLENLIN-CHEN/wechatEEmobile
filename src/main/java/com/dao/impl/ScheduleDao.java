@@ -90,6 +90,78 @@ public class ScheduleDao extends BaseDao<Schedule> {
         pagerModel.setDataList(dataList);
         return pagerModel;
     }
+    /**
+     * @author rthtr 2017/4/17
+     * 统计超期任务数:taskStatus='d'
+     */
+    public List findTaskOverTimeForSubprojectByOpenId(Integer teamId, Integer subprojectId, String startTime, String endTime){
+        String hql="select count (*) from Schedule s where s.taskTime>'"+startTime
+                +"' and s.taskTime<='"+endTime+"' and s.taskStatus='d' and s.subproject.subprojectId='"+subprojectId
+                +"' and s.subproject.project.team.teamId="+teamId;
+
+        /*String hql="select count (*) from ScheduleMember s where s.user.userName='"+memberName+"'";*/
+
+        return this.findByHql(hql, null,null);
+    }
+
+    /**
+     * 统计未完成任务数:taskStatus='a,b,f'
+     */
+    public List findUnfinishedForSubprojectByOpenId(Integer teamId, Integer subprojectId,String startTime, String endTime){
+        String hql="select count (*) from Schedule s where s.taskTime>'"+startTime
+                +"' and s.taskTime<='"+endTime+"' and (s.taskStatus='a' or s.taskStatus='b' or s.taskStatus='f')"
+                +" and s.subproject.subprojectId='"+subprojectId+"' and s.subproject.project.team.teamId="+teamId;
+
+        return this.findByHql(hql, null,null);
+    }
+
+    /**
+     * 统计某天已完成任务数:taskStatus='c'
+     */
+    public List findFinishedForSubprojectByOpenId(Integer teamId, Integer subprojectId,String startTime, String endTime){
+        String hql="select count (*) from Schedule s where s.taskTime>'"+startTime
+                +"' and s.taskTime<='"+endTime+"' and s.taskStatus='c'"
+                +" and s.subproject.subprojectId='"+subprojectId+"' and s.subproject.project.team.teamId="+teamId;
+
+        return this.findByHql(hql, null,null);
+    }
 
 
+    /**
+     * @author rthtr 2017/4/17
+     * 统计某天超期任务数:taskStatus='d'
+     */
+    public List getCountTaskOverTimeForSubproject(Integer teamId, Integer subprojectId,String date){
+        String hql="select count (1) from Schedule s where s.taskTime='"+date+"' " +
+                "and s.taskStatus='d' and s.subproject.subprojectId='"+subprojectId+"' and " +
+                "s.subproject.project.team.teamId="+teamId;
+
+        return this.findByHql(hql, null,null);
+    }
+
+    /**
+     * 统计某天未完成任务数:taskStatus=a,b,f
+     */
+    public List getCountUnfinishedForSubproject(Integer teamId, Integer subprojectId,String date){
+        String hql="select count (1) from Schedule s where s.taskTime='"+date+"' and (s.taskStatus='a' " +
+                "or s.taskStatus='b' or s.taskStatus='f') and s.subproject.subprojectId='"+subprojectId+
+                "' and s.subproject.project.team.teamId="+teamId;
+
+        return this.findByHql(hql, null,null);
+    }
+
+    /**
+     * 统计某天已完成任务数:taskStatus=c
+     */
+    public List getCountFinishedForSubproject(Integer teamId, Integer subprojectId,String date){
+        String hql="select count (1) from Schedule s where s.taskTime='"+date+"' " +
+                "and s.taskStatus='c' and s.subproject.subprojectId='"+subprojectId+"' and " +
+                "s.subproject.project.team.teamId="+teamId;
+
+        return this.findByHql(hql, null,null);
+    }
+
+    public Schedule findByScheduleId(Integer scheduleId){
+        return this.get(Schedule.class,scheduleId);
+    }
 }

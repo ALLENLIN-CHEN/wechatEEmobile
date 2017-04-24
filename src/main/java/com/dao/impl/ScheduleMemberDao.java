@@ -72,5 +72,76 @@ public class ScheduleMemberDao extends BaseDao<ScheduleMember>{
         return pagerModel;
     }
 
+    /**
+     * @author rthtr 2017/4/16
+     * 统计某天超期任务数:taskStatus='d'
+     */
+    public List getCountTaskOverTimeForPerson(Integer teamId, String openId,String date){
+        String hql="select count (1) from ScheduleMember s where s.schedule.taskTime='"+date+"' " +
+                "and s.schedule.taskStatus='d' and s.user.openId='"+openId+"' and " +
+                "s.schedule.subproject.project.team.teamId="+teamId;
+
+        return this.findByHql(hql, null,null);
+    }
+
+    /**
+     * 统计某天未完成任务数:taskStatus=a,b,f
+     */
+    public List getCountUnfinishedForPerson(Integer teamId, String openId,String date){
+        String hql="select count (1) from ScheduleMember s where s.schedule.taskTime='"+date+"' " +
+                "and (s.schedule.taskStatus='a' or s.schedule.taskStatus='b' or s.schedule.taskStatus='f') " +
+                "and s.user.openId='"+openId+"' and s.schedule.subproject.project.team.teamId="+teamId;
+
+        return this.findByHql(hql, null,null);
+    }
+
+    /**
+     * 统计某天已完成任务数:taskStatus=c
+     */
+    public List getCountFinishedForPerson(Integer teamId, String openId,String date){
+        String hql="select count (1) from ScheduleMember s where s.schedule.taskTime='"+date+"' " +
+                "and s.schedule.taskStatus='c' and s.user.openId='"+openId+"' and " +
+                "s.schedule.subproject.project.team.teamId="+teamId;
+
+        return this.findByHql(hql, null,null);
+    }
+
+
+    /**
+     * @author rthtr 2017/4/16
+     * 统计超期任务数:taskStatus='d'
+     */
+    public List findTaskOverTimeForPersonByOpenId(Integer teamId, String openId, String startTime, String endTime){
+        String hql="select count (*) from ScheduleMember s where s.schedule.taskTime>'"+startTime
+                +"' and s.schedule.taskTime<='"+endTime+"' and s.schedule.taskStatus='d'"
+                +" and s.user.openId='"+openId+"' and s.schedule.subproject.project.team.teamId="+teamId;
+
+        /*String hql="select count (*) from ScheduleMember s where s.user.userName='"+memberName+"'";*/
+
+        return this.findByHql(hql, null,null);
+    }
+
+    /**
+     * 统计未完成任务数:taskStatus=a,b,f
+     */
+    public List findUnfinishedForPersonByOpenId(Integer teamId, String openId,String startTime, String endTime){
+        String hql="select count (*) from ScheduleMember s where s.schedule.taskTime>'"+startTime
+                +"' and s.schedule.taskTime<='"+endTime+"' and (s.schedule.taskStatus='a'"
+                +" or s.schedule.taskStatus='b' or s.schedule.taskStatus='f')"
+                +" and s.user.openId='"+openId+"' and s.schedule.subproject.project.team.teamId="+teamId;
+
+        return this.findByHql(hql, null,null);
+    }
+
+    /**
+     * 统计某天已完成任务数:taskStatus=c
+     */
+    public List findFinishedForPersonByOpenId(Integer teamId, String openId,String startTime, String endTime){
+        String hql="select count (*) from ScheduleMember s where s.schedule.taskTime>'"+startTime
+                +"' and s.schedule.taskTime<='"+endTime+"' and s.schedule.taskStatus='c'"
+                +" and s.user.openId='"+openId+"' and s.schedule.subproject.project.team.teamId="+teamId;
+
+        return this.findByHql(hql, null,null);
+    }
 
 }

@@ -93,12 +93,21 @@ public class SubprojectService {
         List list=subprojectDao.findByHql(hql,params,null);
         return list;
     }
+    @Transactional
+    public List members(int projectId,int subprojectId){
+        String hql="select distinct(p.user.openId),p.user.userName from ProjectMember p left join p.subproject sub where sub.subprojectId!=:subprojectId and sub.project.projectId=:projectId";
+        Map<String,Object>params=new HashMap<>();
+        params.put("subprojectId",subprojectId);
+        params.put("projectId",projectId);
+        List list=projectDao.findByHql(hql,params,null);
+        return list;
+    }
     /**
      *查询项目现有人员
      */
     @Transactional
     public List projectMembers(int projectId){
-        String hql="select p.user.openId,p.user.userName from ProjectMember p left join p.subproject sub where sub.project.projectId=:projectId";
+        String hql="select distinct(p.user.openId),p.user.userName from ProjectMember p left join p.subproject sub where sub.project.projectId=:projectId";
         Map<String,Object>params=new HashMap<>();
         params.put("projectId",projectId);
         List list=projectDao.findByHql(hql,params,null);
