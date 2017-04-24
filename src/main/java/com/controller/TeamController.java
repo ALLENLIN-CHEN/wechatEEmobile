@@ -7,7 +7,6 @@ import com.service.*;
 import com.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -117,12 +116,18 @@ public class TeamController {
                 startTime=simpleDateFormat.format(c.getTime());
                 endTime=simpleDateFormat.format(new Date());
             }
-            ArrayList data=scheduleMemberService.findTaskIntensityForPerson(pagerModel,teamId,memberName,startTime,endTime);
+            ArrayList<Map> data=scheduleMemberService.findTaskIntensityForPerson(pagerModel,teamId,memberName,startTime,endTime);
 
+            int []total=new int[data.size()];
+            for (int i=0;i<data.size();i++){
+                total[i]=Integer.parseInt(data.get(i).get("taskUnfinished").toString())+Integer.parseInt(data.get(i).get("taskOverTime").toString());
+            }
+            sort(total);
             int totalSize = pagerModel.getTotalSize();
             dataMap.put("result", "success");
             dataMap.put("resultTip", "");
             dataMap.put("totalSize",totalSize);
+            dataMap.put("max",total[0]);
             dataMap.put("data",data);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -354,12 +359,19 @@ public class TeamController {
                 startTime=simpleDateFormat.format(c.getTime());
                 endTime=simpleDateFormat.format(new Date());
             }
-            ArrayList data=subprojectService.findTaskIntensityForSubproject(pagerModel,teamId,subprojectName,subprojectStatus,startTime,endTime);
+            ArrayList<Map> data=subprojectService.findTaskIntensityForSubproject(pagerModel,teamId,subprojectName,subprojectStatus,startTime,endTime);
+
+            int []total=new int[data.size()];
+            for (int i=0;i<data.size();i++){
+                total[i]=Integer.parseInt(data.get(i).get("taskUnfinished").toString())+Integer.parseInt(data.get(i).get("taskOverTime").toString());
+            }
+            sort(total);
 
             int totalSize = pagerModel.getTotalSize();
             dataMap.put("result", "success");
             dataMap.put("resultTip", "");
             dataMap.put("totalSize",totalSize);
+            dataMap.put("max",total[0]);
             dataMap.put("data",data);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -413,6 +425,7 @@ public class TeamController {
                 canModify=1;
             }
             ArrayList data=scheduleService.findTaskIntensityStatisticsForSubproject(pagerModel,subprojectId, scheduleType,startTime,endTime);
+
             int totalSize = pagerModel.getTotalSize();
             dataMap.put("result", "success");
             dataMap.put("resultTip", "");
@@ -481,6 +494,7 @@ public class TeamController {
             String openId=(String) request.getParameter("openId");//登录者微信号
             Integer teamIdTemp=initTeamId(openId);
             Integer teamId = request.getParameter("teamId")!=null?Integer.parseInt(request.getParameter("teamId").toString()):teamIdTemp;
+            String searchingForSheduleName=request.getParameter("searchingForSheduleName");
             String startTime=(String) request.getParameter("startTime");
             String endTime=(String) request.getParameter("endTime");
             if(startTime==null||endTime==null||startTime.equals("")||endTime.equals("")){
@@ -493,7 +507,7 @@ public class TeamController {
             String scheduleType=(String) request.getParameter("scheduleType");//登录者微信号
 
             TeamUser teamUserForOpen=teamUserService.findTeamUsersByOpenIdAndTeamId(openId, teamId).get(0);
-            ArrayList data=scheduleService.findStatisticsForSubproject(pagerModel,teamId, scheduleType,startTime,endTime);
+            ArrayList data=scheduleService.findStatisticsForSubproject(pagerModel,teamId, scheduleType,searchingForSheduleName,startTime,endTime);
             int totalSize = pagerModel.getTotalSize();
             dataMap.put("result", "success");
             dataMap.put("resultTip", "");
@@ -539,7 +553,7 @@ public class TeamController {
             dataMap.put("result","success");
             dataMap.put("resultTip", "");
             dataMap.put("canModify",canModify);
-    }catch (Exception e){
+        }catch (Exception e){
             e.getStackTrace();
             dataMap.put("result", "fail");
             dataMap.put("resultTip", e.getMessage());
@@ -547,4 +561,24 @@ public class TeamController {
         return dataMap;
 
     }
+    //teamController中用于排序(寻找最大值)的通用方法
+    public void sort(int[] a)
+    {
+        int temp = 0;
+        for (int i = a.length - 1; i > 0; --i)
+        {
+            for (int j = 0; j < i; ++j)
+            {
+                if (a[j + 1]>a[j])
+                {
+                    temp = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = temp;
+                }
+            }
+        }
     }
+
+}
+
+

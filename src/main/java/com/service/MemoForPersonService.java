@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +27,8 @@ public class MemoForPersonService {
     @Autowired
     ScheduleDao scheduleDao;
 
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
     public ArrayList findPersonMemo(Pager pager, String openId, String searchString) {
         ArrayList<Map> arrayList = new ArrayList<Map>();
         Pager subprojectList = memoForPersonDao.findPersonMemo(pager, openId, searchString);
@@ -36,7 +39,7 @@ public class MemoForPersonService {
             mapForOneMemo.put("subprojectName", row[0]);
             mapForOneMemo.put("projectName", row[1]);
             mapForOneMemo.put("content", row[2]);
-            mapForOneMemo.put("date", row[3]);
+            mapForOneMemo.put("date", simpleDateFormat.format(row[3]));
             mapForOneMemo.put("memoId",row[4]);
             mapForOneMemo.put("hasRead",row[5]);
 
