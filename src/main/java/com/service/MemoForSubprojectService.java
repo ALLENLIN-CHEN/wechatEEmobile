@@ -37,7 +37,7 @@ public class MemoForSubprojectService {
             mapForOneMemo.put("subprojectName", row[0]);
             mapForOneMemo.put("projectName", row[1]);
             mapForOneMemo.put("content", row[2]);
-            mapForOneMemo.put("date", row[3]);
+            mapForOneMemo.put("date", simpleDateFormat.format(row[3]));
             mapForOneMemo.put("memoId",row[4]);
             mapForOneMemo.put("hasRead",row[5]);
 
@@ -46,7 +46,6 @@ public class MemoForSubprojectService {
                 memoForSubproject.setHasRead(1);
                 memoForSubprojectDao.update(memoForSubproject);
             }
-
             arrayList.add(mapForOneMemo);
         }
         return arrayList;
