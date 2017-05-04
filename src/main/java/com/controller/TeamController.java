@@ -580,5 +580,3 @@ public class TeamController {
     }
 
 }
-
-
