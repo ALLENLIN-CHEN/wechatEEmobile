@@ -827,7 +827,7 @@ public class ProjectController {
             }
             List<ScheduleMemberT> list=projectService.findScheduleMember(scheduleId);
             dataMap.put("result","success");
-            dataMap.put("totalSize",list);
+            dataMap.put("scheduleMember",list);
         } catch (Exception e) {
             e.printStackTrace();
             dataMap.put("result", "fail");
