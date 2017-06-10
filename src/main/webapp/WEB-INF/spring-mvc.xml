@@ -12,6 +12,8 @@
            http://www.springframework.org/schema/mvc
            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
+
     <!-- 激活在bean中定义的各种注解，@Transactional注解除外，它需要tx:annotation-driven激活  -->
     <context:annotation-config />
     <!-- 使用annotation 自动注册bean,并保证@Required,@Autowired的属性被注入  -->
@@ -25,6 +27,7 @@
         <property name="prefix" value="/public/" />
         <property name="suffix" value=".jsp" />
     </bean>
+
     <!-- 设置请求映射编码，解决@ResponseBody乱码问题 -->
     <bean
             class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">

@@ -1,9 +1,12 @@
 package com.controller;
 
-import com.util.AccessTokenUtil;
-import com.util.HttpSender;
-import net.sf.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.github.sd4324530.fastweixin.api.enums.OauthScope;
+import com.github.sd4324530.fastweixin.company.api.QYOauthAPI;
+import com.github.sd4324530.fastweixin.company.api.QYUserAPI;
+import com.github.sd4324530.fastweixin.company.api.config.QYAPIConfig;
+import com.github.sd4324530.fastweixin.company.api.response.GetOauthUserInfoResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Created by rthtr on 2017/4/22.
@@ -20,45 +23,35 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "login")
 public class LoginController {
-    @Autowired
-    private HttpSender httpSender;
-    @Autowired
-    private AccessTokenUtil accessTokenUtil;
 
-    private Map<String, Object> dataMap = new HashMap<String, Object>();
+
+    private static final Logger log = LoggerFactory.getLogger(LoginController.class);
+
+    private QYAPIConfig qyapiConfig = new QYAPIConfig("wxa50ffd87271d6e9e", "PP6oO5miSKsQsRTDrZaaHLxvZx2hQT9PnWXtESRPP6anCMxaIgfITTIo-riM1Pnu");
+    private QYOauthAPI qyOauthAPI = new QYOauthAPI(qyapiConfig);
+    private QYUserAPI qyUserAPI = new QYUserAPI(qyapiConfig);
+
+
+    @RequestMapping(value = "getOauth", method = RequestMethod.GET)
+    public void getOauth(@RequestParam("state") String state, HttpServletResponse response) throws IOException {
+        response.sendRedirect(qyOauthAPI.getOauthPageUrl("www.chenlinallen.com/login/getUserId", OauthScope.SNSAPI_USERINFO, state));
+    }
 
     /**
      * 微信授权时，用来获取微信企业号授权的用户userId（做微信授权时的测试）
      * 访问特殊url后，拿到code
+     *
      * @param request
      * @return
      */
-    @RequestMapping(value="getUserId", method= RequestMethod.GET)
+    @RequestMapping(value = "getUserId", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> getUserId(HttpServletRequest request, @RequestParam("code")String code) {
-        dataMap.clear();
-        //accessToken是企业号的唯一全局票据
-        /**
-         * 这个链接的作用是根据code获取用户信息
-         * {"UserId":"USERID.","DeviceId":"DEVICEID"}
-         */
-        try{
-            String jsonString = httpSender.sendGet("https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo",
-                    "access_token=" + accessTokenUtil.getAccessToken().getToken()
-                            + "&code=" + code, 5);
-            JSONObject jsonObj = JSONObject.fromObject(jsonString);
-            //若key不存在时，optString会返回一个空字符串或者默认设置的值
-            //getString方法则会报错
-            String openId = jsonObj.optString("UserId");
-            request.setAttribute("openId", openId);
-            dataMap.put("result", "success");
-            dataMap.put("openId", openId);
-        } catch (Exception e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-        dataMap.put("result", "fail");
-        dataMap.put("resultTip", e.getMessage());
-    }
-        return dataMap;
+    public void getUserId(HttpServletRequest request, HttpServletResponse response, @RequestParam("code") String code, @RequestParam("state") String state) throws IOException {
+        GetOauthUserInfoResponse oauthUserInfoResponse = qyUserAPI.getOauthUserInfo(code);
+
+//        qyUserAPI.create(new QYUser());
+        response.sendRedirect(state + "?openId=" + oauthUserInfoResponse.getUserid());
     }
 }
+
+

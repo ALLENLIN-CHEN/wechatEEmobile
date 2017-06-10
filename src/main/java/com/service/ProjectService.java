@@ -29,7 +29,7 @@ public class ProjectService {
     @Autowired
     private ScheduleMemberDao scheduleMemberDao;
     @Autowired
-    private  ScheduleService scheduleService;
+    private ScheduleService scheduleService;
     @Autowired
     private TeamUserDao teamUserDao;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

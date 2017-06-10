@@ -25,4 +25,22 @@ public class UserDao extends BaseDao<User> {
         List <User>list=this.findByHql(hql,null,null);
         return list.get(0);
     }
+
+    public List getList(){
+        //   return  this.get(User.class,openId);
+        String hql="from User u";
+        List <User>list=this.findByHql(hql,null,null);
+        return list;
+    }
+    public User saveUser(String openId){
+        //   return  this.get(User.class,openId);
+        if(openId == null || openId.isEmpty())
+            return null;
+        else {
+            User user = new User(openId);
+            this.save(user);
+            return  user;
+        }
+
+    }
 }

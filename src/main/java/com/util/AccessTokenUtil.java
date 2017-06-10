@@ -79,7 +79,7 @@ public class AccessTokenUtil {
 		return accessToken;
 	}
 
-	/*// 获取访问权限码URL
+	// 获取访问权限码URL
     private final static String ACCESS_TOKEN_URL = "https://qyapi.weixin.qq.com/cgi-bin/gettoken";
     
 	public static String getAccessToken(HttpServletRequest request){
@@ -97,33 +97,33 @@ public class AccessTokenUtil {
 			}
 		}
 		return refleshAccessToken(request);
-		
+
 	}
-	private static String refleshAccessToken(HttpServletRequest request){
+	private static String refleshAccessToken(HttpServletRequest request) {
 		String result = null;
-		HttpClient client =HttpClients.createDefault();
+		HttpClient client = HttpClients.createDefault();
 		//https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=id&corpsecret=secrect
-		HttpGet get = new HttpGet(ACCESS_TOKEN_URL+"?corpid="+PropertyUtil.getProperty("CorpID")+"&corpsecret="+PropertyUtil.getProperty("CorpSecret"));
+		HttpGet get = new HttpGet(ACCESS_TOKEN_URL + "?corpid=" + PropertyUtil.getProperty("CorpID") + "&corpsecret=" + PropertyUtil.getProperty("CorpSecret"));
 		try {
 			HttpResponse response = client.execute(get);
-			if(response.getStatusLine().getStatusCode()==HttpStatus.SC_OK){
+			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				HttpEntity entity = response.getEntity();
-				if(entity!=null){
+				if (entity != null) {
 					BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
-					String line = null;
-					while((line = br.readLine())!=null){
+					Boolean line = null;
+					while ((line = (br.readLine()) != null)) {
 						try {
 							JSONObject json = new JSONObject(line);
 							result = json.getString("access_token");
-							if(request!=null){
+							if (request != null) {
 								ServletContext context = request.getSession().getServletContext();
 								AccessToken at = new AccessToken();
 								at.setAccessToken(result);
 								at.setCreateTime(new Date());
 								context.setAttribute("accesstoken", at);
 							}
-							
-						} catch (JSONException e) {
+
+						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
@@ -138,10 +138,8 @@ public class AccessTokenUtil {
 			e.printStackTrace();
 		}
 		get.releaseConnection();
-		System.out.println("accesstoken:"+result);
+		System.out.println("accesstoken:" + result);
 		return result;
-		
-	}*/
-	
-	
+
+	}
 }

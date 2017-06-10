@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by zengqin on 2017/3/25.
  */
@@ -25,5 +27,10 @@ public class UserService {
         return  user;
     }
 
+    public List list(){
+        List userList=userDao.getList();
+        return  userList;
     }
+
+}
 

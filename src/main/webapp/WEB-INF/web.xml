@@ -71,7 +71,7 @@
 
 	<welcome-file-list>
 
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>/index.html</welcome-file>
 
 	</welcome-file-list>
     <context-param>
@@ -84,6 +84,11 @@
             org.springframework.web.util.Log4jConfigListener
         </listener-class>
     </listener>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/index.html</location>
+	</error-page>
 
 </web-app>
 

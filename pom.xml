@@ -109,6 +109,11 @@
       <artifactId>hibernate-entitymanager</artifactId>
       <version>4.3.5.Final</version>
     </dependency>
+    <dependency>
+      <groupId>com.github.sd4324530</groupId>
+      <artifactId>fastweixin</artifactId>
+      <version>1.3.7</version>
+    </dependency>
     <!-- 以下可选 -->
     <dependency>
       <groupId>org.hibernate</groupId>

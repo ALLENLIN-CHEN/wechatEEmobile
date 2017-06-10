@@ -144,9 +144,9 @@ public class SendUtil {
 		return json;
 	}
 	
-	/*public static void main(String[] args){
+	public static void main(String[] args){
 		SendUtil u = new  SendUtil();
 		String accessToken = AccessTokenUtil.getAccessToken(null);
 		u.sendWechatMobile(accessToken,"dev-mazhe");
-	}*/
+	}
 }
