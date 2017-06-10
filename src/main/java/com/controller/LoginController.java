@@ -4,9 +4,13 @@ import com.github.sd4324530.fastweixin.api.enums.OauthScope;
 import com.github.sd4324530.fastweixin.company.api.QYOauthAPI;
 import com.github.sd4324530.fastweixin.company.api.QYUserAPI;
 import com.github.sd4324530.fastweixin.company.api.config.QYAPIConfig;
+import com.github.sd4324530.fastweixin.company.api.entity.QYUser;
 import com.github.sd4324530.fastweixin.company.api.response.GetOauthUserInfoResponse;
+import com.github.sd4324530.fastweixin.company.api.response.GetQYUserInfoResponse;
+import com.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +28,8 @@ import java.io.IOException;
 @RequestMapping(value = "login")
 public class LoginController {
 
+    @Autowired
+    private UserService userService;
 
     private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
@@ -47,9 +53,16 @@ public class LoginController {
     @RequestMapping(value = "getUserId", method = RequestMethod.GET)
     @ResponseBody
     public void getUserId(HttpServletRequest request, HttpServletResponse response, @RequestParam("code") String code, @RequestParam("state") String state) throws IOException {
+        // 根据授权获取的code获取信息
         GetOauthUserInfoResponse oauthUserInfoResponse = qyUserAPI.getOauthUserInfo(code);
-
-//        qyUserAPI.create(new QYUser());
+        // 得到用户信息
+        GetQYUserInfoResponse getQYUserInfoResponse = qyUserAPI.get(oauthUserInfoResponse.getUserid());
+        // 企业号添加用户
+        QYUser qyUser = qyUserAPI.get(oauthUserInfoResponse.getUserid()).getUser();
+        qyUserAPI.create(qyUser);
+        // 添加用户
+        userService.creatUser(getQYUserInfoResponse.getUser());
+        // 重定向到前端
         response.sendRedirect(state + "?openId=" + oauthUserInfoResponse.getUserid());
     }
 }
