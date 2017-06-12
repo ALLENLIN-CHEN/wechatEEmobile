@@ -40,7 +40,7 @@ public class LoginController {
 
     @RequestMapping(value = "getOauth", method = RequestMethod.GET)
     public void getOauth(@RequestParam("state") String state, HttpServletResponse response) throws IOException {
-        response.sendRedirect(qyOauthAPI.getOauthPageUrl("www.chenlinallen.com/login/getUserId", OauthScope.SNSAPI_USERINFO, state));
+        response.sendRedirect(qyOauthAPI.getOauthPageUrl("www.chenlinallen.com/api/login/getUserId", OauthScope.SNSAPI_USERINFO, state));
     }
 
     /**
