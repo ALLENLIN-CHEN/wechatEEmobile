@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Map;
 
 /**
  * Created by rthtr on 2017/4/2.
@@ -122,7 +125,7 @@ public class TeamController {
             for (int i=0;i<data.size();i++){
                 total[i]=Integer.parseInt(data.get(i).get("taskUnfinished").toString())+Integer.parseInt(data.get(i).get("taskOverTime").toString());
             }
-            sort(total);
+            sort(total,data);
             int totalSize = pagerModel.getTotalSize();
             dataMap.put("result", "success");
             dataMap.put("resultTip", "");
@@ -365,7 +368,7 @@ public class TeamController {
             for (int i=0;i<data.size();i++){
                 total[i]=Integer.parseInt(data.get(i).get("taskUnfinished").toString())+Integer.parseInt(data.get(i).get("taskOverTime").toString());
             }
-            sort(total);
+            sort(total,data);
 
             int totalSize = pagerModel.getTotalSize();
             dataMap.put("result", "success");
@@ -461,6 +464,7 @@ public class TeamController {
             String subprojectStatus=(String) request.getParameter("subprojectStatus");//子项目状态
 
             ArrayList data=projectMemberService.findManpowerDistributionForTeam(pagerModel,teamId,subprojectName,subprojectStatus);
+            Collections.sort(data, new MapComparator());
             int totalSize = pagerModel.getTotalSize();
             dataMap.put("result", "success");
             dataMap.put("resultTip", "");
@@ -562,21 +566,31 @@ public class TeamController {
 
     }
     //teamController中用于排序(寻找最大值)的通用方法
-    public void sort(int[] a)
-    {
+    public void sort(int[] a,ArrayList<Map> data) {
         int temp = 0;
-        for (int i = a.length - 1; i > 0; --i)
-        {
-            for (int j = 0; j < i; ++j)
-            {
-                if (a[j + 1]>a[j])
-                {
+        //   Map dataTemp;
+        for (int i = a.length - 1; i > 0; --i) {
+            for (int j = 0; j < i; ++j) {
+                if (a[j + 1] > a[j]) {
                     temp = a[j];
                     a[j] = a[j + 1];
                     a[j + 1] = temp;
                 }
             }
         }
+        Collections.sort(data, new MapComparator());
     }
+    class MapComparator<T> implements Comparator<Map<String, Object>> {
+        @Override
+        public int compare(Map<String, Object> o1, Map<String, Object> o2) {
+            // TODO Auto-generated method stub
+            Long b1 = (Long) o1.get("total");
+            Long b2 = (Long) o2.get("total");
+            if (b2 != null) {
+                return b2.compareTo(b1);
+            }
+            return 0;
+        }
 
+    }
 }

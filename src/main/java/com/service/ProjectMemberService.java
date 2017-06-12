@@ -41,6 +41,7 @@ public class ProjectMemberService {
 
             Map<String,Object> mapForOneSubproject=new HashMap<String, Object>();
             mapForOneSubproject.put("numberOfPeople",numberOfPeople);
+            mapForOneSubproject.put("total",numberOfPeople);
             mapForOneSubproject.put("subprojectId",row[0]);
             mapForOneSubproject.put("subprojectName",row[1]);
             mapForOneSubproject.put("projectId",row[2]);

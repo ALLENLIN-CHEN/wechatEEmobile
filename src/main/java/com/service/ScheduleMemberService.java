@@ -41,6 +41,7 @@ public class ScheduleMemberService {
             mapForOnePerson.put("taskOverTime",dataForOverTimeAmount);
             mapForOnePerson.put("memberOpenId",row[0].toString());
             mapForOnePerson.put("memberName",row[1].toString());
+            mapForOnePerson.put("total",dataForOverTimeAmount+dataUnfinishedAmount);
             arrayList.add(mapForOnePerson);
         }
         return arrayList;

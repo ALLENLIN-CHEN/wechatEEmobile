@@ -7,6 +7,7 @@ import com.entity.TeamUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,16 @@ public class TeamUserService {
     public List findTeamUsersByOpenId(String openId){
         int role=10;//非超级管理员
         List list =teamUserDao.findTeamUsersByOpenId(openId,role);
-        return list;
+        List result=new ArrayList();
+        result.add(list.get(0));
+        for(int i=1;i<list.size();i++){
+            Object []row = (Object [])list.get(i);
+            Object []rowPrev = (Object [])list.get(i-1);
+            if(!row[0].equals(rowPrev[0])){
+                result.add(list.get(i));
+            }
+        }
+        return result;
     }
 
     public List<TeamUser> findTeamUsersByOpenIdAndTeamId(String openId, Integer teamId){

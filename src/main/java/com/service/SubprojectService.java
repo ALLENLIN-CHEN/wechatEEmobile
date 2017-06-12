@@ -78,6 +78,7 @@ public class SubprojectService {
             mapForOneSubproject.put("subprojectName",row[1]);
             mapForOneSubproject.put("projectId",row[2]);
             mapForOneSubproject.put("projectName",row[3]);
+            mapForOneSubproject.put("total",dataUnfinishedAmount+dataForOverTimeAmount);
             arrayList.add(mapForOneSubproject);
         }
         return arrayList;
