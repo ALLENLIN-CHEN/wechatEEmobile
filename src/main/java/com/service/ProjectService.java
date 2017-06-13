@@ -96,7 +96,7 @@ public class ProjectService {
      * 获取团队所有人员
      */
     public List  findAllMember(int teamId){
-        String hql="select new com.entity.newT.UserT(u.openId,u.userName) " +
+        String hql="select distinct new com.entity.newT.UserT(u.openId,u.userName) " +
                 "from TeamUser tu left join tu.user u left join tu.team t" +
                 " where t.teamId=:teamId";
         Map<String,Object> params=new HashMap<String, Object>();
