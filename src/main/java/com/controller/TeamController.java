@@ -374,7 +374,12 @@ public class TeamController {
             dataMap.put("result", "success");
             dataMap.put("resultTip", "");
             dataMap.put("totalSize",totalSize);
-            dataMap.put("max",total[0]);
+            if(total.length!=0){
+                dataMap.put("max",total[0]);
+            }else{
+                dataMap.put("max",0);
+            }
+
             dataMap.put("data",data);
         } catch (Exception e) {
             // TODO Auto-generated catch block
