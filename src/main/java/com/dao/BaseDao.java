@@ -38,15 +38,15 @@ public class  BaseDao<T> {
     {
         this.getCurrentSession().save(entity);
     }
+
+
     /**
      * 删除实体
      *
      * @param entity
      */
-    public ScheduleMember delete(T entity)
-    {
+    public void delete(T entity) {
         this.getCurrentSession().delete(entity);
-        return null;
     }
 
     /**
