@@ -21,8 +21,8 @@ public class TagService {
     private TagRelationDao tagRelationDao;
 
 
-    public List<TagDictEntity> allTagsByTeamId(int teamId) {
-        return tagDictDao.getAllTagByTeamId(teamId);
+    public List<TagDictEntity> allTagsByTeamId(int teamId,String tagType) {
+        return tagDictDao.getAllTagByTeamId(teamId,tagType);
     }
 
     public TagDictEntity getPeopleByTagList(List<String> tagNames) {
@@ -35,10 +35,11 @@ public class TagService {
     }
 
 
-    public TagDictEntity saveTag(String tagName, int teamId) {
+    public TagDictEntity saveTag(String tagName, int teamId,String tagType) {
         TagDictEntity tagDictEntity = new TagDictEntity();
         tagDictEntity.setTagName(tagName);
         tagDictEntity.setTeamId(teamId);
+        tagDictEntity.setTagType(tagType);
         tagDictDao.save(tagDictEntity);
         return tagDictEntity;
     }

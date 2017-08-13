@@ -13,6 +13,7 @@ public class TagDictEntity {
     private int tagId;
     private String tagName;
     private int teamId;
+    private String tagType;
 
     @Basic
     @Column(name = "teamId", nullable = true)
@@ -63,5 +64,15 @@ public class TagDictEntity {
         int result = tagId;
         result = 31 * result + (tagName != null ? tagName.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "tagType", nullable = true, length = 32)
+    public String getTagType() {
+        return tagType;
+    }
+
+    public void setTagType(String tagType) {
+        this.tagType = tagType;
     }
 }

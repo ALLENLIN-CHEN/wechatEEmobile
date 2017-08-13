@@ -30,6 +30,7 @@ public class TagRelationEntity {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tagRelationId", nullable = false)
     public int getTagRelationId() {
         return tagRelationId;
