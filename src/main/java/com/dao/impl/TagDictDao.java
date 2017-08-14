@@ -13,13 +13,30 @@ import java.util.Map;
  */
 @Repository("TagDictDao")
 public class TagDictDao extends BaseDao<TagDictEntity> {
-    public List<TagDictEntity> getAllTagByTeamId(int teamId,String tagType){
+    public List<TagDictEntity> getAllTagByTeamId(int teamId, String tagType) {
         String hql = "from TagDictEntity where teamId=:teamId and tagType=:tagType group by tagName";
         Map<String, Object> params = new HashedMap();
         params.put("teamId", teamId);
         params.put("tagType", tagType);
         List<TagDictEntity> users = this.findByHql(hql, params, null);
         return users;
+    }
+
+    public boolean batchDeleteTagByIds(List<Integer> ids) {
+        String hql = "Delete from TagDictEntity where tagId =:ids";
+        Map<String, Object> params = new HashedMap();
+        params.put("ids", ids);
+        return this.deleteByHql(hql, params, null);
+    }
+
+    public void batchSaveTag(List<TagDictEntity> tagDictEntities) {
+        for (int i = 0; i < tagDictEntities.size(); i++) {
+            this.save(tagDictEntities.get(i));
+            if (i % 100 == 0) {             //以每100个数据作为一个处理单元
+                this.getCurrentSession().flush();           //保持与数据库数据的同步
+                this.getCurrentSession().clear();           //清楚Session级别的一级缓存的全部数据，及时释放占用的内存
+            }
+        }
     }
 
 

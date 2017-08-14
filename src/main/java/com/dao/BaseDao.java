@@ -74,6 +74,8 @@ public class  BaseDao<T> {
         }
         return true;
     }
+
+
     public boolean updateBy(String hql, Map<String, Object> params, Query query)
     {
         try

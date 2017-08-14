@@ -21,8 +21,8 @@ public class TagService {
     private TagRelationDao tagRelationDao;
 
 
-    public List<TagDictEntity> allTagsByTeamId(int teamId,String tagType) {
-        return tagDictDao.getAllTagByTeamId(teamId,tagType);
+    public List<TagDictEntity> allTagsByTeamId(int teamId, String tagType) {
+        return tagDictDao.getAllTagByTeamId(teamId, tagType);
     }
 
     public TagDictEntity getPeopleByTagList(List<String> tagNames) {
@@ -35,21 +35,15 @@ public class TagService {
     }
 
 
-    public TagDictEntity saveTag(String tagName, int teamId,String tagType) {
-        TagDictEntity tagDictEntity = new TagDictEntity();
-        tagDictEntity.setTagName(tagName);
-        tagDictEntity.setTeamId(teamId);
-        tagDictEntity.setTagType(tagType);
-        tagDictDao.save(tagDictEntity);
-        return tagDictEntity;
+    public void batchSaveTags(List<TagDictEntity> tagDictEntities) {
+        tagDictDao.batchSaveTag(tagDictEntities);
     }
 
     public TagDictEntity getTagById(int tagId) {
         return tagDictDao.get(TagDictEntity.class, tagId);
     }
 
-    public void deleteTagById(int tagId) {
-        TagDictEntity tagDictEntity = tagDictDao.load(TagDictEntity.class, tagId);
-        tagDictDao.delete(tagDictEntity);
+    public boolean batchDeleteTag(List<Integer> tagId) {
+        return tagDictDao.batchDeleteTagByIds(tagId);
     }
 }

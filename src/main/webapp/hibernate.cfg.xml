@@ -6,7 +6,7 @@
   <session-factory>
     <property name="connection.url">jdbc:mysql://119.29.221.108:3306/projectdatabase</property>
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-    <mapping class="com.entity.TagDictEntity"/>
+      <mapping class="com.entity.TagDictEntity"/>
       <mapping class="com.entity.TagRelationEntity"/>
       <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->

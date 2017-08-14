@@ -20,20 +20,20 @@ public class TagController {
     @Autowired
     TagService tagService;
 
-    // 创建一个标签
+    // 创建多个标签
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public TagDictEntity saveTagDict(@RequestParam String tagName, @RequestParam int teamId, @RequestParam String tagType) {
-        return tagService.saveTag(tagName, teamId, tagType);
+    public void saveTagDict(@RequestBody List<TagDictEntity> tagDictEntities) {
+        tagService.batchSaveTags(tagDictEntities);
     }
 
-    // 删除一个标签
+    // 删除多个标签
     @RequestMapping(value = "", method = RequestMethod.DELETE)
     @ResponseBody
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePeopleTag(@RequestParam int tagId) {
-        tagService.deleteTagById(tagId);
+    public void batchDeleteTag(@RequestBody List<Integer> tagId) {
+        tagService.batchDeleteTag(tagId);
     }
 
 
