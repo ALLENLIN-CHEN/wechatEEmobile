@@ -2,19 +2,17 @@ package com.controller;
 
 import com.dao.impl.SubprojectDao;
 import com.dao.impl.TeamUserDao;
-import com.entity.Pager;
+import com.entity.*;
 import com.entity.newT.ProjectT;
 import com.entity.newT.UserT;
 import com.service.*;
+import com.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -114,6 +112,17 @@ public class ProjectPCController {
         return dataMap;
 
     }
+
+    /**
+     * 更新项目
+     */
+    @RequestMapping(value = "updateProject")
+    @ResponseBody
+    public Project updateProject(@RequestBody Project project) {
+        projectService.updateMainProjectWithoutSubProjectAndTeam(project);
+        return project;
+    }
+
 }
 
 

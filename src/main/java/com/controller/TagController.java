@@ -24,8 +24,9 @@ public class TagController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveTagDict(@RequestBody List<TagDictEntity> tagDictEntities) {
+    public List<TagDictEntity> saveTagDict(@RequestBody List<TagDictEntity> tagDictEntities) {
         tagService.batchSaveTags(tagDictEntities);
+        return tagDictEntities;
     }
 
     // 删除多个标签

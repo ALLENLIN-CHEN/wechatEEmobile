@@ -85,7 +85,7 @@ public class  BaseDao<T> {
             if (params != null && params.size() > 0)
                 this.setParameters(query, params);
             query.executeUpdate();
-            this.getCurrentSession().beginTransaction().commit();
+//            this.getCurrentSession().beginTransaction().commit();
         } catch (Exception e)
         {
             this.getCurrentSession().close();

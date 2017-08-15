@@ -143,6 +143,26 @@ public class ProjectService {
         projectDao.update(project);
     }
 
+    @Transactional
+    public void updateMainProjectWithoutSubProjectAndTeam(Project project) {
+        String hql = "update Project set " +
+                "project=:project, type=:type, area=:area, contractStage=:contractStage, contractAmount=:contractAmount, " +
+                "completedAmount=:completedAmount, receivedAmount=:receivedAmount, contractBalance=:contractBalance " +
+                "where projectId=:projectId";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("projectId", project.getProjectId());
+        params.put("project", project.getProject());
+        params.put("type", project.getType());
+        params.put("area", project.getArea());
+        params.put("contractStage", project.getContractStage());
+        params.put("contractAmount", project.getContractAmount());
+        params.put("completedAmount", project.getCompletedAmount());
+        params.put("receivedAmount", project.getReceivedAmount());
+        params.put("contractBalance", project.getContractBalance());
+        projectDao.updateBy(hql,params,null);
+    }
+
+
     /**
      * 根据人员职位查询人员
      */
