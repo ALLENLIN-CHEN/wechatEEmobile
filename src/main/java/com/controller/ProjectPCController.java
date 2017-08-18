@@ -2,18 +2,16 @@ package com.controller;
 
 import com.dao.impl.SubprojectDao;
 import com.dao.impl.TeamUserDao;
-import com.entity.*;
+import com.entity.Pager;
+import com.entity.Project;
 import com.entity.newT.ProjectT;
 import com.entity.newT.UserT;
 import com.service.*;
-import com.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
-
 
 @Controller
 @RequestMapping(value = "projectPC")
@@ -131,6 +129,17 @@ public class ProjectPCController {
     public boolean deleteProject(@RequestParam int projectId) {
         return projectService.deleteProject(projectId);
     }
+
+    /**
+     * 创建项目
+     */
+    @RequestMapping(value = "createProject",method = RequestMethod.POST)
+    @ResponseBody
+    public Project createProject(@RequestBody Project project) {
+        project.setProjectTime(new Date());
+        return projectService.createNewPCProject(project);
+    }
+
 
 }
 

@@ -137,6 +137,14 @@ public class ProjectService {
     public boolean createNewProject(Project project) {
         return projectDao.create_project(project);
     }
+    /**
+     * 创建新项目
+     */
+    @Transactional
+    public Project createNewPCProject(Project project) {
+         projectDao.create_project(project);
+         return project;
+    }
 
     @Transactional
     public void updateMainProject(Project project) {
