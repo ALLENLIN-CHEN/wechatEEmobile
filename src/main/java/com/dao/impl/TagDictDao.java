@@ -23,7 +23,7 @@ public class TagDictDao extends BaseDao<TagDictEntity> {
     }
 
     public boolean batchDeleteTagByIds(List<Integer> ids) {
-        String hql = "Delete from TagDictEntity where tagId =:ids";
+        String hql = "Delete from TagDictEntity where tagId in :ids";
         Map<String, Object> params = new HashedMap();
         params.put("ids", ids);
         return this.deleteByHql(hql, params, null);

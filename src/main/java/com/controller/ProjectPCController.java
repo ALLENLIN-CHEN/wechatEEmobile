@@ -116,11 +116,20 @@ public class ProjectPCController {
     /**
      * 更新项目
      */
-    @RequestMapping(value = "updateProject")
+    @RequestMapping(value = "updateProject",method = RequestMethod.POST)
     @ResponseBody
     public Project updateProject(@RequestBody Project project) {
         projectService.updateMainProjectWithoutSubProjectAndTeam(project);
         return project;
+    }
+
+    /**
+     * 删除项目
+     */
+    @RequestMapping(value = "deleteProject",method = RequestMethod.DELETE)
+    @ResponseBody
+    public boolean deleteProject(@RequestParam int projectId) {
+        return projectService.deleteProject(projectId);
     }
 
 }

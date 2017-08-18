@@ -32,9 +32,9 @@ public class TagController {
     // 删除多个标签
     @RequestMapping(value = "", method = RequestMethod.DELETE)
     @ResponseBody
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void batchDeleteTag(@RequestBody List<Integer> tagId) {
-        tagService.batchDeleteTag(tagId);
+    public boolean batchDeleteTag(@RequestBody List<Integer> tagId) {
+        boolean flag = tagService.batchDeleteTag(tagId);
+        return flag;
     }
 
 

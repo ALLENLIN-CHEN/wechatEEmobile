@@ -416,6 +416,16 @@ public class ProjectService {
     }
 
     /**
+     * 删除项目
+     */
+    public boolean deleteProject(int projectId) {
+        String hql = "delete from Project where projectId=:projectId";
+        Map<String, Object> params = new HashMap<>();
+        params.put("projectId", projectId);
+        return projectDao.deleteByHql(hql, params, null);
+    }
+
+    /**
      * 根据openId查询与该人员相关的项目
      */
     public List findProject(String openId) {
