@@ -31,6 +31,8 @@ public class ProjectPCController {
     @Autowired
     TeamUserService teamUserService;
     @Autowired
+    TeamService teamService;
+    @Autowired
     TeamUserDao teamUserDao;
     @Autowired
     UserService userService;
@@ -133,9 +135,10 @@ public class ProjectPCController {
     /**
      * 创建项目
      */
-    @RequestMapping(value = "createProject",method = RequestMethod.POST)
+    @RequestMapping(value = "createProject/{teamid}",method = RequestMethod.POST)
     @ResponseBody
-    public Project createProject(@RequestBody Project project) {
+    public Project createProject(@RequestBody Project project,@RequestParam int teamid) {
+        project.setTeam(teamService.findTeam(teamid));
         project.setProjectTime(new Date());
         return projectService.createNewPCProject(project);
     }
