@@ -2,6 +2,8 @@ package com.entity;
 
 // Generated 2016-4-16 15:43:05 by Hibernate Tools 3.4.0.CR1
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -28,7 +30,9 @@ public class Project implements java.io.Serializable
 	private Double receivedAmount;
 	private Double contractBalance;
 	private Date projectTime;
+	@JsonIgnore
 	private Team team;
+	@JsonIgnore
 	private Set<Subproject> subprojects = new HashSet<Subproject>(0);
 
 	public Project()
