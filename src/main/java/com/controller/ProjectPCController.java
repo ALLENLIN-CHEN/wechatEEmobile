@@ -6,6 +6,7 @@ import com.entity.Pager;
 import com.entity.Project;
 import com.entity.newT.ProjectT;
 import com.entity.newT.UserT;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -135,7 +136,8 @@ public class ProjectPCController {
     /**
      * 创建项目
      */
-    @RequestMapping(value = "createProject/{teamid}",method = RequestMethod.POST)
+    @RequestMapping(value = "createProject",method = RequestMethod.POST)
+    @JsonIgnoreProperties(value={"team"})
     @ResponseBody
     public Project createProject(@RequestBody Project project,@RequestParam int teamid) {
         project.setTeam(teamService.findTeam(teamid));

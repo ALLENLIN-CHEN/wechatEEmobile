@@ -143,6 +143,8 @@ public class ProjectService {
     @Transactional
     public Project createNewPCProject(Project project) {
          projectDao.create_project(project);
+         project.setTeam(null);
+         project.setSubprojects(null);
          return project;
     }
 
