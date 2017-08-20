@@ -500,7 +500,7 @@ public class ProjectController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "addProjecMember")
+    @RequestMapping(value = "addProjectMember")
     @ResponseBody
     public Map<String,Object> addProjectMember(@RequestBody String request){
         dataMap.clear();
