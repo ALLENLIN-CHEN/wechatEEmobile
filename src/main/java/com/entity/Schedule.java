@@ -2,6 +2,8 @@ package com.entity;
 
 // Generated 2016-4-16 15:43:05 by Hibernate Tools 3.4.0.CR1
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -37,7 +39,9 @@ public class Schedule implements java.io.Serializable {
     private Character taskStatus;
     private Date taskTime;
     private Date taskStartTime;
+    @JsonIgnore
     private Set<ScheduleMember> scheduleMembers = new HashSet<ScheduleMember>(0);
+    @JsonIgnore
     private Set<TransferEntity> transferEntities=new HashSet<>(0);
 
     public Schedule() {

@@ -2,11 +2,11 @@ package com.controller;
 
 import com.dao.impl.SubprojectDao;
 import com.dao.impl.TeamUserDao;
-import com.entity.Pager;
-import com.entity.Project;
+import com.entity.*;
 import com.entity.newT.ProjectT;
 import com.entity.newT.UserT;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -143,6 +143,34 @@ public class ProjectPCController {
         project.setTeam(teamService.findTeam(teamid));
         project.setProjectTime(new Date());
         return projectService.createNewPCProject(project);
+    }
+
+    /**
+     * 创建子项目
+     */
+    @Deprecated
+    @RequestMapping(value = "createSubProject",method = RequestMethod.POST)
+    @ResponseBody
+    public Subproject createSubProject(@RequestBody Subproject subproject) {
+        return projectService.createNewPCSubProject(subproject);
+    }
+
+    /**
+     * 根据teamId获取项目id/名称列表
+     */
+    @RequestMapping(value = "listProjectByTeam",method = RequestMethod.GET)
+    @ResponseBody
+    public  List listProjectsIdAndNameByTeamId(@RequestParam int teamid) {
+        return projectService.findTeamProjectListByTeamId(teamid);
+    }
+
+    /**
+     * 根据项目id获取子项目id/名称列表
+     */
+    @RequestMapping(value = "listSubProjectByTeam",method = RequestMethod.GET)
+    @ResponseBody
+    public  List listSubProjectByTeam(@RequestParam int projectid) {
+        return subprojectService.findSubProjectListByProjectId(projectid);
     }
 
 

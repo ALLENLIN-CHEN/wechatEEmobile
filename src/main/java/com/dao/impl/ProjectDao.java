@@ -3,6 +3,7 @@ package com.dao.impl;
 import com.dao.BaseDao;
 import com.entity.Pager;
 import com.entity.Project;
+import com.entity.Subproject;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 

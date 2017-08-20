@@ -31,6 +31,8 @@ public class ProjectService {
     @Autowired
     private ScheduleService scheduleService;
     @Autowired
+    private ProjectMemberService projectMemberService;
+    @Autowired
     private TeamUserDao teamUserDao;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -144,6 +146,19 @@ public class ProjectService {
     public Project createNewPCProject(Project project) {
          projectDao.create_project(project);
          return project;
+    }
+    /**
+     * 创建新子项目
+     */
+    @Transactional
+    public Subproject createNewPCSubProject(Subproject subproject) {
+        subprojectDao.saveSubproject(subproject);
+        Set<ProjectMember> projectMemberSet = subproject.getProjectMembers();
+        for (ProjectMember projectMember:projectMemberSet) {
+            projectMember.setSubproject(subproject);
+            projectMemberService.saveProjectMember(projectMember);
+        }
+        return subproject;
     }
 
     @Transactional
@@ -405,6 +420,7 @@ public class ProjectService {
         }
         return arrayList;
     }
+
 
     public RecordEntity findByRecordId(int recordId) {
         String hql = "from RecordEntity where recordId=:recordId";

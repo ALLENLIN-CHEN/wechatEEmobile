@@ -2,6 +2,7 @@ package com.entity;
 
 // Generated 2016-4-16 15:43:05 by Hibernate Tools 3.4.0.CR1
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;
@@ -24,6 +25,7 @@ public class ProjectMember implements java.io.Serializable
 {
 
 	private Integer projectMemberId;
+	@JsonIgnore
 	private Subproject subproject;
 	private User user;
 	private Character roleType;

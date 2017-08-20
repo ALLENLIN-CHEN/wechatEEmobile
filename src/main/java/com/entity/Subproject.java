@@ -2,6 +2,8 @@ package com.entity;
 
 // Generated 2016-4-16 15:43:05 by Hibernate Tools 3.4.0.CR1
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,6 +35,7 @@ public class Subproject implements Serializable
 	private String paymentStatus;
 	private String allocationStatus;
 	private Set<ProjectMember> projectMembers = new HashSet<ProjectMember>(0);
+	@JsonIgnore
 	private Set<Schedule> schedules = new HashSet<Schedule>(0);
 
 	public Subproject()

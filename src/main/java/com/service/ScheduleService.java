@@ -21,6 +21,10 @@ public class ScheduleService {
     ScheduleMemberDao scheduleMemberDao;
 
 
+    public void saveSechedule(Schedule schedule){
+         scheduleDao.save(schedule);
+    }
+
     public Schedule findById(int scheduleId){
         return scheduleDao.findById(scheduleId);
     }
