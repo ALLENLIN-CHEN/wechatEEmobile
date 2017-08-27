@@ -205,6 +205,33 @@ public class  BaseDao<T> {
         return list;
     }
 
+    public List<T> excuteBySQL(String SQL, Map<String, Object> params, Query query)
+    {
+        List<T> list = new ArrayList<T>();
+        try
+        {
+            if (query == null) {
+                query = this.getCurrentSession().createSQLQuery(SQL);
+            }
+        } catch (QuerySyntaxException e)
+        {
+            e.printStackTrace();
+        }
+        if (params != null && params.size() > 0)
+        {
+            this.setParameters(query, params);
+        }
+        try
+        {
+            list = query.list();
+        } catch (Exception e)
+        {
+            this.getCurrentSession().close();
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     /**
      * 分页查询
      *

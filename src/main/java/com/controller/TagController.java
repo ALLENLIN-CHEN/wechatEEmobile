@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.entity.TagDictEntity;
 import com.service.TagService;
 
@@ -38,11 +39,19 @@ public class TagController {
     }
 
 
-    // 根据teamId获取全部的标签
+    // 根据teamId获取全部的标签（分组）
     @RequestMapping(value = "list", method = RequestMethod.GET)
     @ResponseBody
     public List<TagDictEntity> getAllTagsByTeamId(@RequestParam int teamId, @RequestParam String tagType) {
         return tagService.allTagsByTeamId(teamId, tagType);
+    }
+
+
+    // 根据teamId和标签类型获取标签的全部成员（分组）
+    @RequestMapping(value = "listTagMember", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject getAllTagMemberByTeamId(@RequestParam int teamId, @RequestParam String tagType) {
+        return tagService.getAllTagMemberByTeamId(teamId, tagType);
     }
 
 

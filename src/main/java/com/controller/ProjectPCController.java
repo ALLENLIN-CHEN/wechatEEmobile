@@ -4,6 +4,7 @@ import com.dao.impl.SubprojectDao;
 import com.dao.impl.TeamUserDao;
 import com.entity.*;
 import com.entity.newT.ProjectT;
+import com.entity.newT.ScheduleT;
 import com.entity.newT.UserT;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -78,6 +79,9 @@ public class ProjectPCController {
                         projectT.setSubprjectId(Integer.parseInt(obj[1].toString()));
                         List<UserT> userTs = projectService.findLeader(Integer.parseInt(obj[1].toString()));
                         projectT.setUserTs(userTs);
+                        List<ScheduleT> scheduleTS =
+                                scheduleService.findTaskStatusSubproject(Integer.parseInt(obj[1].toString()));
+                        projectT.setSchedules(scheduleTS);
                     }
                     if (obj[2] != null) {
                         projectT.setSubproject(obj[2].toString());

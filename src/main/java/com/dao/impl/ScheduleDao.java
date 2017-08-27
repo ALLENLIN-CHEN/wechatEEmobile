@@ -3,9 +3,13 @@ package com.dao.impl;
 import com.dao.BaseDao;
 import com.entity.Pager;
 import com.entity.Schedule;
+import org.apache.commons.collections.map.HashedMap;
+import org.hibernate.SQLQuery;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created on 2017/3/26.
@@ -31,6 +35,18 @@ public class ScheduleDao extends BaseDao<Schedule> {
                 +"' and s.taskStartTime<='"+endTime+"')) and s.taskStatus='d'"
                 +" and s.subproject.subprojectId="+subprojectId;
         return this.findByHql(hql,null,null);
+    }
+
+
+    public List findTaskStatusSubproject(Integer subprojectId){
+        String sql="select task_status,count(task_status) as count from schedule s" +
+                " where s.subprojectId=:subprojectId group by task_status";
+        Map<String, Object> params = new HashedMap();
+        params.put("subprojectId", subprojectId);
+        SQLQuery query = this.getCurrentSession().createSQLQuery(sql);
+        //设定结果结果集中的每个对象为Map类型
+        query.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP);
+        return this.excuteBySQL(sql,params,query);
     }
 
     public List findUnfinishedForSubproject(Integer subprojectId, String startTime, String endTime){
@@ -112,6 +128,8 @@ public class ScheduleDao extends BaseDao<Schedule> {
 
         return this.findByHql(hql, null,null);
     }
+
+
 
     /**
      * 统计未完成任务数:taskStatus='a,b,f'

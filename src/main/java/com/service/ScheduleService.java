@@ -104,6 +104,9 @@ public class ScheduleService {
         }
         return arrayList;
     }
+    public List findTaskStatusSubproject(Integer subprojectid){
+        return scheduleDao.findTaskStatusSubproject(subprojectid);
+    }
 
     public Map findTaskIntensityAnalyzeForSubproject(Integer teamId, Integer subprojectId, String period){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

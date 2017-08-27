@@ -16,6 +16,16 @@ public class ProjectT {
     private  String teamName;
     private List<UserT> userTs=new ArrayList<>(0);
 
+    public List<ScheduleT> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<ScheduleT> schedules) {
+        this.schedules = schedules;
+    }
+
+    private List<ScheduleT> schedules=new ArrayList<>(0);
+
     public ProjectT() {
     }
 
