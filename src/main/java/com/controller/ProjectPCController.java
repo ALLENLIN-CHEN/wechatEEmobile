@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Controller
@@ -178,6 +179,43 @@ public class ProjectPCController {
     }
 
 
+    /**
+     * 显示项目下的任务列表
+     */
+    @RequestMapping(value="findSchedules")
+    @ResponseBody
+    public Map<String,Object> findSchedules(HttpServletRequest request,
+                                            @RequestParam List<Character> status){
+        Map<String, Object> dataMap = new HashMap<String, Object>();
+        try{
+            int currentPageNumber = request.getParameter("currentPageNumber")!=null?Integer.parseInt(request.getParameter("currentPageNumber")):1;
+            int pageSize = request.getParameter("pageSize")!=null?Integer.parseInt(request.getParameter("pageSize")):5;
+            int projectId=Integer.parseInt(request.getParameter("projectId"));
+            int subprojectId=Integer.parseInt(request.getParameter("subprojectId"));
+
+
+            Pager pagerModel = new Pager(currentPageNumber, pageSize);
+
+                pagerModel=projectService.findSchedules(projectId,subprojectId,null,null,pagerModel,status);
+
+            List<ScheduleT> schedules = pagerModel.getDataList();
+            for(ScheduleT T:schedules){
+                System.out.println(T.getTaskContent());
+            }
+            int totalSize = pagerModel.getTotalSize();
+            dataMap.put("result","success");
+            dataMap.put("resultTip","");
+            dataMap.put("schedules",schedules);
+            dataMap.put("totalSize",totalSize);
+            System.out.println(dataMap);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            dataMap.put("result", "fail");
+            dataMap.put("resultTip", e.getMessage());
+        }
+        return dataMap;
+    }
 }
 
 

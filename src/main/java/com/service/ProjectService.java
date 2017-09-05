@@ -202,6 +202,21 @@ public class ProjectService {
     /**
      * 显示项目下的任务列表
      */
+    public Pager findSchedules(int projectId, int subprojectId, String taskContent, Character taskType, Pager pagerModel,List<Character> status) {
+        String hql = "select new com.entity.newT.ScheduleT(task.taskContent, task.taskReply, task.taskType, task.scheduleId,p.projectId," +
+                " p.project, sub.subprojectId, sub.subproject,task.taskTime, task.taskStatus, task.user.openId)"
+                + "from Subproject sub left join sub.project p left join sub.schedules task "
+                + "where sub.subprojectId=:subprojectId and p.projectId=:projectId and task.taskStatus in :status";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("projectId", projectId);
+        params.put("subprojectId", subprojectId);
+        params.put("status", status);
+        return projectDao.findByPage(hql, pagerModel, params);
+    }
+
+    /**
+     * 显示项目下的任务列表
+     */
     public Pager findSchedules(int projectId, int subprojectId, String taskContent, Character taskType, Pager pagerModel) {
         String hql = "select new com.entity.newT.ScheduleT(task.taskContent, task.taskReply, task.taskType, task.scheduleId,p.projectId, p.project, sub.subprojectId, sub.subproject,task.taskTime)"
                 + "from Subproject sub left join sub.project p left join sub.schedules task "

@@ -14,8 +14,42 @@ public class ScheduleT {
     private  String subproject;
     private Date taskTime;
 
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    private String openId;
+    public Character getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(Character taskStatus) {
+        this.taskStatus = taskStatus;
+    }
+
+    private Character taskStatus;
 
     private int subprojectId;
+
+    public ScheduleT(String taskContent, String taskReply, Character taskType, int scheduleId, int projectId, String project,
+                     int subprojectId, String subproject, Date taskTime, Character taskStatus, String openId) {
+        this.taskContent = taskContent;
+        this.taskReply = taskReply;
+        this.taskType = taskType;
+        this.scheduleId = scheduleId;
+        this.subprojectId = subprojectId;
+        this.project = project;
+        this.subproject = subproject;
+        this.taskTime = taskTime;
+        this.taskStatus = taskStatus;
+        this.projectId = projectId;
+        this.openId = openId;
+    }
+
     private  int projectId;
 
     public ScheduleT() {
