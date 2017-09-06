@@ -34,8 +34,9 @@ public class Subproject implements Serializable
 	private String contractStatus;
 	private String paymentStatus;
 	private String allocationStatus;
+	@JsonIgnore
 	private Set<ProjectMember> projectMembers = new HashSet<ProjectMember>(0);
-
+	@JsonIgnore
 	private Set<Schedule> schedules = new HashSet<Schedule>(0);
 
 	public Subproject()

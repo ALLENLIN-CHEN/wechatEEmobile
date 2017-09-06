@@ -120,6 +120,24 @@ public class ProjectPCController {
     }
 
     /**
+     * 查看项目
+     */
+    @RequestMapping(value = "showProject",method = RequestMethod.GET)
+    @ResponseBody
+    public Project showProject(HttpServletRequest request) {
+        return projectService.findById(Integer.parseInt(request.getParameter("projectId")));
+    }
+
+    /**
+     * 查看子项目
+     */
+    @RequestMapping(value = "showSubProject",method = RequestMethod.GET)
+    @ResponseBody
+    public Subproject showSubProject(HttpServletRequest request) {
+        return subprojectService.findById(Integer.parseInt(request.getParameter("subprojectId")));
+    }
+
+    /**
      * 更新项目
      */
     @RequestMapping(value = "updateProject",method = RequestMethod.POST)
