@@ -7,7 +7,6 @@ import com.entity.newT.ProjectT;
 import com.entity.newT.ScheduleT;
 import com.entity.newT.UserT;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -217,14 +216,18 @@ public class ProjectPCController {
                 pagerModel=projectService.findSchedules(projectId,subprojectId,null,null,pagerModel,status);
 
             List<ScheduleT> schedules = pagerModel.getDataList();
-            for(ScheduleT T:schedules){
-                System.out.println(T.getTaskContent());
-            }
+            // 查询负责任人
+            List<UserT> leaders = projectService.findLeader(subprojectId);
+
+            // 查询非负责人
+            List<UserT> notLeaders = projectService.findNoLeaders(subprojectId);
             int totalSize = pagerModel.getTotalSize();
             dataMap.put("result","success");
             dataMap.put("resultTip","");
             dataMap.put("schedules",schedules);
             dataMap.put("totalSize",totalSize);
+            dataMap.put("leader",leaders);
+            dataMap.put("members",notLeaders);
             System.out.println(dataMap);
         } catch (Exception e) {
             // TODO Auto-generated catch block

@@ -101,6 +101,17 @@ public class ProjectService {
     }
 
     /**
+     * 查询项目其他人员
+     */
+    public List<UserT> findNoLeaders(int subprojectId) {
+        String hql = "select new com.entity.newT.UserT(m.user.openId,m.user.userName) from ProjectMember m " +
+                " where m.subproject.subprojectId=:subprojectId and m.roleType in ('b','c','d')";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("subprojectId", subprojectId);
+        return projectDao.findById(params, hql);
+    }
+
+    /**
      * 查询所有团队
      */
     public List findAllTeam() {
