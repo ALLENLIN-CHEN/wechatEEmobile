@@ -3,6 +3,8 @@ package com.dao.impl;
 import com.dao.BaseDao;
 import com.entity.Pager;
 import com.entity.ProjectMember;
+import org.hibernate.Query;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,6 +27,13 @@ public class ProjectMemberDao extends BaseDao<ProjectMember> {
     public List findManpowerForSubproject(Integer subprojectId){
         String hql="select count(*) from ProjectMember p where p.subproject.subprojectId="+subprojectId;
         return this.findByHql(hql, null,null);
+    }
+
+    public List findManpowerMemberForSubproject(Integer subprojectId){
+        String hql="select p.user.openId as openId, p.user.userName as userName, p.roleType as roleType " +
+                "from ProjectMember p where p.subproject.subprojectId="+subprojectId;
+        Query query = this.getCurrentSession().createQuery(hql).setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP);
+        return this.findByHql(hql, null,query);
     }
 
     /**

@@ -36,13 +36,14 @@ public class ProjectMemberService {
         Pager subprojectList=subprojectDao.findSubprojectListByTeamId(pager,teamId,subprojectName,subprojectStatus);
         for(int i=0;i<subprojectList.getDataList().size();i++){
             Object [] row=(Object[])subprojectList.getDataList().get(i);
-            List manpowerForSubproject = projectMemberDao.findManpowerForSubproject(Integer.parseInt(row[0].toString()));
-            Long numberOfPeople = manpowerForSubproject.isEmpty() ? 0 : (Long) manpowerForSubproject.get(0);
+            List manpowerForSubproject = projectMemberDao.findManpowerMemberForSubproject(Integer.parseInt(row[0].toString()));
+            Long numberOfPeople = (long)manpowerForSubproject.size();
 
             Map<String,Object> mapForOneSubproject=new HashMap<String, Object>();
             mapForOneSubproject.put("numberOfPeople",numberOfPeople);
             mapForOneSubproject.put("total",numberOfPeople);
             mapForOneSubproject.put("subprojectId",row[0]);
+            mapForOneSubproject.put("data",manpowerForSubproject);
             mapForOneSubproject.put("subprojectName",row[1]);
             mapForOneSubproject.put("projectId",row[2]);
             mapForOneSubproject.put("projectName",row[3]);
