@@ -49,7 +49,9 @@ public class TeamUserService {
          params.put("openId",openId);
          params.put("subprojectId",subprojectId);
          List<ProjectMember> projectMemberList=teamUserDao.findBy(hq,params);
-         ProjectMember projectMember=projectMemberList.get(0);
+         ProjectMember projectMember=null;
+         if(projectMemberList!=null && !projectMemberList.isEmpty())
+             projectMember = projectMemberList.get(0);
         return projectMember;
          }
 

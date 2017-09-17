@@ -63,6 +63,12 @@ public class ScheduleMemberDao extends BaseDao<ScheduleMember>{
                 +"' and s.schedule.taskTime<='"+endTime+"') or (s.schedule.taskStartTime>='"+startTime
                 +"' and s.schedule.taskStartTime<='"+endTime+"')) and (s.schedule.taskStatus!='c' and s.schedule.taskStatus!='e')"
                 +" and s.user.openId='"+memberOpenId+"' and s.schedule.subproject.project.team.teamId="+teamId;
+
+       /* String hql="select count (*) from ScheduleMember s where s.schedule.taskTime>'"+startTime
+                +"' and s.schedule.taskTime<='"+endTime+"' and (s.schedule.taskStatus='a'"
+                +" or s.schedule.taskStatus='b' or s.schedule.taskStatus='f')"
+                +" and s.user.openId='"+openId+"' and s.schedule.subproject.project.team.teamId="+teamId;*/
+
         List dataList = this.listByPage(hql, pagerModel.getCurrentPageNumber(), pagerModel.getPageSize(), null, null);
         //      List dataList=findByHql(hql, null,null);
         int count = this.getAllTotal(hql, null, null);
