@@ -1,19 +1,13 @@
 package com.service;
 
 import com.dao.impl.*;
-import com.entity.Pager;
-import com.entity.ProjectMember;
-import com.entity.Subproject;
-import com.entity.User;
+import com.entity.*;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by zengqin on 2017/4/6.
@@ -30,6 +24,8 @@ public class SubprojectService {
     UserDao userDao;
     @Autowired
     ProjectMemberDao projectMemberDao;
+    @Autowired
+    TeamDao teamDao;
 
     @Transactional
     public boolean saveSubproject(Subproject subproject){
@@ -88,7 +84,7 @@ public class SubprojectService {
      */
     @Transactional
     public List subprojectMembers(int subprojectId){
-        String hql="select p.user.openId,p.user.userName from ProjectMember p left join p.subproject sub where sub.subprojectId=:subprojectId ";
+        String hql="select distinct(p.user.openId),p.user.userName from ProjectMember p left join p.subproject sub where sub.subprojectId=:subprojectId ";
         Map<String,Object>params=new HashMap<>();
         params.put("subprojectId",subprojectId);
         List list=subprojectDao.findByHql(hql,params,null);
@@ -114,6 +110,28 @@ public class SubprojectService {
         List list=projectDao.findByHql(hql,params,null);
         return  list;
     }
+    /**
+     *查询团队现有人员
+     */
+/*    @Transactional
+    public List teamMembers(int teamid){
+
+        Map result = new HashMap();
+        Team team = teamDao.load(Team.class,teamid);
+        Set<Project> projects = team.getProjects();
+        for(Project project : projects){
+            List list = projectMembers(project.getProjectId());
+            if(list!=null && list.size() )
+            result.put()
+        }
+
+        String hql="select distinct(p.user.openId),p.user.userName from ProjectMember p left join p.subproject sub where sub.project.projectId=:projectId";
+        Map<String,Object>params=new HashMap<>();
+        params.put("projectId",projectId);
+        List list=projectDao.findByHql(hql,params,null);
+        return  list;
+    }*/
+
     /**
      * 删除子项目现有人员
      */

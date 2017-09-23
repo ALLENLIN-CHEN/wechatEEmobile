@@ -34,4 +34,6 @@ public class TagRelationDao extends BaseDao<TagRelationEntity> {
             this.save(new TagRelationEntity("人员绑定",tag,wechatId));
         }
     }
+
+
 }
