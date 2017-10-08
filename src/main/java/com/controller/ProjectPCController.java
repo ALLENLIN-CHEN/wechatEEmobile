@@ -177,6 +177,17 @@ public class ProjectPCController {
         return projectService.createNewPCSubProject(subproject);
     }
 
+
+    /**
+     * 删除子项目
+     */
+    @Deprecated
+    @RequestMapping(value = "removeSubProject",method = RequestMethod.DELETE)
+    @ResponseBody
+    public Subproject removeSubProject(@RequestParam int subProjectId) {
+        return projectService.removeSubProject(subProjectId);
+    }
+
     /**
      * 根据teamId获取项目id/名称列表
      */
@@ -184,6 +195,15 @@ public class ProjectPCController {
     @ResponseBody
     public  List listProjectsIdAndNameByTeamId(@RequestParam int teamid) {
         return projectService.findTeamProjectListByTeamId(teamid);
+    }
+
+    /**
+     * 根据teamId所属团队人员(包括标签）
+     */
+    @RequestMapping(value = "listTeamMembersAndTags",method = RequestMethod.GET)
+    @ResponseBody
+    public  List listTeamMeber(@RequestParam String teamid) {
+        return projectMemberService.teamMembers(teamid);
     }
 
     /**

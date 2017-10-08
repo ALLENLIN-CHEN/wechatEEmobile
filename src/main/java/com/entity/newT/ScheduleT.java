@@ -1,6 +1,9 @@
 package com.entity.newT;
 
+import com.entity.ScheduleMember;
+
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by  xionglian on 2017/3/25.
@@ -13,6 +16,25 @@ public class ScheduleT {
     private String project;
     private  String subproject;
     private Date taskTime;
+
+    public Set<ScheduleMember> getScheduleMembers() {
+        return scheduleMembers;
+    }
+
+    public void setScheduleMembers(Set<ScheduleMember> scheduleMembers) {
+        this.scheduleMembers = scheduleMembers;
+    }
+
+    private Set<ScheduleMember> scheduleMembers;
+    public Date getTaskStartTime() {
+        return taskStartTime;
+    }
+
+    public void setTaskStartTime(Date taskStartTime) {
+        this.taskStartTime = taskStartTime;
+    }
+
+    private Date taskStartTime;
 
     public String getOpenId() {
         return openId;
@@ -48,6 +70,21 @@ public class ScheduleT {
         this.taskStatus = taskStatus;
         this.projectId = projectId;
         this.openId = openId;
+    }
+
+    public ScheduleT(String taskContent, String taskReply, Character taskType, int scheduleId, int projectId, String project,
+                     int subprojectId, String subproject, Date taskTime, Date taskStartTime ) {
+        this.taskContent = taskContent;
+        this.taskReply = taskReply;
+        this.taskType = taskType;
+        this.scheduleId = scheduleId;
+        this.subprojectId = subprojectId;
+        this.project = project;
+        this.subproject = subproject;
+        this.taskTime = taskTime;
+        this.projectId = projectId;
+        this.taskStartTime = taskStartTime;
+
     }
 
     private  int projectId;

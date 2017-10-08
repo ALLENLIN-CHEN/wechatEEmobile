@@ -2,6 +2,8 @@ package com.entity;
 
 // Generated 2016-4-16 15:43:05 by Hibernate Tools 3.4.0.CR1
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -27,10 +29,15 @@ public class User implements Serializable
 	private String address;
 	private String password;
 	private Boolean isfocus;
+	@JsonIgnore
 	private Set<Schedule> schedules = new HashSet<Schedule>(0);
+	@JsonIgnore
 	private Set<ProjectMember> projectMembers = new HashSet<ProjectMember>(0);
+	@JsonIgnore
 	private Set<ScheduleMember> scheduleMembers = new HashSet<ScheduleMember>(0);
+	@JsonIgnore
 	private Set<TeamUser> teamUsers = new HashSet<TeamUser>(0);
+	@JsonIgnore
 	private  Set<TransferEntity> transferEntities=new HashSet<>(0);
 	//private Set<TransferMemberEntity> transferMembers=new HashSet<>(0);
 	public User()

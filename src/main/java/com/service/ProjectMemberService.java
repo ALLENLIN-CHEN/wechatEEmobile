@@ -28,6 +28,11 @@ public class ProjectMemberService {
         return projectMemberDao.saveProjectMember(projectMember);
     }
 
+    @Transactional
+    public List teamMembers(String teamid){
+        return projectMemberDao.teamMembers(teamid);
+    }
+
     /**
      * 团队模块中对子项目中人力分布统计
      */

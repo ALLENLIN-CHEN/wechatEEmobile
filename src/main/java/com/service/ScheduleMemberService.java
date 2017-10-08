@@ -79,6 +79,13 @@ public class ScheduleMemberService {
         return list;
     }
 
+
+    public List findScheduleMembers(int scheduleId) {
+        String SQL = "select * from scheduleMember sm where sm.scheduleId=" + scheduleId;
+        List list = scheduleMemberDao.excuteBySQL(SQL, null, null);
+        return list;
+    }
+
     public Map findTaskIntensityAnalyzeForPerson(Integer teamId, String memberOpenId, String period) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         ArrayList unfinished = new ArrayList();

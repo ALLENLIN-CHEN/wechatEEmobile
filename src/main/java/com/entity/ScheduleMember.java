@@ -2,6 +2,9 @@ package com.entity;
 
 // Generated 2016-4-16 15:43:05 by Hibernate Tools 3.4.0.CR1
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,6 +24,7 @@ public class ScheduleMember implements java.io.Serializable
 {
 
 	private Integer scheduleMemberId;
+	@JsonIgnore
 	private Schedule schedule;
 	private User user;
 

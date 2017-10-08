@@ -2,12 +2,19 @@ package com.dao.impl;
 
 import com.dao.BaseDao;
 import com.entity.Pager;
+import com.entity.Project;
 import com.entity.ProjectMember;
+import com.entity.Team;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by zengqin on 2017/4/6.
@@ -76,6 +83,25 @@ public class ProjectMemberDao extends BaseDao<ProjectMember> {
                 +" and p.user.openId='"+openId+"'";
         List <ProjectMember>list=findByHql(hql, null,null);
         return list.get(0);
+    }
+
+    /**
+     *查询团队现有人员
+     */
+    @Transactional
+    public List teamMembers(String teamid){
+
+        String sql = "select  DISTINCT (projectMember.openId),user.userName,tagContent, tagRelation.tagType,tagRelation.tagId  from projectMember inner join user on projectMember.openId = user.openId\n" +
+                "  LEFT JOIN tagRelation ON tagRelation.wechatId = projectMember.openId\n" +
+                "  left JOIN tagDict ON tagDict.tagId = tagRelation.tagId\n" +
+                "  where subprojectId in\n" +
+                "        (select subprojectId from subproject where projectId in (select projectId from project where team = 2))\n" +
+                "        and (tagRelation.tagType = \"人员绑定\" OR isnull(tagRelation.tagType)) ;";
+
+        SQLQuery query = this.getCurrentSession().createSQLQuery(sql);
+        //设定结果结果集中的每个对象为Map类型
+        query.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP);
+        return this.excuteBySQL(sql,null,query);
     }
 
 

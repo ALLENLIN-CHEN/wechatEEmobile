@@ -110,27 +110,7 @@ public class SubprojectService {
         List list=projectDao.findByHql(hql,params,null);
         return  list;
     }
-    /**
-     *查询团队现有人员
-     */
-/*    @Transactional
-    public List teamMembers(int teamid){
 
-        Map result = new HashMap();
-        Team team = teamDao.load(Team.class,teamid);
-        Set<Project> projects = team.getProjects();
-        for(Project project : projects){
-            List list = projectMembers(project.getProjectId());
-            if(list!=null && list.size() )
-            result.put()
-        }
-
-        String hql="select distinct(p.user.openId),p.user.userName from ProjectMember p left join p.subproject sub where sub.project.projectId=:projectId";
-        Map<String,Object>params=new HashMap<>();
-        params.put("projectId",projectId);
-        List list=projectDao.findByHql(hql,params,null);
-        return  list;
-    }*/
 
     /**
      * 删除子项目现有人员

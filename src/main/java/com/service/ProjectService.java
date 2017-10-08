@@ -150,6 +150,8 @@ public class ProjectService {
     public boolean createNewProject(Project project) {
         return projectDao.create_project(project);
     }
+
+
     /**
      * 创建新项目
      */
@@ -497,6 +499,16 @@ public class ProjectService {
         params.put("projectId", projectId);
         List list = projectDao.findByHql(hql, params, null);
         return list;
+    }
+
+    /**
+     * 删除子项目
+     */
+    public Subproject removeSubProject(int subProjectId) {
+       Subproject subproject = subprojectDao.findById(subProjectId);
+       if(subproject!=null)
+        subprojectDao.delete(subproject);
+       return subproject;
     }
 
     /**
