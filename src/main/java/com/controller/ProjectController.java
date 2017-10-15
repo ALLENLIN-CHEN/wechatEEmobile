@@ -9,10 +9,7 @@ import com.service.*;
 import com.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
@@ -711,6 +708,16 @@ public class ProjectController {
         return dataMap;
     }
 
+    /**
+     * taskName
+     *
+     * @return
+     */
+    @RequestMapping(value = "updateScheduleName", method = RequestMethod.POST)
+    @ResponseBody
+    public Schedule updateScheduleContent(@RequestParam int taskId,@RequestParam String taskName ) {
+        return scheduleService.updateScheduleName(taskId, taskName);
+    }
     /**
      * 任务转移指派
      */

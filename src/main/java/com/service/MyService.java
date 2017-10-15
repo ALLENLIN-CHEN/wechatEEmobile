@@ -43,6 +43,19 @@ public class MyService {
         return projectDao.findByPage(hql, pagerModel, params);
     }
     /**
+     * 查询我的已转移任务
+     */
+
+    public Pager findMyTransferSchedule(Pager pager,char taskType){
+        String hql="select new com.entity.newT.ScheduleT(task.taskContent, task.taskReply, task.taskType, task.scheduleId,p.projectId, p.project,sub.subprojectId, " +
+                "sub.subproject,task.taskTime,  task.taskStartTime) " +
+                "from Subproject sub left join sub.project p left join sub.schedules task left join task.transferEntities transfer " +
+                "where task.taskType=:taskType";
+        Map<String,Object> params=new HashedMap();
+        params.put("taskType",taskType);
+        return projectDao.findByPage(hql,pager,params);
+    }
+    /**
      * 查询正在做任务
      */
     public Pager findDoingSchedules(String openId,Pager pagerModel) {
@@ -53,6 +66,19 @@ public class MyService {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("openId", openId);
         params.put("taskStatus",'b');
+        return projectDao.findByPage(hql, pagerModel, params);
+    }
+    /**
+     * 查询正在做任务
+     */
+    public Pager findDoingSchedules(Pager pagerModel,char taskType) {
+        String hql = "select new com.entity.newT.ScheduleT(task.taskContent, task.taskReply, task.taskType, task.scheduleId,p.projectId, p.project, " +
+                "sub.subprojectId, sub.subproject, task.taskTime, task.taskStartTime)"
+                + "from Subproject sub left join sub.project p left join sub.schedules task "
+                + "where task.scheduleId in(select s.scheduleId from ScheduleMember sc left join sc.schedule s left join sc.user u where s.taskStatus=:taskStatus ) and task.taskType=:taskType";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("taskStatus",'b');
+        params.put("taskType",taskType);
         return projectDao.findByPage(hql, pagerModel, params);
     }
     /**
@@ -68,6 +94,19 @@ public class MyService {
         return projectDao.findByPage(hql, pagerModel, params);
     }
     /**
+     * 查询已完成任务
+     */
+    public Pager findDoneSchedules(Pager pagerModel,
+                                   char taskType) {
+        String hql = "select new com.entity.newT.ScheduleT(task.taskContent, task.taskReply, task.taskType, task.scheduleId,p.projectId, p.project, " +
+                "sub.subprojectId, sub.subproject, task.taskTime, task.taskStartTime)"
+                + "from Subproject sub left join sub.project p left join sub.schedules task "
+                + "where task.scheduleId in(select s.scheduleId from ScheduleMember sc left join sc.schedule s left join sc.user u where  s.taskStatus='c' ) and task.taskType=:taskType";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("taskType",taskType);
+        return projectDao.findByPage(hql, pagerModel, params);
+    }
+    /**
      * 查询已超期任务
      */
     public Pager findBeyondSchedules(String openId,Pager pagerModel) {
@@ -78,6 +117,19 @@ public class MyService {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("openId", openId);
         params.put("taskStatus",'d');
+        return projectDao.findByPage(hql, pagerModel, params);
+    }
+    /**
+     * 查询已超期任务
+     */
+    public Pager findBeyondSchedules(Pager pagerModel,char taskType) {
+        String hql = "select new com.entity.newT.ScheduleT(task.taskContent, task.taskReply, task.taskType, task.scheduleId,p.projectId, p.project, sub.subprojectId, " +
+                "sub.subproject,task.taskTime, task.taskStartTime)"
+                + "from Subproject sub left join sub.project p left join sub.schedules task "
+                + "where task.scheduleId in(select s.scheduleId from ScheduleMember sc left join sc.schedule s left join sc.user u where s.taskStatus=:taskStatus) and task.taskType=:taskType";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("taskStatus",'d');
+        params.put("taskType",taskType);
         return projectDao.findByPage(hql, pagerModel, params);
     }
     /**

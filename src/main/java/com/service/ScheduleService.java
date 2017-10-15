@@ -168,4 +168,14 @@ public class ScheduleService {
         return map;
     }
 
+    public Schedule updateScheduleName(int taskId,String name){
+        Schedule schedule = scheduleDao.get(Schedule.class,taskId);
+        if(schedule == null)
+            return null;
+        schedule.setTaskContent(name);
+        scheduleDao.update(schedule);
+        return schedule;
+
+    }
+
 }
