@@ -25,6 +25,7 @@ public class UserController {
                           @RequestParam String qqNum,
                           @RequestParam String email,
                           @RequestParam List<Integer> tags,
+                          @RequestParam String wechatNum,
                           @RequestParam String id){
         User user = new User();
         user.setOpenId(openId);
@@ -32,6 +33,7 @@ public class UserController {
         user.setPhoneNum(phoneNum);
         user.setQqNum(qqNum);
         user.setEmail(email);
+        user.setWechatNum(wechatNum);
         userService.creatUser(user,tags,id);
         return user;
 
