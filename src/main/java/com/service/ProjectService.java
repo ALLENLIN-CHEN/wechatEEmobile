@@ -274,7 +274,9 @@ public class ProjectService {
     @Transactional
     public boolean markAsDone(String scheduleId) {
         try {
-            Schedule s = scheduleDao.load(Schedule.class, Integer.parseInt(scheduleId));
+            Schedule s = scheduleDao.get(Schedule.class, Integer.parseInt(scheduleId));
+            if(s == null)
+                return false;
             s.setTaskStatus('a');
             scheduleDao.save(s);
         } catch (NumberFormatException e) {

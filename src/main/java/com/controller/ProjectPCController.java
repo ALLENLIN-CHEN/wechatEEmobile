@@ -147,6 +147,20 @@ public class ProjectPCController {
     }
 
     /**
+     * 更新项目
+     */
+    @RequestMapping(value = "updateProjectName",method = RequestMethod.POST)
+    @ResponseBody
+    public Project updateProjectName(@RequestParam int projectId,@RequestParam String projectName) {
+        Project project = projectService.findById(projectId);
+        if(project == null)
+            return null;
+        project.setProject(projectName);
+        projectService.updateMainProject(project);
+        return project;
+    }
+
+    /**
      * 删除项目
      */
     @RequestMapping(value = "deleteProject",method = RequestMethod.DELETE)

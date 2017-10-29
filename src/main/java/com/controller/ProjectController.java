@@ -1085,6 +1085,12 @@ public class ProjectController {
         return dataMap;
     }
 
+    @RequestMapping(value = "getSchedule")
+    @ResponseBody
+    public Schedule getSchedule(@RequestParam int scheduleId) {
+        return scheduleService.findById(scheduleId);
+    }
+
     @RequestMapping(value = "member")
     @ResponseBody
     public Map<String, Object> member(HttpServletRequest request) {
@@ -1124,6 +1130,17 @@ public class ProjectController {
             dataMap.put("resultTip", e.getMessage());
         }
         return dataMap;
+    }
+
+    /**
+     * 完成任务
+     * @param scheduleId
+     * @return
+     */
+    @RequestMapping(value = "doneSchedule")
+    @ResponseBody
+    public boolean doneSchedule(@RequestParam String scheduleId) {
+        return projectService.markAsDone(scheduleId);
     }
 }
 
