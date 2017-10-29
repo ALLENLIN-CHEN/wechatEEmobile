@@ -411,6 +411,7 @@ public class ProjectController {
                 Object[] obj = (Object[]) subprojectMembers.get(i);
                 map.put("openId", obj[0].toString());
                 map.put("userName", obj[1].toString());
+                map.put("roleType", obj[2].toString());
                 data.add(map);
             }
             dataMap.put("result", "success");

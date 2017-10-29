@@ -43,6 +43,12 @@ public class TeamUserDao extends BaseDao<TeamUser> {
         String hql="from TeamUser t where t.team.teamId="+teamId+" and t.user.openId='"+openId+"'";
         return this.findByHql(hql, null,null);
     }
+
+    public  List<TeamUser> findTeamUsersByTeamId(String teamId){
+        String hql="from TeamUser t where t.team.teamId="+teamId;
+        return this.findByHql(hql, null,null);
+    }
+
     public List findBy(String hql, Map<String,Object>params){
         return this.findByHql(hql,params,null);
     }

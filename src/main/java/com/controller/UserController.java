@@ -22,12 +22,14 @@ public class UserController {
     public User getUserId(@RequestParam String openId,
                           @RequestParam String userName,
                           @RequestParam String phoneNum,
-                          @RequestParam String qqNum,
-                          @RequestParam String email,
-                          @RequestParam List<Integer> tags,
+                          @RequestParam (required = false) String qqNum,
+                          @RequestParam (required = false) String email,
+                          @RequestParam (required = false) List<Integer> tags,
                           @RequestParam String wechatNum,
                           @RequestParam String id){
         User user = new User();
+        if (userService.findUser(openId) != null)
+            return null;
         user.setOpenId(openId);
         user.setUserName(userName);
         user.setPhoneNum(phoneNum);

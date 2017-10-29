@@ -84,7 +84,7 @@ public class SubprojectService {
      */
     @Transactional
     public List subprojectMembers(int subprojectId){
-        String hql="select distinct(p.user.openId),p.user.userName from ProjectMember p left join p.subproject sub where sub.subprojectId=:subprojectId ";
+        String hql="select distinct(p.user.openId),p.user.userName,p.roleType from ProjectMember p left join p.subproject sub where sub.subprojectId=:subprojectId ";
         Map<String,Object>params=new HashMap<>();
         params.put("subprojectId",subprojectId);
         List list=subprojectDao.findByHql(hql,params,null);
