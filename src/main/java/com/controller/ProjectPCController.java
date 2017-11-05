@@ -216,7 +216,7 @@ public class ProjectPCController {
      */
     @RequestMapping(value = "listTeamMembersAndTags",method = RequestMethod.GET)
     @ResponseBody
-    public  List listTeamMeber(@RequestParam String teamid) {
+    public  Map listTeamMeber(@RequestParam String teamid) {
         return projectMemberService.teamMembers(teamid);
     }
 

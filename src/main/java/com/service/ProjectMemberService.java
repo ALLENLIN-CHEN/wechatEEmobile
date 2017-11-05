@@ -29,7 +29,7 @@ public class ProjectMemberService {
     }
 
     @Transactional
-    public List teamMembers(String teamid){
+    public Map teamMembers(String teamid){
         return projectMemberDao.teamMembers(teamid);
     }
 
