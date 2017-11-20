@@ -50,15 +50,14 @@ public class ProjectPCController {
     SubprojectDao subprojectDao;
 
 
-
-    @RequestMapping(value = "list",method = RequestMethod.POST)
+    @RequestMapping(value = "list", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> listAllProject(
             @RequestParam String openId,
             @RequestParam List<String> teamStatus,
             @RequestParam int currentPageNumber,
             @RequestParam int pageSize
-            ) {
+    ) {
         Map<String, Object> dataMap = new HashMap<String, Object>();
         try {
 
@@ -121,7 +120,7 @@ public class ProjectPCController {
     /**
      * 查看项目
      */
-    @RequestMapping(value = "showProject",method = RequestMethod.GET)
+    @RequestMapping(value = "showProject", method = RequestMethod.GET)
     @ResponseBody
     public Project showProject(HttpServletRequest request) {
         return projectService.findById(Integer.parseInt(request.getParameter("projectId")));
@@ -130,7 +129,7 @@ public class ProjectPCController {
     /**
      * 查看子项目
      */
-    @RequestMapping(value = "showSubProject",method = RequestMethod.GET)
+    @RequestMapping(value = "showSubProject", method = RequestMethod.GET)
     @ResponseBody
     public Subproject showSubProject(HttpServletRequest request) {
         return subprojectService.findById(Integer.parseInt(request.getParameter("subprojectId")));
@@ -139,7 +138,7 @@ public class ProjectPCController {
     /**
      * 更新项目
      */
-    @RequestMapping(value = "updateProject",method = RequestMethod.POST)
+    @RequestMapping(value = "updateProject", method = RequestMethod.POST)
     @ResponseBody
     public Project updateProject(@RequestBody Project project) {
         projectService.updateMainProjectWithoutSubProjectAndTeam(project);
@@ -149,11 +148,11 @@ public class ProjectPCController {
     /**
      * 更新项目
      */
-    @RequestMapping(value = "updateProjectName",method = RequestMethod.POST)
+    @RequestMapping(value = "updateProjectName", method = RequestMethod.POST)
     @ResponseBody
-    public Project updateProjectName(@RequestParam int projectId,@RequestParam String projectName) {
+    public Project updateProjectName(@RequestParam int projectId, @RequestParam String projectName) {
         Project project = projectService.findById(projectId);
-        if(project == null)
+        if (project == null)
             return null;
         project.setProject(projectName);
         projectService.updateMainProject(project);
@@ -163,7 +162,7 @@ public class ProjectPCController {
     /**
      * 删除项目
      */
-    @RequestMapping(value = "deleteProject",method = RequestMethod.DELETE)
+    @RequestMapping(value = "deleteProject", method = RequestMethod.DELETE)
     @ResponseBody
     public boolean deleteProject(@RequestParam int projectId) {
         return projectService.deleteProject(projectId);
@@ -172,10 +171,10 @@ public class ProjectPCController {
     /**
      * 创建项目
      */
-    @RequestMapping(value = "createProject",method = RequestMethod.POST)
-    @JsonIgnoreProperties(value={"team"})
+    @RequestMapping(value = "createProject", method = RequestMethod.POST)
+    @JsonIgnoreProperties(value = {"team"})
     @ResponseBody
-    public Project createProject(@RequestBody Project project,@RequestParam int teamid) {
+    public Project createProject(@RequestBody Project project, @RequestParam int teamid) {
         project.setTeam(teamService.findTeam(teamid));
         project.setProjectTime(new Date());
         return projectService.createNewPCProject(project);
@@ -185,7 +184,7 @@ public class ProjectPCController {
      * 创建子项目
      */
     @Deprecated
-    @RequestMapping(value = "createSubProject",method = RequestMethod.POST)
+    @RequestMapping(value = "createSubProject", method = RequestMethod.POST)
     @ResponseBody
     public Subproject createSubProject(@RequestBody Subproject subproject) {
         return projectService.createNewPCSubProject(subproject);
@@ -196,7 +195,7 @@ public class ProjectPCController {
      * 删除子项目
      */
     @Deprecated
-    @RequestMapping(value = "removeSubProject",method = RequestMethod.DELETE)
+    @RequestMapping(value = "removeSubProject", method = RequestMethod.DELETE)
     @ResponseBody
     public Subproject removeSubProject(@RequestParam int subProjectId) {
         return projectService.removeSubProject(subProjectId);
@@ -205,27 +204,27 @@ public class ProjectPCController {
     /**
      * 根据teamId获取项目id/名称列表
      */
-    @RequestMapping(value = "listProjectByTeam",method = RequestMethod.GET)
+    @RequestMapping(value = "listProjectByTeam", method = RequestMethod.GET)
     @ResponseBody
-    public  List listProjectsIdAndNameByTeamId(@RequestParam int teamid) {
+    public List listProjectsIdAndNameByTeamId(@RequestParam int teamid) {
         return projectService.findTeamProjectListByTeamId(teamid);
     }
 
     /**
      * 根据teamId所属团队人员(包括标签）
      */
-    @RequestMapping(value = "listTeamMembersAndTags",method = RequestMethod.GET)
+    @RequestMapping(value = "listTeamMembersAndTags", method = RequestMethod.GET)
     @ResponseBody
-    public  Map listTeamMeber(@RequestParam String teamid) {
+    public Map listTeamMeber(@RequestParam String teamid) {
         return projectMemberService.teamMembers(teamid);
     }
 
     /**
      * 根据项目id获取子项目id/名称列表
      */
-    @RequestMapping(value = "listSubProjectByTeam",method = RequestMethod.GET)
+    @RequestMapping(value = "listSubProjectByTeam", method = RequestMethod.GET)
     @ResponseBody
-    public  List listSubProjectByTeam(@RequestParam int projectid) {
+    public List listSubProjectByTeam(@RequestParam int projectid) {
         return subprojectService.findSubProjectListByProjectId(projectid);
     }
 
@@ -233,21 +232,21 @@ public class ProjectPCController {
     /**
      * 显示项目下的任务列表
      */
-    @RequestMapping(value="findSchedules")
+    @RequestMapping(value = "findSchedules")
     @ResponseBody
-    public Map<String,Object> findSchedules(HttpServletRequest request,
-                                            @RequestParam List<Character> status){
+    public Map<String, Object> findSchedules(HttpServletRequest request,
+                                             @RequestParam List<Character> status) {
         Map<String, Object> dataMap = new HashMap<String, Object>();
-        try{
-            int currentPageNumber = request.getParameter("currentPageNumber")!=null?Integer.parseInt(request.getParameter("currentPageNumber")):1;
-            int pageSize = request.getParameter("pageSize")!=null?Integer.parseInt(request.getParameter("pageSize")):5;
-            int projectId=Integer.parseInt(request.getParameter("projectId"));
-            int subprojectId=Integer.parseInt(request.getParameter("subprojectId"));
+        try {
+            int currentPageNumber = request.getParameter("currentPageNumber") != null ? Integer.parseInt(request.getParameter("currentPageNumber")) : 1;
+            int pageSize = request.getParameter("pageSize") != null ? Integer.parseInt(request.getParameter("pageSize")) : 5;
+            int projectId = Integer.parseInt(request.getParameter("projectId"));
+            int subprojectId = Integer.parseInt(request.getParameter("subprojectId"));
 
 
             Pager pagerModel = new Pager(currentPageNumber, pageSize);
 
-                pagerModel=projectService.findSchedules(projectId,subprojectId,null,null,pagerModel,status);
+            pagerModel = projectService.findSchedules(projectId, subprojectId, null, null, pagerModel, status);
 
             List<ScheduleT> schedules = pagerModel.getDataList();
             // 查询负责任人
@@ -256,12 +255,12 @@ public class ProjectPCController {
             // 查询非负责人
             List<UserT> notLeaders = projectService.findNoLeaders(subprojectId);
             int totalSize = pagerModel.getTotalSize();
-            dataMap.put("result","success");
-            dataMap.put("resultTip","");
-            dataMap.put("schedules",schedules);
-            dataMap.put("totalSize",totalSize);
-            dataMap.put("leader",leaders);
-            dataMap.put("members",notLeaders);
+            dataMap.put("result", "success");
+            dataMap.put("resultTip", "");
+            dataMap.put("schedules", schedules);
+            dataMap.put("totalSize", totalSize);
+            dataMap.put("leader", leaders);
+            dataMap.put("members", notLeaders);
             System.out.println(dataMap);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -270,6 +269,44 @@ public class ProjectPCController {
             dataMap.put("resultTip", e.getMessage());
         }
         return dataMap;
+    }
+
+    /**
+     * 显示项目下的任务列表
+     */
+    @RequestMapping(value = "findSchedulesBySubprojects")
+    @ResponseBody
+    public Map<Integer,Map> findSchedulesBySubprojects(HttpServletRequest request,
+                                                          @RequestParam List<Character> status, @RequestParam List<Integer> subprojectIds) {
+        Map<Integer,Map> result = new HashMap<>();
+        int currentPageNumber = request.getParameter("currentPageNumber") != null ? Integer.parseInt(request.getParameter("currentPageNumber")) : 1;
+        int pageSize = request.getParameter("pageSize") != null ? Integer.parseInt(request.getParameter("pageSize")) : 5;
+
+        for (int subprojectId : subprojectIds) {
+
+            Map<String, Object> dataMap = new HashMap<String, Object>();
+
+            Pager pagerModel = new Pager(currentPageNumber, pageSize);
+
+            pagerModel = projectService.findSchedules(subprojectId, pagerModel, status);
+
+            List<ScheduleT> schedules = pagerModel.getDataList();
+            // 查询负责任人
+            List<UserT> leaders = projectService.findLeader(subprojectId);
+
+            // 查询非负责人
+            List<UserT> notLeaders = projectService.findNoLeaders(subprojectId);
+
+            int totalSize = pagerModel.getTotalSize();
+
+            dataMap.put("schedules", schedules);
+            dataMap.put("totalSize", totalSize);
+            dataMap.put("leader", leaders);
+            dataMap.put("members", notLeaders);
+
+            result.put(subprojectId,dataMap);
+        }
+        return result;
     }
 }
 
