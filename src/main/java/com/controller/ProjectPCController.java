@@ -280,7 +280,7 @@ public class ProjectPCController {
                                                           @RequestParam List<Character> status, @RequestParam List<Integer> subprojectIds) {
         Map<Integer,Map> result = new HashMap<>();
         int currentPageNumber = request.getParameter("currentPageNumber") != null ? Integer.parseInt(request.getParameter("currentPageNumber")) : 1;
-        int pageSize = request.getParameter("pageSize") != null ? Integer.parseInt(request.getParameter("pageSize")) : 5;
+        int pageSize = request.getParameter("pageSize") != null ? Integer.parseInt(request.getParameter("pageSize")) : 1000;
 
         for (int subprojectId : subprojectIds) {
 
