@@ -803,9 +803,9 @@ public class ProjectController {
                 dataMap.put("resultTip", "");
                 return dataMap;
             }
-            if (status.equals("a"))
+            if (status.equals("c"))
                 projectService.markAsDone(id);
-            else if (status.equals("c"))
+            else if (status.equals("d"))
                 projectService.markAsOverdue(id);
             else if (status.equals("b"))
                 projectService.markAsUndone(id);

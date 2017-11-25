@@ -291,7 +291,7 @@ public class ProjectService {
             Schedule s = scheduleDao.get(Schedule.class, Integer.parseInt(scheduleId));
             if(s == null)
                 return false;
-            s.setTaskStatus('a');
+            s.setTaskStatus('c');
             scheduleDao.save(s);
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -323,7 +323,7 @@ public class ProjectService {
 
         try {
             Schedule s = scheduleDao.load(Schedule.class, Integer.parseInt(scheduleId));
-            s.setTaskStatus('c');
+            s.setTaskStatus('d');
             scheduleDao.save(s);
         } catch (NumberFormatException e) {
             e.printStackTrace();
