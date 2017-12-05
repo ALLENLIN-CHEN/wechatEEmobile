@@ -7,6 +7,7 @@ import com.entity.newT.ProjectT;
 import com.entity.newT.*;
 import com.service.*;
 import com.util.JsonUtil;
+import org.apache.velocity.tools.generic.ClassTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -542,6 +543,26 @@ public class ProjectController {
         }
 
         return dataMap;
+    }
+
+    /**
+     * 更新项目
+     */
+    @RequestMapping(value = "updateSubProjectName")
+    @ResponseBody
+    public Subproject updateSubProjectName(@RequestParam int subProjectId, @RequestParam String subProjectName ){
+        Subproject subproject = subprojectService.findById(subProjectId);
+        subproject.setSubproject(subProjectName);
+        return subproject;
+    }
+
+    /**
+     * 删除项目
+     */
+    @RequestMapping(value = "removeSubProject")
+    @ResponseBody
+    public boolean removeSubProject(@RequestParam int subProjectId){
+       return projectService.deleteSubProject(subProjectId);
     }
 
     /**
