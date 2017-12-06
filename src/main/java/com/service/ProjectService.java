@@ -497,9 +497,9 @@ public class ProjectService {
      * 删除项目
      */
     public boolean deleteSubProject(int projectId) {
-        String hql = "delete from Project where projectId=:projectId";
+        String hql = "delete from Subproject where subprojectId=:subprojectId";
         Map<String, Object> params = new HashMap<>();
-        params.put("projectId", projectId);
+        params.put("subprojectId", projectId);
         return projectDao.deleteByHql(hql, params, null);
     }
 

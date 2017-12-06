@@ -553,6 +553,7 @@ public class ProjectController {
     public Subproject updateSubProjectName(@RequestParam int subProjectId, @RequestParam String subProjectName ){
         Subproject subproject = subprojectService.findById(subProjectId);
         subproject.setSubproject(subProjectName);
+        subprojectService.update(subproject);
         return subproject;
     }
 
@@ -562,6 +563,8 @@ public class ProjectController {
     @RequestMapping(value = "removeSubProject")
     @ResponseBody
     public boolean removeSubProject(@RequestParam int subProjectId){
+        if (subprojectService.findById(subProjectId) == null)
+            return false;
        return projectService.deleteSubProject(subProjectId);
     }
 
