@@ -178,4 +178,9 @@ public class ScheduleService {
 
     }
 
+    public void updateMemeber(int scheduleId, List<String> openIds){
+        scheduleMemberDao.deleteMemeber(scheduleId,openIds);
+        scheduleMemberDao.insertMemeber(scheduleId,openIds);
+    }
+
 }

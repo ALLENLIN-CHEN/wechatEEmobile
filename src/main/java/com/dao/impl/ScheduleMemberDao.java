@@ -4,8 +4,10 @@ import com.dao.BaseDao;
 import com.entity.Pager;
 import com.entity.ScheduleMember;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +37,32 @@ public class ScheduleMemberDao extends BaseDao<ScheduleMember>{
         /*String hql="select count (*) from ScheduleMember s where s.user.userName='"+memberName+"'";*/
 
         return this.findByHql(hql, null,null);
+    }
+
+    /**
+     * 删除人员
+     */
+    public List deleteMemeber(int scheduleId, List<String> openIds){
+        String deleteSQL ="delete FROM scheduleMember where scheduleId =:scheduleId and openId in:openIds";
+        SQLQuery query = this.getCurrentSession().createSQLQuery(deleteSQL);
+        query.setInteger("scheduleId",scheduleId);
+        query.setParameterList("openIds",openIds);
+        query.executeUpdate();
+
+        return null;
+    }
+    /**
+     * 更新人员
+     */
+    public List insertMemeber(int scheduleId, List<String> openIds){
+        for (String openId: openIds) {
+            String insertSQL = "insert into scheduleMember(openId,scheduleId) VALUES (:openId,:scheduleId)";
+            SQLQuery query = this.getCurrentSession().createSQLQuery(insertSQL);
+            query.setString("openId", openId);
+            query.setInteger("scheduleId", scheduleId);
+            query.executeUpdate();
+        }
+        return null;
     }
 
     /**
