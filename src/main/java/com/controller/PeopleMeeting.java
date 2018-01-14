@@ -53,31 +53,37 @@ public class PeopleMeeting {
         }
         int undoTotalSize = pagerModel.getTotalSize();
 
-        Pager doingPagerModel = new Pager(currentPageNumber, pageSize);
-        pagerModel = myService.findDoingSchedules(openId, pagerModel);
-        List<ScheduleT> doingScheduleTs = doingPagerModel.getDataList();
+        myService.findDoingSchedules(openId, pagerModel);
+        List<ScheduleT> doingScheduleTs = pagerModel.getDataList();
         for (ScheduleT scheduleT : doingScheduleTs) {
             int scheduleId = scheduleT.getScheduleId();
-            scheduleT.setScheduleMembers((Set<ScheduleMember>) scheduleMemberService.findScheduleMembers(String.valueOf(scheduleId)));
+            List list = scheduleMemberService.findScheduleMembers(String.valueOf(scheduleId));
+            Set<ScheduleMember> set = new HashSet<>();
+            set.addAll(list);
+            scheduleT.setScheduleMembers(set);
         }
         int doingTotalSize = pagerModel.getTotalSize();
 
-        Pager beyondPagerModel = new Pager(currentPageNumber, pageSize);
-        pagerModel = myService.findBeyondSchedules(openId, pagerModel);
-        List<ScheduleT> beyondScheduleTs = beyondPagerModel.getDataList();
+        myService.findBeyondSchedules(openId, pagerModel);
+        List<ScheduleT> beyondScheduleTs = pagerModel.getDataList();
         for (ScheduleT scheduleT : beyondScheduleTs) {
             int scheduleId = scheduleT.getScheduleId();
-            scheduleT.setScheduleMembers((Set<ScheduleMember>) scheduleMemberService.findScheduleMembers(String.valueOf(scheduleId)));
+            List list = scheduleMemberService.findScheduleMembers(String.valueOf(scheduleId));
+            Set<ScheduleMember> set = new HashSet<>();
+            set.addAll(list);
+            scheduleT.setScheduleMembers(set);
+
         }
         int beyondTotalSize = pagerModel.getTotalSize();
 
-        Pager transferPagerModel = new Pager(currentPageNumber, pageSize);
-        pagerModel = myService.findMyTransferSchedule(openId, pagerModel);
-        List<ScheduleT> transferScheduleTs = transferPagerModel.getDataList();
+        myService.findMyTransferSchedule(openId, pagerModel);
+        List<ScheduleT> transferScheduleTs = pagerModel.getDataList();
         for (ScheduleT scheduleT : transferScheduleTs) {
             int scheduleId = scheduleT.getScheduleId();
-            scheduleT.setScheduleMembers((Set<ScheduleMember>) scheduleMemberService.findScheduleMembers(String.valueOf(scheduleId)));
-        }
+            List list = scheduleMemberService.findScheduleMembers(String.valueOf(scheduleId));
+            Set<ScheduleMember> set = new HashSet<>();
+            set.addAll(list);
+            scheduleT.setScheduleMembers(set);   }
         int transferTotalSize = pagerModel.getTotalSize();
 
 
