@@ -558,6 +558,19 @@ public class ProjectController {
     }
 
     /**
+     * 更新子项目
+     */
+    @RequestMapping(value = "updateSubProject")
+    @ResponseBody
+    public Subproject updateSubProject(@RequestParam int subProjectId, @RequestParam String subProjectName,@RequestParam String teamStatus ){
+        Subproject subproject = subprojectService.findById(subProjectId);
+        subproject.setSubproject(subProjectName);
+        subproject.setTeamStatus(teamStatus);
+        subprojectService.update(subproject);
+        return subproject;
+    }
+
+    /**
      * 删除项目
      */
     @RequestMapping(value = "removeSubProject")
