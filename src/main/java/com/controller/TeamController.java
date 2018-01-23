@@ -599,7 +599,7 @@ public class TeamController {
             Long b1 = (Long) o1.get("total");
             Long b2 = (Long) o2.get("total");
             if (b2 != null) {
-                return b2.compareTo(b1);
+                return b1.compareTo(b2);
             }
             return 0;
         }
