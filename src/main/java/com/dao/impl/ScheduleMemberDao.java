@@ -69,7 +69,14 @@ public class ScheduleMemberDao extends BaseDao<ScheduleMember>{
      * 统计未完成任务数:taskStatus=b
      */
     public List findUnfinishedForPerson(Integer teamId, String memberName,String startTime, String endTime){
-        String hql="select count (*) from ScheduleMember s where ((s.schedule.taskTime>='"+startTime
+        String a2="select s.schedule from ScheduleMember s where ((s.schedule.taskTime>='"+startTime
+                +"' and s.schedule.taskTime<='"+endTime+"') or (s.schedule.taskStartTime>='"+startTime
+                +"' and s.schedule.taskStartTime<='"+endTime+"')) and s.schedule.taskStatus='b'"
+                +" and s.user.userName='"+memberName+"' and s.schedule.subproject.project.team.teamId="+teamId;
+
+        List t= this.findByHql(a2, null,null);
+
+        String hql="select count(distinct s.schedule.scheduleId) from ScheduleMember s where ((s.schedule.taskTime>='"+startTime
                 +"' and s.schedule.taskTime<='"+endTime+"') or (s.schedule.taskStartTime>='"+startTime
                 +"' and s.schedule.taskStartTime<='"+endTime+"')) and s.schedule.taskStatus='b'"
                 +" and s.user.userName='"+memberName+"' and s.schedule.subproject.project.team.teamId="+teamId;
