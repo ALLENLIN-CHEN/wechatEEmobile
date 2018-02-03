@@ -89,7 +89,7 @@ public class ProjectMemberDao extends BaseDao {
     @Transactional
     public Map<String, List> teamMembers(String teamid) {
         Map<String, List> result = new HashMap<>();
-        String sql = "select  DISTINCT (tagRelation.wechatId),user.userName,tagContent, tagRelation.tagType,tagRelation.tagId  from projectMember inner join user on projectMember.openId = user.openId\n" +
+        String sql = "select  DISTINCT (user.openId) as wechatId,user.userName,tagContent, tagRelation.tagType,tagRelation.tagId  from projectMember inner join user on projectMember.openId = user.openId\n" +
                 "  LEFT JOIN tagRelation ON tagRelation.wechatId = projectMember.openId\n" +
                 "  left JOIN tagDict ON tagDict.tagId = tagRelation.tagId\n" +
                 "  where subprojectId in\n" +
