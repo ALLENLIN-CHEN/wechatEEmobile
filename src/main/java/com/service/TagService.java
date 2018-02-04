@@ -35,9 +35,10 @@ public class TagService {
         return tagDictDao.getAllTagByTeamId(teamId, tagType);
     }
 
-    public List<HashMap<String,Object>> getAllTagMemberByTeamId(int teamId, String tagType) {
-        List<HashMap<String,Object>> result =  tagDictDao.getAllTagMemberByTeamId(teamId, tagType);
-        return result;
+    public List<TagDictEntity> getAllTagMemberByTeamId(int teamId, int[] tagids) {
+        List<TagDictEntity> tags = tagDictDao.getAllTagMemberByTeamId(teamId, tagids);
+
+        return tags;
     }
 
 
@@ -46,7 +47,7 @@ public class TagService {
         return null;
     }
 
-    public List<TeamUserT2> findTeamLeaderByTeamId(String teamId){
+    public List<TeamUserT2> findTeamLeaderByTeamId(String teamId) {
         return teamUserDao.findTeamUsersLeaderByTeamId(teamId);
     }
 
