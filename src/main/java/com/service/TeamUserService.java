@@ -4,6 +4,7 @@ import com.dao.impl.ProjectMemberDao;
 import com.dao.impl.TeamUserDao;
 import com.entity.ProjectMember;
 import com.entity.TeamUser;
+import com.entity.newT.TeamUserT2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,17 @@ public class TeamUserService {
             }
         }
         return result;
+    }
+
+    public List<TeamUserT2> findTeamUsersListByOpenId(String openId){
+        List<TeamUserT2> list =teamUserDao.findTeamUsersLeaderByOpenId(openId);
+        System.out.println(list);
+        for (TeamUserT2 team:list) {
+            int teamid = team.getTeamId();
+            List list1 = teamUserDao.findcount(teamid);
+            team.setCount((long) list1.get(0));
+        }
+        return list;
     }
 
     public List<TeamUser> findTeamUsersByOpenIdAndTeamId(String openId, Integer teamId){

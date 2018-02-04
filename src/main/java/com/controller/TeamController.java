@@ -3,6 +3,7 @@ package com.controller;
 import com.entity.Pager;
 import com.entity.ProjectMember;
 import com.entity.TeamUser;
+import com.entity.newT.TeamUserT2;
 import com.service.*;
 import com.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,14 +69,16 @@ public class TeamController {
         dataMap.clear();
         try {
             String openId = (String) request.getParameter("openId");
-            List teamUsers = teamUserService.findTeamUsersByOpenId(openId);
+            List<TeamUserT2> teamUsers = teamUserService.findTeamUsersListByOpenId(openId);
 
             ArrayList<Map> arrayList = new ArrayList<Map>();
             for (int i = 0; i < teamUsers.size(); i++) {
-                Object[] row = (Object[]) teamUsers.get(i);
                 Map<String, Object> team = new HashMap<String, Object>();
-                team.put("teamId", row[0]);
-                team.put("teamName", row[1]);
+                team.put("teamId", teamUsers.get(i).getTeamId());
+                team.put("teamName", teamUsers.get(i).getTeamName());
+                team.put("count", teamUsers.get(i).getCount());
+                team.put("teamLeaders", teamUsers.get(i).getUserName());
+
                 arrayList.add(team);
             }
 

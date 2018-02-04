@@ -14,7 +14,6 @@ public class TagDictEntity {
     private String tagName;
     private int teamId;
     private String tagType;
-    private String tagContent;
 
     @Basic
     @Column(name = "teamId", nullable = true)
@@ -77,13 +76,4 @@ public class TagDictEntity {
         this.tagType = tagType;
     }
 
-    @Basic
-    @Column(name = "tagContent", nullable = true, length = 100)
-    public String getTagContent() {
-        return tagContent;
-    }
-
-    public void setTagContent(String tagContent) {
-        this.tagContent = tagContent;
-    }
 }

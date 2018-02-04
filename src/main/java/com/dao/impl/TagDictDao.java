@@ -26,10 +26,8 @@ public class TagDictDao extends BaseDao<TagDictEntity> {
     }
 
     public List getAllTagMemberByTeamId(int teamId, String tagType) {
-        String hql = "SELECT tagName, wechatId, tagDict.tagId ,user.userName " +
-                "FROM tagRelation INNER JOIN tagDict on tagRelation.tagId = tagDict.tagId " +
-                "INNER JOIN user on user.openId = wechatId " +
-                "Where teamId=:teamId and tagDict.tagType=:tagType";
+        String hql = "SELECT tagId,wechatId,wechatName,tagName FROM " +
+                "tagRelation where teamId=:teamId and tagType=:tagType GROUP BY tagName";
         Map<String, Object> params = new HashedMap();
         params.put("teamId", teamId);
         params.put("tagType", tagType);
