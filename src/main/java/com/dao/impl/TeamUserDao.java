@@ -4,9 +4,13 @@ import com.dao.BaseDao;
 import com.entity.Pager;
 import com.entity.TeamUser;
 import com.entity.newT.TeamUserT2;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,12 +29,30 @@ public class TeamUserDao extends BaseDao {
         return this.findByHql(hql, null,null);
     }
 
+    public void updateAdmin(String openId,int teamId){
+        String hql="update TeamUser t set t.role = 1 where t.user.openId =:openId and t.team.teamId =:teamId";
+        Map params = new HashMap();
+        params.put("openId",openId);
+        params.put("teamId",teamId);
+        this.updateBy(hql, params,null);
+    }
+
     public List<TeamUserT2> findTeamUsersLeaderByOpenId(String openId){
-        String hql="select new com.entity.newT.TeamUserT2( t.team.teamId, t.user.userName, t.team.teamName) from TeamUser t " +
+        String hql="select new com.entity.newT.TeamUserT2( t.team.teamId,t.team.teamName) from TeamUser t " +
                 "where t.user.openId like '%"+openId+"%' and t.team.teamId!=1 and t.role = 1 " +
                 "order by t.team.teamId";
 
         List<TeamUserT2> list =  this.findByHql(hql, null,null);
+        for(TeamUserT2 t2 : list){
+            int teamId = t2.getTeamId();
+            String query = "select t.user.userName from TeamUser t where t.role = 1 and t.team.teamId = "+teamId;
+            List<String> result = this.findByHql(query, null,null);
+            StringBuffer stringBuffer = new StringBuffer();
+            for(String uName : result)
+                stringBuffer.append(uName).append(",");
+            stringBuffer.deleteCharAt(stringBuffer.length()-1);
+            t2.setUserName(stringBuffer.toString());
+        }
 
         return list;
     }
@@ -44,6 +66,19 @@ public class TeamUserDao extends BaseDao {
 
         return list;
     }
+
+    public List findTeamUsersByTeamId(String teamId){
+        String hql="select t.user.userName as userName, t.user.openId as openId from TeamUser t " +
+                "where  t.team.teamId = "+teamId;
+        Query query = this.getCurrentSession().createQuery(hql);
+        //设定结果结果集中的每个对象为Map类型
+
+        query.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP);
+        List list =  this.findByHql(hql, null,query);
+
+        return list;
+    }
+
 
 
     public Pager findTeamUsersByTeamId(Pager pagerModel, Integer teamId, String memberName){

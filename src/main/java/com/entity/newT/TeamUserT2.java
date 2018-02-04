@@ -6,9 +6,8 @@ public class TeamUserT2 {
     private String teamName;
     private long count;
 
-    public TeamUserT2(int teamId, String userName, String teamName) {
+    public TeamUserT2(int teamId, String teamName) {
         this.teamId = teamId;
-        this.userName = userName;
         this.teamName = teamName;
     }
 

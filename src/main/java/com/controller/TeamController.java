@@ -41,6 +41,8 @@ public class TeamController {
     ProjectMemberService projectMemberService;
     @Autowired
     MemoForPersonService memoForPersonService;
+    @Autowired
+    UserService userService;
 
     private Map<String, Object> dataMap = new HashMap<String, Object>();
     private Pager pagerModel = new Pager(1, 5);
@@ -58,6 +60,25 @@ public class TeamController {
             teamIdTemp = Integer.parseInt(row[0].toString());
         }
         return teamIdTemp;
+    }
+
+    /**
+     * 获取团队成员
+     */
+    @RequestMapping(value = "members")
+    @ResponseBody
+    public List teamMemebers(String teamId) {
+        return teamUserService.findTeamUsersByTeamId(teamId);
+    }
+
+    /**
+     * 设置团队管理员
+     */
+    @RequestMapping(value = "setAdmin")
+    @ResponseBody
+    public boolean teamMemebers(int teamId,String openId) {
+        teamUserService.updateAdmin(openId,teamId);
+        return true;
     }
 
     /**
@@ -182,8 +203,8 @@ public class TeamController {
             dataMap.put("result", "success");
             dataMap.put("resultTip", "");
             dataMap.put("totalSize", totalSize);
-            if(teamUserForOpen!=null)
-            dataMap.put("role", teamUserForOpen.getRole());
+            if (teamUserForOpen != null)
+                dataMap.put("role", teamUserForOpen.getRole());
             dataMap.put("data", data);
 
         } catch (Exception e) {
