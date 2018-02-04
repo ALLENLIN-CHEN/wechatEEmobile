@@ -2,13 +2,16 @@ package com.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.entity.TagDictEntity;
+import com.entity.newT.TeamUserT2;
 import com.service.TagService;
 
+import com.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -20,6 +23,7 @@ import java.util.List;
 public class TagController {
     @Autowired
     TagService tagService;
+
 
     // 创建多个标签
     @RequestMapping(value = "", method = RequestMethod.POST)
@@ -50,9 +54,10 @@ public class TagController {
     // 根据teamId和标签类型获取标签的全部成员（分组）
     @RequestMapping(value = "listTagMember", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject getAllTagMemberByTeamId(@RequestParam int teamId, @RequestParam String tagType) {
+    public List<HashMap<String,Object>> getAllTagMemberByTeamId(@RequestParam int teamId, @RequestParam String tagType) {
         return tagService.getAllTagMemberByTeamId(teamId, tagType);
     }
+
 
 
     //对任务或者人员绑定标签

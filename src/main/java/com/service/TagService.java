@@ -3,7 +3,10 @@ package com.service;
 import com.alibaba.fastjson.JSONObject;
 import com.dao.impl.TagDictDao;
 import com.dao.impl.TagRelationDao;
+import com.dao.impl.TeamUserDao;
 import com.entity.TagDictEntity;
+import com.entity.Team;
+import com.entity.newT.TeamUserT2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +26,8 @@ public class TagService {
     @Autowired
     private TagDictDao tagDictDao;
     @Autowired
+    private TeamUserDao teamUserDao;
+    @Autowired
     private TagRelationDao tagRelationDao;
 
 
@@ -30,22 +35,9 @@ public class TagService {
         return tagDictDao.getAllTagByTeamId(teamId, tagType);
     }
 
-    public JSONObject getAllTagMemberByTeamId(int teamId, String tagType) {
+    public List<HashMap<String,Object>> getAllTagMemberByTeamId(int teamId, String tagType) {
         List<HashMap<String,Object>> result =  tagDictDao.getAllTagMemberByTeamId(teamId, tagType);
-        JSONObject jsonObject = new JSONObject();
-        for (HashMap hashMap: result){
-            String key = hashMap.get("tagName").toString();
-            if (jsonObject.get(key) == null){
-                ArrayList arrayList = new ArrayList();
-                arrayList.add(hashMap);
-                jsonObject.put(key,arrayList);
-            }
-            else {
-                ArrayList arrayList = (ArrayList) jsonObject.get(key);
-                arrayList.add(hashMap);
-            }
-        }
-        return jsonObject;
+        return result;
     }
 
 
@@ -53,6 +45,11 @@ public class TagService {
         String hql = "from TagDicEntity where tagNames=:tagNames inner join ";
         return null;
     }
+
+    public List<TeamUserT2> findTeamLeaderByTeamId(String teamId){
+        return teamUserDao.findTeamUsersLeaderByTeamId(teamId);
+    }
+
 
     public List bindTag(String id, List<Integer> tags, String bindType) {
         return tagRelationDao.bindTag(id, tags, bindType);

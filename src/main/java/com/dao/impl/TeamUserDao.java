@@ -35,6 +35,17 @@ public class TeamUserDao extends BaseDao {
         return list;
     }
 
+    public List<TeamUserT2> findTeamUsersLeaderByTeamId(String teamId){
+        String hql="select new com.entity.newT.TeamUserT2( t.team.teamId, t.user.userName, t.team.teamName) from TeamUser t " +
+                "where  t.team.teamId = "+teamId+" and t.role = 1 " +
+                "order by t.team.teamId";
+
+        List<TeamUserT2> list =  this.findByHql(hql, null,null);
+
+        return list;
+    }
+
+
     public Pager findTeamUsersByTeamId(Pager pagerModel, Integer teamId, String memberName){
         String hql="";
         if(memberName==null||memberName.equals("")){
