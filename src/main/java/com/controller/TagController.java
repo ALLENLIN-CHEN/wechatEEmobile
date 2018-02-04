@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by congzihan on 17/7/28.
@@ -54,8 +55,8 @@ public class TagController {
     // 根据teamId和标签类型获取标签的全部成员（分组）
     @RequestMapping(value = "listTagMember", method = RequestMethod.GET)
     @ResponseBody
-    public List<HashMap<String,Object>> getAllTagMemberByTeamId(@RequestParam int teamId, @RequestParam String tagType) {
-        return tagService.getAllTagMemberByTeamId(teamId, tagType);
+    public List getAllTagMemberByTeamId(@RequestParam int teamId, @RequestParam List<Integer> tagids) {
+        return tagService.getAllTagMemberByTeamId(teamId,tagids);
     }
 
 
