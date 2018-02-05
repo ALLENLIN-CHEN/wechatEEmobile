@@ -25,14 +25,15 @@ public class TagDictDao extends BaseDao<TagDictEntity> {
         return users;
     }
 
-    public List getAllTagMemberByTeamId(int teamId, List<Integer> tagids) {
-        String hql = "SELECT tagId,wechatId,wechatName,tagName," +
+    public List getAllTagMemberByTeamId(int teamId, List<Integer> tagIds) {
+        String hql = "SELECT openId,wechatName,concat ('',GROUP_CONCAT(tagName),'') as tags," +
+                "concat ('',GROUP_CONCAT(tagId),'') as tagIds," +
                 "user.phoneNum,user.email,user.qqNum,user.wechatNum FROM " +
-                "tagRelation INNER JOIN user ON tagRelation.wechatId = user.openId " +
-                "where teamId=:teamId and tagId in:tagids";
+                "tagRelation INNER JOIN user ON tagRelation.wechatId = user.openId inner join teamUser on teamUser.openId as oid = openId " +
+                "where teamId=:teamId and tagId in:tagIds group by openId";
         Map<String, Object> params = new HashedMap();
         params.put("teamId", teamId);
-        params.put("tagids", tagids);
+        params.put("tagIds", tagIds);
         SQLQuery query = this.getCurrentSession().createSQLQuery(hql);
         //设定结果结果集中的每个对象为Map类型
 
