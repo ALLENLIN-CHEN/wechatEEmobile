@@ -22,8 +22,8 @@ import com.util.PropertyUtil;
  */
 @Component
 public class SendListener implements  ApplicationListener<ContextRefreshedEvent> {
-//	private long DAY = 24*60*60*1000;
-	private long DAY = 60*1000;
+	private long DAY = 24*60*60*1000;
+	//private long DAY = 60*1000;
 	private Timer timer;
 	private int sendHour ;
 	private int sendMin ;//=Integer.parseInt(PropertyUtil.getProperty("sendMin"));
