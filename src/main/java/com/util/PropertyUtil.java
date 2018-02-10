@@ -34,7 +34,7 @@ public class PropertyUtil {
 		return properties.getProperty(key);
 	}
 
-	public static String getProperty(String key) {
+	public static String  getProperty(String key) {
 		String value = getValue(key);
 		if (value == null) {
 			throw new NoSuchElementException();

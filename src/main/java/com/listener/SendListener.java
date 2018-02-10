@@ -80,7 +80,7 @@ public class SendListener implements  ApplicationListener<ContextRefreshedEvent>
 		timer = new Timer("推送",true);
 
 	    //启动推送任务,每天执行一次
-		timer.schedule(this.sendTask,delay, DAY );
+		timer.schedule(this.sendTask,0, 24*60*60*1000 );
 //		timer.schedule(this.sendTask,0, DAY );
 		//this.context.setAttribute("sendListener", this);
 		
